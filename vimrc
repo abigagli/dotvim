@@ -1,13 +1,32 @@
 set nocompatible
-filetype off "Pathogen needs to run before plugin indent on
-set rtp += ~/.vim/bundle/vundle
+filetype off 
+set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-
-
-
-
-
+Bundle 'git://github.com/vim-scripts/TaskList.vim'
+Bundle 'git://github.com/vim-scripts/Tagbar'
+Bundle 'git://github.com/vim-scripts/Intelligent-Tags'
+Bundle 'git://github.com/vim-scripts/PreciseJump'
+Bundle 'git://github.com/vim-scripts/errormarker.vim'
+Bundle 'git://github.com/vim-scripts/clang-complete'
+Bundle 'git://github.com/vim-scripts/unimpaired.vim'
+Bundle 'git://github.com/vim-scripts/YankRing.vim'
+Bundle 'git://github.com/vim-scripts/ack.vim'
+Bundle 'git://github.com/vim-scripts/The-NERD-Commenter'
+Bundle 'git://github.com/vim-scripts/SuperTab-continued.'
+Bundle 'git://github.com/vim-scripts/Screen-vim---gnu-screentmux'
+Bundle 'git://github.com/vim-scripts/surround.vim'
+Bundle 'git://github.com/vim-scripts/toggle_mouse'
+Bundle 'git://github.com/vim-scripts/grep.vim'
+Bundle 'git://github.com/vim-scripts/snipMate'
+Bundle 'git://github.com/vim-scripts/project.vim'
+Bundle 'git://github.com/vim-scripts/bufexplorer.zip'
+Bundle 'git://github.com/vim-scripts/a.vim'
+Bundle 'git://github.com/vim-scripts/SingleCompile'
+Bundle 'git://github.com/vim-scripts/The-NERD-tree'
+Bundle 'git://github.com/vim-scripts/ctrlp.vim'
+Bundle 'git://github.com/vim-scripts/cscope_macros.vim'
+Bundle 'git://github.com/vim-scripts/fugitive.vim'
 
 syntax on
 filetype plugin indent on
