@@ -1,0 +1,36 @@
+Installation:
+
+    git clone git://github.com/abigagli/dotvim.git ~/.vim
+
+Create symlinks:
+
+    ln -s ~/.vim/vimrc ~/.vimrc
+    ln -s ~/.vim/gvimrc ~/.gvimrc
+
+Switch to the `~/.vim` directory, and fetch submodules:
+
+    cd ~/.vim
+    git submodule init
+    git submodule update
+
+
+
+
+To install plugins as git submodules:
+NOTE:   To avoid pathogen#helptags() called by .vimrc dirtying the submodules's git repository tree,
+        add an "ignore=dirty" line to the .gitmodules file for each submodule
+
+    git submodule add http://github.com/vim-scripts/<plugin> bundle/<plugin>
+    git add .
+    git commit -m "Install <plugin> bundle as a submodule."
+
+To upgrade a plugin bundle:
+
+    cd ~/.vim/bundle/<plugin>
+    git pull origin master
+
+To upgrade ALL bundled plugins
+    
+    cd ~/.vim
+    git submodule foreach git pull origin master
+
