@@ -1,8 +1,13 @@
 set nocompatible
 filetype off 
+
+"Activate vundle and let it manage itself
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+Bundle 'gmarik/vundle'
 
+"And now all the bundles I want to use
+"-------------------------------------------------------
 Bundle 'git://github.com/vim-scripts/TaskList.vim'
 Bundle 'git://github.com/vim-scripts/Tagbar'
 Bundle 'git://github.com/vim-scripts/Intelligent-Tags'
@@ -19,7 +24,6 @@ Bundle 'git://github.com/vim-scripts/surround.vim'
 Bundle 'git://github.com/vim-scripts/toggle_mouse'
 Bundle 'git://github.com/vim-scripts/grep.vim'
 Bundle 'git://github.com/vim-scripts/snipMate'
-Bundle 'git://github.com/vim-scripts/project.vim'
 Bundle 'git://github.com/vim-scripts/bufexplorer.zip'
 Bundle 'git://github.com/vim-scripts/a.vim'
 Bundle 'git://github.com/vim-scripts/SingleCompile'
@@ -27,6 +31,10 @@ Bundle 'git://github.com/vim-scripts/The-NERD-tree'
 Bundle 'git://github.com/vim-scripts/ctrlp.vim'
 Bundle 'git://github.com/vim-scripts/cscope_macros.vim'
 Bundle 'git://github.com/vim-scripts/fugitive.vim'
+"-------------------------------------------------------
+
+
+
 
 syntax on
 filetype plugin indent on
@@ -37,8 +45,6 @@ set path+=./x64-Darwin/include;quantiqa-*
 set path+=./3rdParty/cal/x64-Darwin/include;quantiqa-*
 set path+=$GCCROOT/include/**
 set path+=$BOOSTROOT/include
-"filetype plugin indent on
-"syntax on
 
 "Disable cmake-indent which apparently screws up c/c++ indenting
 let b:did_indent = 1
