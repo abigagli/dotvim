@@ -31,10 +31,14 @@ Bundle 'git://github.com/vim-scripts/The-NERD-tree'
 Bundle 'git://github.com/vim-scripts/ctrlp.vim'
 Bundle 'git://github.com/vim-scripts/cscope_macros.vim'
 Bundle 'git://github.com/vim-scripts/fugitive.vim'
+"Bundle 'Shougo/neocomplcache'
+"Bundle 'Shougo/neocomplcache-clang'
+"Bundle 'Lokaltog/vim-easymotion'
 "-------------------------------------------------------
 
 
-
+"ctrlp search by filename (not full path)
+let g:ctrlp_by_filename = 1
 
 syntax on
 filetype plugin indent on
