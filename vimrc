@@ -31,14 +31,15 @@ Bundle 'git://github.com/vim-scripts/The-NERD-tree'
 Bundle 'git://github.com/vim-scripts/ctrlp.vim'
 Bundle 'git://github.com/vim-scripts/cscope_macros.vim'
 Bundle 'git://github.com/vim-scripts/fugitive.vim'
+
+
+Bundle 'sjl/clam.vim'
+Bundle 'Lokaltog/vim-powerline'
 "Bundle 'Shougo/neocomplcache'
 "Bundle 'Shougo/neocomplcache-clang'
 "Bundle 'Lokaltog/vim-easymotion'
 "-------------------------------------------------------
 
-
-"ctrlp search by filename (not full path)
-let g:ctrlp_by_filename = 1
 
 syntax on
 filetype plugin indent on
@@ -50,8 +51,6 @@ set path+=./3rdParty/cal/x64-Darwin/include;quantiqa-*
 set path+=$GCCROOT/include/**
 set path+=$BOOSTROOT/include
 
-"Disable cmake-indent which apparently screws up c/c++ indenting
-let b:did_indent = 1
 
 set mouse=a
 set number
@@ -100,8 +99,16 @@ set autoread
 let mapleader=","
 
 
-"Invoke ctrlp as if it was command-t
+"Disable cmake-indent which apparently screws up c/c++ indenting
+let b:did_indent = 1
+
+"Powerline ------------------------
+"let g:Powerline_symbols = 'fancy'
+
+"ctrlp ----------------------------
+let g:ctrlp_by_filename = 1
 let g:ctrlp_map = '<leader>t'
+
 
 "Hit F to follow log file
 nmap F :e<CR>GL:sleep 1<CR>F
@@ -347,6 +354,12 @@ let g:alternateExtensions_h = "m,mm,c,cpp,cc,cxx"
 map <leader>v <Plug>TaskList
 let g:tlTokenList = ['TODO', 'FIXME']
 
+"------------- Grep  ------------------
+let Grep_Xargs_Options = '-0'
+let Grep_Default_Filelist = '*.c *.cpp *.h *.hpp'
+
+
+
 
 "-------------- Functions ----------------
 
@@ -440,9 +453,6 @@ augroup resCur
 augroup END
 
 
-"------------- Grep  ------------------
-let Grep_Xargs_Options = '-0'
-let Grep_Default_Filelist = '*.c *.cpp *.h *.hpp'
 
 " '\g' : grep all open buffers
 noremap <Leader>g <Esc>:GrepBuffer <CR>
