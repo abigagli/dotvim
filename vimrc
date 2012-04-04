@@ -201,13 +201,17 @@ nmap <leader>cd :cd %:p:h<CR>
 
 if ! has ('gui_running')
     set t_Co=256
-    colorscheme ir_black
-    "highlight CursorLine ctermbg=darkblue
+    colorscheme solarized
+    set background=dark
+    "colorscheme ir_black
+    highlight CursorLine ctermbg=LightCyan
 else
-    colorscheme ir_black
-    colorscheme macvim
+    "colorscheme ir_black
+    "colorscheme macvim
+    colorscheme solarized
+    set background=dark
     set guifont=Inconsolata:h14
-    "highlight CursorLine guibg=darkblue 
+    highlight CursorLine guibg=LightCyan 
 endif
 
 if has('statusline')
