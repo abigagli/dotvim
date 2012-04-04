@@ -7,6 +7,8 @@ Create symlinks:
     ln -s ~/.vim/vimrc ~/.vimrc
     ln -s ~/.vim/gvimrc ~/.gvimrc
 
+
+NOTE: WHAT FOLLOWS IS ONLY NEEDED IF USING PATHOGEN AND git SUBMODULES:
 Switch to the `~/.vim` directory, and fetch submodules:
 
     cd ~/.vim
