@@ -4,33 +4,33 @@ filetype off
 "Activate vundle and let it manage itself
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-Bundle 'gmarik/vundle'
+Bundle 'https://github.com/gmarik/vundle'
 
 "And now all the bundles I want to use
 "-------------------------------------------------------
-Bundle 'git://github.com/vim-scripts/TaskList.vim'
-Bundle 'git://github.com/vim-scripts/Tagbar'
-Bundle 'git://github.com/vim-scripts/Intelligent-Tags'
-Bundle 'git://github.com/vim-scripts/PreciseJump'
-Bundle 'git://github.com/vim-scripts/errormarker.vim'
-Bundle 'git://github.com/vim-scripts/clang-complete'
-Bundle 'git://github.com/vim-scripts/unimpaired.vim'
-Bundle 'git://github.com/vim-scripts/YankRing.vim'
-Bundle 'git://github.com/vim-scripts/ack.vim'
-Bundle 'git://github.com/vim-scripts/The-NERD-Commenter'
-Bundle 'git://github.com/vim-scripts/SuperTab-continued.'
-Bundle 'git://github.com/vim-scripts/Screen-vim---gnu-screentmux'
-Bundle 'git://github.com/vim-scripts/surround.vim'
-Bundle 'git://github.com/vim-scripts/toggle_mouse'
-Bundle 'git://github.com/vim-scripts/grep.vim'
-Bundle 'git://github.com/vim-scripts/snipMate'
-Bundle 'git://github.com/vim-scripts/bufexplorer.zip'
-Bundle 'git://github.com/vim-scripts/a.vim'
-Bundle 'git://github.com/vim-scripts/SingleCompile'
-Bundle 'git://github.com/vim-scripts/The-NERD-tree'
-Bundle 'git://github.com/vim-scripts/ctrlp.vim'
-Bundle 'git://github.com/vim-scripts/cscope_macros.vim'
-Bundle 'git://github.com/vim-scripts/fugitive.vim'
+Bundle 'https://github.com/vim-scripts/TaskList.vim'
+Bundle 'https://github.com/vim-scripts/Tagbar'
+Bundle 'https://github.com/vim-scripts/Intelligent-Tags'
+Bundle 'https://github.com/vim-scripts/PreciseJump'
+Bundle 'https://github.com/vim-scripts/errormarker.vim'
+Bundle 'https://github.com/vim-scripts/clang-complete'
+Bundle 'https://github.com/vim-scripts/unimpaired.vim'
+Bundle 'https://github.com/vim-scripts/YankRing.vim'
+Bundle 'https://github.com/vim-scripts/ack.vim'
+Bundle 'https://github.com/vim-scripts/The-NERD-Commenter'
+Bundle 'https://github.com/vim-scripts/SuperTab-continued.'
+Bundle 'https://github.com/vim-scripts/Screen-vim---gnu-screentmux'
+Bundle 'https://github.com/vim-scripts/surround.vim'
+Bundle 'https://github.com/vim-scripts/toggle_mouse'
+Bundle 'https://github.com/vim-scripts/grep.vim'
+Bundle 'https://github.com/vim-scripts/snipMate'
+Bundle 'https://github.com/vim-scripts/bufexplorer.zip'
+Bundle 'https://github.com/vim-scripts/a.vim'
+Bundle 'https://github.com/vim-scripts/SingleCompile'
+Bundle 'https://github.com/vim-scripts/The-NERD-tree'
+Bundle 'https://github.com/vim-scripts/ctrlp.vim'
+Bundle 'https://github.com/vim-scripts/cscope_macros.vim'
+Bundle 'https://github.com/vim-scripts/fugitive.vim'
 
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'sjl/clam.vim'
@@ -46,9 +46,9 @@ filetype plugin indent on
 
 "source $VIMRUNTIME/vimrc_example.vim
 set tags=./tags; "quantiqa-* 
-set path+=./x64-Darwin/include;quantiqa-*
-set path+=./3rdParty/cal/x64-Darwin/include;quantiqa-*
-set path+=$GCCROOT/include/**
+set path+=./$HOST_TUPLE/include;quantiqa-*
+set path+=./3rdParty/cal/$HOST_TUPLE/include;quantiqa-*
+set path+=$GCCROOT/include/c++/**
 set path+=$BOOSTROOT/include
 
 
@@ -104,6 +104,9 @@ let b:did_indent = 1
 
 "Powerline ------------------------
 "let g:Powerline_symbols = 'fancy'
+
+"yankring ------------------------
+let g:yankring_manual_clipboard_check=1
 
 "ctrlp ----------------------------
 let g:ctrlp_by_filename = 1
@@ -293,7 +296,7 @@ let g:EclimCSearchSingleResult='lopen' "'split', 'edit' or 'lopen'
 "-------------------------------------------------------------------
 
 "------------------ IntelligentTags  -------------------------------
-let g:Itags_dir_name=' ''/Volumes/develop/tags/'' . fnamemodify( dirName . ''/'' . fName, '':gs?[/\\:\.]\+?\.?'')'
+let g:Itags_dir_name='expand(''~/tags/'') . fnamemodify( dirName . ''/'' . fName, '':gs?[/\\:\.]\+?\.?'')'
 let g:Itags_Ctags_Flags="-n --extra=+q -R --languages=C,C++ --c++-kinds=+plx --fields=+iaS --sort=foldcase -I'__THROW,__NTH+,__wur,__warnattr, __nonnull, __attribute_malloc__, __attribute_pure__,             __attribute_used__, __attribute_noinline__, __attribute_deprecated__, __attribute_format_arg__, __attribute_format_strfmon__, __attribute_warn_unused_result__, __always_inline,         __extern_inline, __extension__, __restrict'"
 
 
@@ -313,22 +316,22 @@ set completeopt=menuone,menu,longest,preview
 
 "------------------------ SINGLE COMPILE ---------------------------
  call SingleCompile#SetCompilerTemplate('cpp', 'g++',
-             \'g++ self-built', '/Users/abigagli/GCC-CURRENT/bin/g++', '-g3 -std=c++0x -Wall -fno-pie -Wl,-no_pie -Wl,-rpath,$BOOSTROOT/MacOS/lib -I$BOOSTROOT/include -L$BOOSTROOT/MacOS/lib -lboost_thread -lboost_date_time -lboost_system -o %:r', './%:r')
+             \'g++ self-built', '$GCCROOT/bin/g++', '-g3 -std=c++11 -Wall -fno-pie -Wl,-no_pie -Wl,-rpath,$BOOSTROOT/MacOS/lib -I$BOOSTROOT/include -L$BOOSTROOT/MacOS/lib -lboost_thread -lboost_date_time -lboost_system -o %:r', './%:r')
 
  call SingleCompile#SetCompilerTemplate('cpp', 'clang++',
-             \'clang++ self-built with libcxx', '/Users/abigagli/LLVM-CURRENT/bin/clang++', '-g3 -std=c++11 -stdlib=libc++ -Wl,-no_pie -Wl,-rpath,$BOOSTROOT/MacOS/lib -I$BOOSTROOT/include -I$LIBCXXROOT/include -L$LIBCXXROOT/lib -L$BOOSTROOT/MacOS/lib -lboost_date_time -lboost_system -o %:r', './%:r')
+             \'clang++ self-built with libcxx', '$LLVMROOT/bin/clang++', '-g3 -std=c++11 -stdlib=libc++ -Wl,-no_pie -Wl,-rpath,$BOOSTROOT/MacOS/lib -I$BOOSTROOT/include -I$LIBCXXROOT/include -L$LIBCXXROOT/lib -L$BOOSTROOT/MacOS/lib -lboost_date_time -lboost_system -o %:r', './%:r')
 
 call SingleCompile#ChooseCompiler ('cpp','clang++')
 "call SingleCompile#ChooseCompiler ('cpp','g++')
 "-------------------------------------------------------------------
 
 "------------------ CLANG COMPLETE -------------------------------
-let g:clang_exec = "/Users/abigagli/LLVM-CURRENT/bin/clang++"
-let g:clang_user_options="-std=c++0x -stdlib=libc++ -I$BOOSTROOT/include -I/Users/abigagli/develop/LLVM_FACTORY/LIBCXX/include"
+let g:clang_exec = $LLVMROOT. "/bin/clang++"
+let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include -I" . $LIBCXXROOT . "/include"
 let g:clang_complete_auto = 0
 let g:clang_auto_select = 1
 let g:clang_use_library = 1
-let g:clang_library_path = "/Users/abigagli/LLVM-CURRENT/lib"
+let g:clang_library_path = $LLVMROOT . "/lib"
 let g:clang_complete_patterns = 1
 let g:clang_complete_copen = 1
 let g:clang_hl_errors = 1
@@ -340,7 +343,7 @@ let g:clang_auto_user_options="path, .clang_complete"
 let g:clang_sort_algo="priority"
 let g:clang_complete_macros=1
 let g:clang_complete_patterns=0
-"let g:clang_debug=1
+let g:clang_debug=0
 nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
 "let g:clic_filename="/Users/abigagli/develop/commprove/H3G/GTPAnalyzerMT/prj-index/index.db"
 
