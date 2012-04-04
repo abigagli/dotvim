@@ -103,6 +103,7 @@ let mapleader=","
 let b:did_indent = 1
 
 "Powerline ------------------------
+set encoding=utf-8
 "let g:Powerline_symbols = 'fancy'
 
 "yankring ------------------------
