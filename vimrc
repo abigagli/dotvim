@@ -32,7 +32,7 @@ Bundle 'git://github.com/vim-scripts/ctrlp.vim'
 Bundle 'git://github.com/vim-scripts/cscope_macros.vim'
 Bundle 'git://github.com/vim-scripts/fugitive.vim'
 
-
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'sjl/clam.vim'
 Bundle 'Lokaltog/vim-powerline'
 "Bundle 'Shougo/neocomplcache'
