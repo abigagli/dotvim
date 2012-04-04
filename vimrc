@@ -36,6 +36,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'sjl/clam.vim'
 Bundle 'Lokaltog/vim-powerline'
 "Bundle 'Shougo/neocomplcache'
+"Bundle 'Shougo/neocomplcache-snippets-complete'
 "Bundle 'Shougo/neocomplcache-clang'
 "Bundle 'Lokaltog/vim-easymotion'
 "-------------------------------------------------------
@@ -102,9 +103,15 @@ let mapleader=","
 "Disable cmake-indent which apparently screws up c/c++ indenting
 let b:did_indent = 1
 
+"neocomplcache ------------------------
+"let g:neocomplcache_enable_at_startup = 1
+
+
+
+
 "Powerline ------------------------
 set encoding=utf-8
-"let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols = 'fancy'
 
 "yankring ------------------------
 let g:yankring_manual_clipboard_check=1
