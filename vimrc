@@ -51,6 +51,7 @@ set path+=./$HOST_TUPLE/include;quantiqa-*
 set path+=./3rdParty/cal/$HOST_TUPLE/include;quantiqa-*
 set path+=$GCCROOT/include/c++/**
 set path+=$BOOSTROOT/include
+set path+=$LLVMROOT/include
 
 
 set mouse=a
@@ -306,6 +307,7 @@ let g:EclimCSearchSingleResult='lopen' "'split', 'edit' or 'lopen'
 "------------------ IntelligentTags  -------------------------------
 let g:Itags_dir_name='expand(''~/tags/'') . fnamemodify( dirName . ''/'' . fName, '':gs?[/\\:\.]\+?\.?'')'
 let g:Itags_Ctags_Flags="-n --extra=+q -R --languages=C,C++ --c++-kinds=+plx --fields=+iaS --sort=foldcase -I'__THROW,__NTH+,__wur,__warnattr, __nonnull, __attribute_malloc__, __attribute_pure__,             __attribute_used__, __attribute_noinline__, __attribute_deprecated__, __attribute_format_arg__, __attribute_format_strfmon__, __attribute_warn_unused_result__, __always_inline,         __extern_inline, __extension__, __restrict'"
+let g:Itags_Depth=-1
 
 
 "------------------ OMNICPP COMPLETE -------------------------------
@@ -335,7 +337,7 @@ call SingleCompile#ChooseCompiler ('cpp','clang++')
 
 "------------------ CLANG COMPLETE -------------------------------
 let g:clang_exec = $LLVMROOT. "/bin/clang++"
-let g:clang_user_options="-std=c++11 -stdlib=libc++ -I$BOOSTROOT/include -I$LIBCXXROOT/include"
+let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include -I" . $LIBCXXROOT . "/include"
 let g:clang_complete_auto = 0
 let g:clang_auto_select = 1
 let g:clang_use_library = 1
