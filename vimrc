@@ -336,7 +336,7 @@ call SingleCompile#ChooseCompiler ('cpp','clang++')
 "-------------------------------------------------------------------
 
 "------------------ CLANG COMPLETE -------------------------------
-let g:clang_exec = $LLVMROOT. "/bin/clang++"
+let g:clang_exec = $LLVMROOT . "/bin/clang++"
 let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include -I" . $LIBCXXROOT . "/include"
 let g:clang_complete_auto = 0
 let g:clang_auto_select = 1
@@ -350,7 +350,7 @@ let g:clang_snippets=1
 let g:clang_snippets_engine="clang_complete"
 let g:clang_conceal_snippets=1
 let g:clang_auto_user_options="path, .clang_complete"
-let g:clang_sort_algo="priority"
+let g:clang_sort_algo="alpha"
 let g:clang_complete_macros=1
 let g:clang_complete_patterns=0
 let g:clang_debug=0
