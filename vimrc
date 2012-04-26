@@ -334,8 +334,8 @@ set completeopt=menuone,menu,longest,preview
 call SingleCompile#SetCompilerTemplate('cpp', 'clang++_libstdc++',
              \'clang++ self-built with libstdc++', '$LLVMROOT/bin/clang++', '-g3 -std=c++11 -Wl,-no_pie -Wl,-rpath,$BOOSTROOT/MacOS/lib -I$BOOSTROOT/include -L$GCCROOT/lib -L$BOOSTROOT/MacOS/lib -lboost_date_time -lboost_system -o %:r', './%:r')
 
-call SingleCompile#ChooseCompiler ('cpp','clang++_libc++')
-"call SingleCompile#ChooseCompiler ('cpp','clang++_libstdc++')
+"call SingleCompile#ChooseCompiler ('cpp','clang++_libc++')
+call SingleCompile#ChooseCompiler ('cpp','clang++_libstdc++')
 "call SingleCompile#ChooseCompiler ('cpp','g++')
 "-------------------------------------------------------------------
 
