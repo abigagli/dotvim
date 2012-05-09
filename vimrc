@@ -326,13 +326,13 @@ set completeopt=menuone,menu,longest,preview
 
 "------------------------ SINGLE COMPILE ---------------------------
  call SingleCompile#SetCompilerTemplate('cpp', 'g++',
-             \'g++ self-built', '$GCCROOT/bin/g++', '-g3 -std=c++11 -Wall -fno-pie -Wl,-no_pie -Wl,-rpath,$BOOSTROOT/MacOS/lib -I$BOOSTROOT/include -L$BOOSTROOT/MacOS/lib -lboost_date_time -lboost_system -o %:r', './%:r')
+             \'g++ self-built', '$GCCROOT/bin/g++', '-g3 -std=c++11 -Wall -fno-pie -Wl,-no_pie -Wl,-rpath,$BOOSTROOT/MacOS/lib -I$HOME/include -I$BOOSTROOT/include -L$BOOSTROOT/MacOS/lib -lboost_date_time -lboost_system -o %:r', './%:r')
 
  call SingleCompile#SetCompilerTemplate('cpp', 'clang++_libc++',
-             \'clang++ self-built with libcxx', '$LLVMROOT/bin/clang++', '-g3 -std=c++11 -stdlib=libc++ -Wl,-no_pie -Wl,-rpath,$BOOSTROOT/MacOS/lib -I$BOOSTROOT/include -I$LIBCXXROOT/include -L$LIBCXXROOT/lib -L$BOOSTROOT/MacOS/lib -lboost_date_time -lboost_system -o %:r', './%:r')
+             \'clang++ self-built with libcxx', '$LLVMROOT/bin/clang++', '-g3 -std=c++11 -stdlib=libc++ -Wl,-no_pie -Wl,-rpath,$BOOSTROOT/MacOS/lib -I$HOME/include -I$BOOSTROOT/include -I$LIBCXXROOT/include -L$LIBCXXROOT/lib -L$BOOSTROOT/MacOS/lib -lboost_date_time -lboost_system -o %:r', './%:r')
 
 call SingleCompile#SetCompilerTemplate('cpp', 'clang++_libstdc++',
-             \'clang++ self-built with libstdc++', '$LLVMROOT/bin/clang++', '-g3 -std=c++11 -Wl,-no_pie -Wl,-rpath,$BOOSTROOT/MacOS/lib -I$BOOSTROOT/include -L$GCCROOT/lib -L$BOOSTROOT/MacOS/lib -lboost_date_time -lboost_system -o %:r', './%:r')
+             \'clang++ self-built with libstdc++', '$LLVMROOT/bin/clang++', '-g3 -std=c++11 -Wl,-no_pie -Wl,-rpath,$BOOSTROOT/MacOS/lib -I$HOME/include -I$BOOSTROOT/include -L$GCCROOT/lib -L$BOOSTROOT/MacOS/lib -lboost_date_time -lboost_system -o %:r', './%:r')
 
 "call SingleCompile#ChooseCompiler ('cpp','clang++_libc++')
 call SingleCompile#ChooseCompiler ('cpp','clang++_libstdc++')
