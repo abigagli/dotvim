@@ -107,7 +107,8 @@ let b:did_indent = 1
 "neocomplcache ------------------------
 "let g:neocomplcache_enable_at_startup = 1
 
-
+"Always put quickfix window at the bottom of the window layout
+autocmd FileType qf wincmd J
 
 
 "Powerline ------------------------
@@ -123,10 +124,10 @@ let g:ctrlp_map = '<leader>t'
 
 
 "Hit F to follow log file
-nmap F :e<CR>GL:sleep 1<CR>F
+nnoremap F :e<CR>GL:sleep 1<CR>F
 
 "easier use of cscope_map which is based on C-\
-nmap <C-_> <C-\>
+nnoremap <C-_> <C-\>
 
 
 "distinguish errors from warnings in errormarker.vim
@@ -137,26 +138,26 @@ ino jj <esc>
 cno jj <c-c>
 
 "Quick access to make
-nmap <F10> :wa <ESC><BAR> :make -j4 DEBUG=1<CR>
+nnoremap <F10> :wa <ESC><BAR> :make -j4 DEBUG=1<CR>
 
 
 "Recreate cscope db and reload it
-nmap <F9> :execute '!cscope -Rbq' <BAR> cs reset<CR>
+nnoremap <F9> :execute '!cscope -Rbq' <BAR> cs reset<CR>
 
 "Quick access to Tagbar
-nmap <F8> :TagbarToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
 
 "Quick access to buffer list
 nnoremap <F5> :buffers<CR>:buffer<Space>
 nnoremap <F11> :YRShow<CR>
 
 "Quick jump to alternate file
-nmap <leader>a :A<CR>
-nmap <leader>av :AV<CR>
+nnoremap <leader>a :A<CR>
+nnoremap <leader>av :AV<CR>
 
 "Quick difference from when file was opened
-nmap <leader>do :DiffOrig<cr>
-nmap <leader>dc :q<cr>:diffoff!<cr>
+nnoremap <leader>do :DiffOrig<cr>
+nnoremap <leader>dc :q<cr>:diffoff!<cr>
 
 "Turns off Vim's crazy default regex characters and makes searches use normal
 "regexes
@@ -164,12 +165,12 @@ nnoremap / /\v
 vnoremap / /\v
 
 "Bubble single lines
-nmap <Up> [e
-nmap <Down> ]e
+nnoremap <Up> [e
+nnoremap <Down> ]e
 
 "Bubble multiple lines
-vmap <Up> [egv
-vmap <Down> ]egv
+vnoremap <Up> [egv
+vnoremap <Down> ]egv
 
 "Quick open of .vimrc in a right vertical split
 nnoremap <leader>erc <C-w>v<C-w>l:e $MYVIMRC<cr>
@@ -191,24 +192,24 @@ nnoremap j gj
 nnoremap k gk
 
 "Helpers to open files in current file directory
-map <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
-map <leader>es :sp <C-R>=expand("%:p:h") . "/" <CR>
-map <leader>ev :vsp <C-R>=expand("%:p:h") . "/" <CR>
+noremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
+noremap <leader>es :sp <C-R>=expand("%:p:h") . "/" <CR>
+noremap <leader>ev :vsp <C-R>=expand("%:p:h") . "/" <CR>
 
 "Replace word under cursor with register
 nnoremap S "_diwP
 
 "To ease jumping around in windows
-nmap <C-H> <C-W>h
-nmap <C-J> <C-W>j
-nmap <C-K> <C-W>k
-nmap <C-L> <C-W>l
+nnoremap <C-H> <C-W>h
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
 
 "Clear highlighted search
-nmap <silent> <leader><space> :nohlsearch<CR>
+nnoremap <silent> <leader><space> :nohlsearch<CR>
 
 "CD to path of file being edited
-nmap <leader>cd :cd %:p:h<CR>
+nnoremap <leader>cd :cd %:p:h<CR>
 
 
 if ! has ('gui_running')
@@ -378,7 +379,7 @@ let g:alternateExtensions_h = "m,mm,c,cpp,cc,cxx"
 
 "-------------------- TASKLIST ------------------------------------
 "tasklist remapped to <Leader>v to avoid conflict with commandT
-map <leader>v <Plug>TaskList
+noremap <leader>v <Plug>TaskList
 let g:tlTokenList = ['TODO', 'FIXME']
 
 "------------- Grep  ------------------
@@ -494,10 +495,10 @@ noremap <Leader>G <Esc>:Rgrep<CR>
 noremap <silent><leader>qq <Esc>:call QFixToggle(0)<CR>
 
 " '[q' previous quickfix entry
-map [q :cprev<CR>
+noremap [q :cprev<CR>
 
 " ']q' next quickfix entry
-map ]q :cnext<CR>
+noremap ]q :cnext<CR>
 
 " '\q*' : search for occurrences of word under cursor, and write to QuickFix
 noremap <silent><leader>q*  <Esc>:execute 'vimgrep '.expand('<cword>').' '.expand('%') <CR> :copen <CR> :cc
