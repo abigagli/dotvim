@@ -110,6 +110,8 @@ let b:did_indent = 1
 "Always put quickfix window at the bottom of the window layout
 autocmd FileType qf wincmd J
 
+"Should let vim realize the file was externally changed
+autocmd Cursorhold * checktime
 
 "Powerline ------------------------
 set encoding=utf-8
