@@ -97,6 +97,7 @@ set viminfo+=%
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 set tildeop
 set autoread
+set clipboard=unnamed
 
 let mapleader=","
 
