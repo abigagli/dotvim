@@ -130,7 +130,7 @@ let g:ctrlp_map = '<leader>t'
 nnoremap F :e<CR>GL:sleep 1<CR>F
 
 "easier use of cscope_map which is based on C-\
-nnoremap <C-_> <C-\>
+nmap <C-_> <C-\>
 
 
 "distinguish errors from warnings in errormarker.vim
@@ -382,7 +382,7 @@ let g:alternateExtensions_h = "m,mm,c,cpp,cc,cxx"
 
 "-------------------- TASKLIST ------------------------------------
 "tasklist remapped to <Leader>v to avoid conflict with commandT
-noremap <leader>v <Plug>TaskList
+map <leader>v <Plug>TaskList
 let g:tlTokenList = ['TODO', 'FIXME']
 
 "------------- Grep  ------------------
