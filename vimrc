@@ -368,6 +368,7 @@ let g:clang_sort_algo="alpha"
 let g:clang_complete_macros=1
 let g:clang_complete_patterns=0
 let g:clang_debug=0
+#let g:clang_trailing_placeholder=1
 nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
 "let g:clic_filename="/Users/abigagli/develop/commprove/H3G/GTPAnalyzerMT/prj-index/index.db"
 
