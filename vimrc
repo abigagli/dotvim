@@ -32,6 +32,7 @@ Bundle 'https://github.com/vim-scripts/ctrlp.vim'
 Bundle 'https://github.com/vim-scripts/cscope_macros.vim'
 Bundle 'https://github.com/vim-scripts/fugitive.vim'
 
+Bundle 'proyvind/Cpp11-Syntax-Support'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'sjl/clam.vim'
 Bundle 'Lokaltog/vim-powerline'
@@ -99,7 +100,12 @@ set tildeop
 set autoread
 set clipboard=unnamed
 
+set concealcursor=inv
+set conceallevel=2
+
 let mapleader=","
+
+au BufNewFile,BufRead *.cpp set syntax=cpp11
 
 
 "Disable cmake-indent which apparently screws up c/c++ indenting
