@@ -342,7 +342,7 @@ set completeopt=menuone,menu,longest,preview
              \'clang++ self-built with libcxx', '$LLVMROOT/bin/clang++', '-g3 -std=c++11 -stdlib=libc++ -Wl,-no_pie -Wl,-rpath,$BOOSTROOT/MacOS/lib -I$HOME/include -I$BOOSTROOT/include -I$LIBCXXROOT/include -L$LIBCXXROOT/lib -L$BOOSTROOT/MacOS/lib -lboost_date_time -lboost_timer -lboost_system -o %:r', './%:r')
 
 call SingleCompile#SetCompilerTemplate('cpp', 'clang++_libstdc++',
-             \'clang++ self-built with libstdc++', '$LLVMROOT/bin/clang++', '-g3 -std=c++11 -D_GLIBCXX_USE_NANOSLEEP -Wl,-no_pie -Wl,-rpath,$BOOSTROOT/MacOS/lib -I$HOME/include -I$BOOSTROOT/include -L$GCCROOT/lib -L$BOOSTROOT/MacOS/lib -lboost_date_time -lboost_timer -lboost_system -o %:r', './%:r')
+             \'clang++ self-built with libstdc++', '$LLVMROOT/bin/clang++', '-g3 -std=c++11 -D_GLIBCXX_USE_NANOSLEEP -Weverything -Wl,-no_pie -Wl,-rpath,$BOOSTROOT/MacOS/lib -I$HOME/include -I$BOOSTROOT/include -L$GCCROOT/lib -L$BOOSTROOT/MacOS/lib -lboost_date_time -lboost_timer -lboost_system -o %:r', './%:r')
 
 "call SingleCompile#ChooseCompiler ('cpp','clang++_libc++')
 call SingleCompile#ChooseCompiler ('cpp','clang++_libstdc++')
