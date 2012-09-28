@@ -352,7 +352,7 @@ call SingleCompile#ChooseCompiler ('cpp','clang++_libc++')
 
 "------------------ CLANG COMPLETE -------------------------------
 let g:clang_exec = $LLVMROOT . "/bin/clang++"
-let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include -I" . $LIBCXXROOT . "/include"
+let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include -I" . $LIBCXXROOT . "/include" 
 let g:clang_complete_auto = 0
 let g:clang_auto_select = 1
 let g:clang_use_library = 1
@@ -373,7 +373,8 @@ let g:clang_close_preview=1
 "let g:clang_trailing_placeholder=1
 nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
 "let g:clic_filename="/Users/abigagli/develop/commprove/H3G/GTPAnalyzerMT/prj-index/index.db"
-
+" Avoid freezing on offeding code
+let g:clang_user_options += '2>NUL || exit 0"'
 "-----------------------------------------------------------------
 
 
