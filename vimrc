@@ -37,6 +37,7 @@ Bundle 'proyvind/Cpp11-Syntax-Support'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'sjl/clam.vim'
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'godlygeek/tabular'
 "Bundle 'Shougo/neocomplcache'
 "Bundle 'Shougo/neocomplcache-snippets-complete'
 "Bundle 'Shougo/neocomplcache-clang'
@@ -351,12 +352,16 @@ call SingleCompile#ChooseCompiler ('cpp','clang++_libc++')
 "-------------------------------------------------------------------
 
 "------------------ CLANG COMPLETE -------------------------------
-let g:clang_exec = $LLVMROOT . "/bin/clang++"
-let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include -I" . $LIBCXXROOT . "/include" 
+"let g:clang_exec = $LLVMROOT . "/bin/clang++"
+let g:clang_exec=system("xcrun -f clang++")
+"let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include -I" . $LIBCXXROOT . "/include" 
+let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include"
 let g:clang_complete_auto = 0
 let g:clang_auto_select = 1
 let g:clang_use_library = 1
-let g:clang_library_path = $LLVMROOT . "/lib"
+"let g:clang_library_path = $LLVMROOT . "/lib"
+let xcode_in_use = split(system ("xcode-select --print-path"), "\n")
+let g:clang_library_path = xcode_in_use[0] . "/Toolchains/XcodeDefault.xctoolchain/usr/lib"
 let g:clang_complete_patterns = 1
 let g:clang_complete_copen = 1
 let g:clang_hl_errors = 1
