@@ -353,9 +353,10 @@ call SingleCompile#ChooseCompiler ('cpp','clang++_libc++')
 
 "------------------ CLANG COMPLETE -------------------------------
 "let g:clang_exec = $LLVMROOT . "/bin/clang++"
-let g:clang_exec=system("xcrun -f clang++")
+let g:clang_exec = system("xcrun -f clang++")
 "let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include -I" . $LIBCXXROOT . "/include" 
-let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include"
+"let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include"
+let g:clang_user_options = '-stdlib=libc++ -std=c++11 -I' . $BOOSTROOT . '/include 2>NUL || exit 0'
 let g:clang_complete_auto = 0
 let g:clang_auto_select = 1
 let g:clang_use_library = 1
@@ -366,20 +367,18 @@ let g:clang_complete_patterns = 1
 let g:clang_complete_copen = 1
 let g:clang_hl_errors = 1
 "New additions for CLIC
-let g:clang_snippets=1
-let g:clang_snippets_engine="clang_complete"
-let g:clang_conceal_snippets=1
-let g:clang_auto_user_options="path, .clang_complete"
-let g:clang_sort_algo="alpha"
-let g:clang_complete_macros=1
-let g:clang_complete_patterns=0
-let g:clang_debug=0
-let g:clang_close_preview=1
+let g:clang_snippets = 1
+let g:clang_snippets_engine = "clang_complete"
+let g:clang_conceal_snippets = 1
+let g:clang_auto_user_options = "path, .clang_complete"
+let g:clang_sort_algo = "alpha"
+let g:clang_complete_macros = 1
+let g:clang_complete_patterns = 0
+let g:clang_debug = 0
+let g:clang_close_preview = 1
 "let g:clang_trailing_placeholder=1
 nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
 "let g:clic_filename="/Users/abigagli/develop/commprove/H3G/GTPAnalyzerMT/prj-index/index.db"
-" Avoid freezing on offeding code
-let g:clang_user_options += '2>NUL || exit 0"'
 "-----------------------------------------------------------------
 
 
@@ -405,6 +404,11 @@ let Grep_Xargs_Options = '-0'
 let Grep_Default_Filelist = '*.c *.cpp *.h *.hpp'
 
 
+"------------- Tabularize  ------------------
+nnoremap <leader>a= :Tabularize /=<CR>
+vnoremap <leader>a= :Tabularize /=<CR>
+nnoremap <leader>a: :Tabularize /:\zs<CR>
+vnoremap <leader>a: :Tabularize /:\zs<CR>
 
 
 "-------------- Functions ----------------
