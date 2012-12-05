@@ -109,7 +109,25 @@ let mapleader=","
 
 au BufNewFile,BufRead *.cpp set syntax=cpp11
 
+"AFTER SEEING VIMCAST
+vnoremap . :norm.<CR>
 
+
+command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
+function! QuickfixFilenames()
+  " Building a hash ensures we get each buffer only once
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+  endfor
+  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
+endfunction
+""""""""""""""""""""""""""""""""""""""""""""""
+ 
+ 
+ 
+ 
+ 
 "Disable cmake-indent which apparently screws up c/c++ indenting
 let b:did_indent = 1
 
@@ -407,6 +425,8 @@ let Grep_Default_Filelist = '*.c *.cpp *.h *.hpp'
 "------------- Tabularize  ------------------
 nnoremap <leader>a= :Tabularize /=<CR>
 vnoremap <leader>a= :Tabularize /=<CR>
+nnoremap <leader>a{ :Tabularize /{<CR>
+vnoremap <leader>a{ :Tabularize /{<CR>
 nnoremap <leader>a: :Tabularize /:\zs<CR>
 vnoremap <leader>a: :Tabularize /:\zs<CR>
 
