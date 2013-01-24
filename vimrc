@@ -330,8 +330,12 @@ augroup END
 "-------------------------------------------------------------------
 
 "------------------ ECLIM            -------------------------------
-let g:EclimCSearchSingleResult='lopen' "'split', 'edit' or 'lopen'
+let g:EclimCSearchSingleResult='edit' "'split', 'edit' or 'lopen'
 "let g:EclimProjectStatusLine
+let g:EclimCValidate=0 "Use :Validate to manually validate
+let g:EclimValidateSortResults='severity' "'occurrence'
+let g:EclimLocationListHeight=10
+nnoremap <silent> <buffer> <cr> :CSearchContext<cr>
 "-------------------------------------------------------------------
 
 "------------------ IntelligentTags  -------------------------------
@@ -356,16 +360,13 @@ set completeopt=menuone,menu,longest,preview
 
 "------------------------ SINGLE COMPILE ---------------------------
  call SingleCompile#SetCompilerTemplate('cpp', 'g++',
-             \'g++ self-built', '$GCCROOT/bin/g++', '-g3 -std=c++11 -D_GLIBCXX_USE_NANOSLEEP -Wall -fno-pie -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -L$BOOSTROOT/lib -lboost -o %:r', './%:r')
+             \'g++ self-built', '$GCCROOT/bin/g++', '-g3 -std=c++11 -D_GLIBCXX_USE_NANOSLEEP -Wall -fno-pie -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -L$BOOSTROOT/lib -lboost_all -o %:r', './%:r')
 
  call SingleCompile#SetCompilerTemplate('cpp', 'clang++_libc++',
-             \'clang++ self-built with libcxx', '$LLVMROOT/bin/clang++', '-g3 -std=c++11 -stdlib=libc++ -Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -fno-pie -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -I$LIBCXXROOT/include -L$LIBCXXROOT/lib -L$BOOSTROOT/lib -lboost -o %:r', './%:r')
+             \'clang++ self-built with libcxx', '$LLVMROOT/bin/clang++', '-g3 -std=c++11 -stdlib=libc++ -Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -fno-pie -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -I$LIBCXXROOT/include -L$LIBCXXROOT/lib -L$BOOSTROOT/lib -lboost_all -o %:r', './%:r')
 
-call SingleCompile#SetCompilerTemplate('cpp', 'clang++_libstdc++',
-             \'clang++ self-built with libstdc++', '$LLVMROOT/bin/clang++', '-g3 -std=c++11 -D_GLIBCXX_USE_NANOSLEEP -Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -L$GCCROOT/lib -L$BOOSTROOT/lib -lboost -o %:r', './%:r')
 
 call SingleCompile#ChooseCompiler ('cpp','clang++_libc++')
-"call SingleCompile#ChooseCompiler ('cpp','clang++_libstdc++')
 "call SingleCompile#ChooseCompiler ('cpp','g++')
 "-------------------------------------------------------------------
 
