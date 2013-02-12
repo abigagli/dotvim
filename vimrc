@@ -28,11 +28,12 @@ Bundle 'https://github.com/vim-scripts/bufexplorer.zip'
 Bundle 'https://github.com/vim-scripts/a.vim'
 Bundle 'https://github.com/vim-scripts/SingleCompile'
 Bundle 'https://github.com/vim-scripts/The-NERD-tree'
-Bundle 'https://github.com/vim-scripts/ctrlp.vim'
 Bundle 'https://github.com/vim-scripts/cscope_macros.vim'
 Bundle 'https://github.com/vim-scripts/fugitive.vim'
 Bundle 'https://github.com/vim-scripts/Lucius'
 
+Bundle 'kien/ctrlp.vim'
+Bundle 'mihaifm/vimpanel'
 Bundle 'proyvind/Cpp11-Syntax-Support'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'sjl/clam.vim'
@@ -150,6 +151,8 @@ let g:yankring_manual_clipboard_check=1
 "ctrlp ----------------------------
 let g:ctrlp_by_filename = 1
 let g:ctrlp_map = '<leader>t'
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_working_path_mode = 'ra'
 
 
 "Hit F to follow log file
