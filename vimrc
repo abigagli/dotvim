@@ -23,7 +23,7 @@ Bundle 'https://github.com/vim-scripts/Screen-vim---gnu-screentmux'
 Bundle 'https://github.com/vim-scripts/surround.vim'
 Bundle 'https://github.com/vim-scripts/toggle_mouse'
 Bundle 'https://github.com/vim-scripts/grep.vim'
-Bundle 'https://github.com/vim-scripts/snipMate'
+"Bundle 'https://github.com/vim-scripts/snipMate'
 Bundle 'https://github.com/vim-scripts/bufexplorer.zip'
 Bundle 'https://github.com/vim-scripts/a.vim'
 Bundle 'https://github.com/vim-scripts/SingleCompile'
@@ -32,6 +32,7 @@ Bundle 'https://github.com/vim-scripts/cscope_macros.vim'
 Bundle 'https://github.com/vim-scripts/fugitive.vim'
 Bundle 'https://github.com/vim-scripts/Lucius'
 
+Bundle 'guns/ultisnips'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mihaifm/vimpanel'
 Bundle 'proyvind/Cpp11-Syntax-Support'
@@ -386,11 +387,12 @@ let g:clang_use_library = 1
 let xcode_in_use = split(system ("xcode-select --print-path"), "\n")
 let g:clang_library_path = xcode_in_use[0] . "/Toolchains/XcodeDefault.xctoolchain/usr/lib"
 let g:clang_complete_patterns = 1
-let g:clang_complete_copen = 1
+let g:clang_complete_copen = 0
 let g:clang_hl_errors = 1
 "New additions for CLIC
 let g:clang_snippets = 1
-let g:clang_snippets_engine = "clang_complete"
+"let g:clang_snippets_engine = "clang_complete"
+let g:clang_snippets_engine = 'ultisnips'
 let g:clang_conceal_snippets = 1
 let g:clang_auto_user_options = "path, .clang_complete"
 let g:clang_sort_algo = "alpha"
