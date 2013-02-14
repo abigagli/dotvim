@@ -4,7 +4,7 @@ filetype off
 "Activate vundle and let it manage itself
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-Bundle 'https://github.com/gmarik/vundle'
+Bundle 'gmarik/vundle'
 
 "And now all the bundles I want to use
 "-------------------------------------------------------
@@ -13,7 +13,6 @@ Bundle 'https://github.com/vim-scripts/Tagbar'
 Bundle 'https://github.com/vim-scripts/Intelligent-Tags'
 Bundle 'https://github.com/vim-scripts/PreciseJump'
 Bundle 'https://github.com/vim-scripts/errormarker.vim'
-Bundle 'https://github.com/Rip-Rip/clang_complete'
 Bundle 'https://github.com/vim-scripts/unimpaired.vim'
 Bundle 'https://github.com/vim-scripts/YankRing.vim'
 Bundle 'https://github.com/vim-scripts/ack.vim'
@@ -23,7 +22,6 @@ Bundle 'https://github.com/vim-scripts/Screen-vim---gnu-screentmux'
 Bundle 'https://github.com/vim-scripts/surround.vim'
 Bundle 'https://github.com/vim-scripts/toggle_mouse'
 Bundle 'https://github.com/vim-scripts/grep.vim'
-"Bundle 'https://github.com/vim-scripts/snipMate'
 Bundle 'https://github.com/vim-scripts/bufexplorer.zip'
 Bundle 'https://github.com/vim-scripts/a.vim'
 Bundle 'https://github.com/vim-scripts/SingleCompile'
@@ -32,6 +30,7 @@ Bundle 'https://github.com/vim-scripts/cscope_macros.vim'
 Bundle 'https://github.com/vim-scripts/fugitive.vim'
 Bundle 'https://github.com/vim-scripts/Lucius'
 
+Bundle 'Rip-Rip/clang_complete'
 Bundle 'guns/ultisnips'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mihaifm/vimpanel'
