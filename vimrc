@@ -369,28 +369,34 @@ set completeopt=menuone,menu,longest,preview
              \'clang++ self-built with libcxx', '$LLVMROOT/bin/clang++', '-g3 -std=c++11 -stdlib=libc++ -Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -fno-pie -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -I$LIBCXXROOT/include -L$LIBCXXROOT/lib -L$BOOSTROOT/clang-xcode/static/lib -lboost_all -o %:r', './%:r')
 
 
-call SingleCompile#ChooseCompiler ('cpp','clang++_libc++')
-"call SingleCompile#ChooseCompiler ('cpp','g++')
+if has('mac')
+    call SingleCompile#ChooseCompiler ('cpp','clang++_libc++')
+else
+    call SingleCompile#ChooseCompiler ('cpp','g++')
+endif
 "-------------------------------------------------------------------
 
 "------------------ CLANG COMPLETE -------------------------------
-"let g:clang_exec = $LLVMROOT . "/bin/clang++"
-let g:clang_exec = system("xcrun -f clang++")
-"let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include -I" . $LIBCXXROOT . "/include" 
-"let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include"
-let g:clang_user_options = '-stdlib=libc++ -std=c++11 -I' . $BOOSTROOT . '/include 2>NUL || exit 0'
+if has('mac')
+    let g:clang_exec = system("xcrun -f clang++")
+    let g:clang_user_options = '-stdlib=libc++ -std=c++11 -I' . $BOOSTROOT . '/include 2>NUL || exit 0'
+    "let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include -I" . $LIBCXXROOT . "/include" 
+    let xcode_in_use = split(system ("xcode-select --print-path"), "\n")
+    let g:clang_library_path = xcode_in_use[0] . "/Toolchains/XcodeDefault.xctoolchain/usr/lib"
+else
+    let g:clang_exec = $LLVMROOT . "/bin/clang++"
+    let g:clang_user_options = '-std=c++11 -I' . $BOOSTROOT . '/include 2>NUL || exit 0'
+    let g:clang_library_path = $LLVMROOT . "/lib"
+endif
+
 let g:clang_complete_auto = 0
 let g:clang_auto_select = 1
 let g:clang_use_library = 1
-"let g:clang_library_path = $LLVMROOT . "/lib"
-let xcode_in_use = split(system ("xcode-select --print-path"), "\n")
-let g:clang_library_path = xcode_in_use[0] . "/Toolchains/XcodeDefault.xctoolchain/usr/lib"
 let g:clang_complete_patterns = 1
 let g:clang_complete_copen = 0
 let g:clang_hl_errors = 1
 "New additions for CLIC
 let g:clang_snippets = 1
-"let g:clang_snippets_engine = "clang_complete"
 let g:clang_snippets_engine = 'ultisnips'
 let g:clang_conceal_snippets = 1
 let g:clang_auto_user_options = "path, .clang_complete"
