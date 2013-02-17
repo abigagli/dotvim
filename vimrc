@@ -29,6 +29,8 @@ Bundle 'https://github.com/vim-scripts/The-NERD-tree'
 Bundle 'https://github.com/vim-scripts/cscope_macros.vim'
 Bundle 'https://github.com/vim-scripts/fugitive.vim'
 Bundle 'https://github.com/vim-scripts/Lucius'
+Bundle 'https://github.com/vim-scripts/bash-support.vim'
+
 
 Bundle 'Rip-Rip/clang_complete'
 Bundle 'guns/ultisnips'
