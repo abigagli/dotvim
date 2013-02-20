@@ -162,6 +162,8 @@ nnoremap F :e<CR>GL:sleep 1<CR>F
 "easier use of cscope_map which is based on C-\
 nmap <C-_> <C-\>
 
+"easy buffer navigation
+nnoremap <leader>l :ls<CR>:b<space>
 
 "distinguish errors from warnings in errormarker.vim
 let &errorformat="%f:%l:%c: %t%*[^:]:%m,%f:%l: %t%*[^:]:%m," . &errorformat
