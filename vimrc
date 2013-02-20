@@ -32,19 +32,18 @@ Bundle 'https://github.com/vim-scripts/Lucius'
 Bundle 'https://github.com/vim-scripts/bash-support.vim'
 
 
+Bundle 'jnurmine/Zenburn'
 Bundle 'Rip-Rip/clang_complete'
 Bundle 'guns/ultisnips'
 Bundle 'kien/ctrlp.vim'
-Bundle 'mihaifm/vimpanel'
 Bundle 'proyvind/Cpp11-Syntax-Support'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'sjl/clam.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'godlygeek/tabular'
-"Bundle 'Shougo/neocomplcache'
-"Bundle 'Shougo/neocomplcache-snippets-complete'
-"Bundle 'Shougo/neocomplcache-clang'
 "Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'mihaifm/vimpanel'
+"Bundle 'flazz/vim-colorschemes'
 "-------------------------------------------------------
 
 
@@ -245,24 +244,25 @@ nnoremap <silent> <leader><space> :nohlsearch<CR>
 "CD to path of file being edited
 nnoremap <leader>cd :cd %:p:h<CR>
 
-
 if ! has ('gui_running')
     set t_Co=256
     let g:solarized_contrast="normal"
     let g:solarized_visibility="high"
-    colorscheme solarized
+    "colorscheme solarized
     set background=dark
     "colorscheme ir_black
     highlight CursorLine ctermbg=LightCyan
+    colorscheme zenburn
 else
     "colorscheme ir_black
     "colorscheme macvim
     let g:solarized_contrast="normal"
     let g:solarized_visibility="high"
-    colorscheme solarized
+    "colorscheme solarized
     set background=dark
-    set guifont=Inconsolata:h14
+    set guifont=Inconsolata:h13
     highlight CursorLine guibg=LightCyan 
+    colorscheme zenburn
 endif
 
 
