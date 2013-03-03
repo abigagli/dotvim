@@ -261,11 +261,15 @@ endif
 
 let g:solarized_contrast="normal"
 let g:solarized_visibility="high"
-"colorscheme solarized
+colorscheme solarized
 "colorscheme ir_black
-colorscheme zenburn
+"colorscheme zenburn
 set background=dark
-highlight CursorLine ctermbg=DarkYellow guibg=#ac801e
+
+"CursorLine settings for zenburn
+"highlight CursorLine ctermbg=DarkYellow guibg=#ac801e
+
+highlight CursorLine ctermbg=16 guibg=Black
 highlight IncSearch ctermbg=DarkMagenta guibg=DarkMagenta
 highlight Search ctermbg=DarkMagenta guibg=DarkMagenta
 "-------------------------------------------------------------------
