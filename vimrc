@@ -33,6 +33,7 @@ Bundle 'https://github.com/vim-scripts/bash-support.vim'
 Bundle 'https://github.com/vim-scripts/git-file.vim'
 
 
+"Bundle 'godlygeek/csapprox'
 Bundle 'gregsexton/gitv'
 Bundle 'jnurmine/Zenburn'
 Bundle 'Rip-Rip/clang_complete'
@@ -248,28 +249,26 @@ nnoremap <silent> <leader><space> :nohlsearch<CR>
 "CD to path of file being edited
 nnoremap <leader>cd :cd %:p:h<CR>
 
+"Configure CSApprox
+let g:CSApprox_attr_map = {'bold' : 'bold', 'italic' : '', 'sp' : '' }
+
+"--------------------Setup up colorscheme stuff--------------------
 if ! has ('gui_running')
     set t_Co=256
-    let g:solarized_contrast="normal"
-    let g:solarized_visibility="high"
-    "colorscheme solarized
-    set background=dark
-    "colorscheme ir_black
-    highlight CursorLine ctermbg=LightCyan
-    colorscheme zenburn
 else
-    "colorscheme ir_black
-    "colorscheme macvim
-    let g:solarized_contrast="normal"
-    let g:solarized_visibility="high"
-    "colorscheme solarized
-    set background=dark
     set guifont=Inconsolata:h13
-    highlight CursorLine guibg=LightCyan 
-    colorscheme zenburn
 endif
 
-
+let g:solarized_contrast="normal"
+let g:solarized_visibility="high"
+"colorscheme solarized
+"colorscheme ir_black
+colorscheme zenburn
+set background=dark
+highlight CursorLine ctermbg=DarkYellow guibg=#ac801e
+highlight IncSearch ctermbg=DarkMagenta guibg=DarkMagenta
+highlight Search ctermbg=DarkMagenta guibg=DarkMagenta
+"-------------------------------------------------------------------
 
 if has('statusline')
     set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
