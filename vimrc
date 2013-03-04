@@ -270,7 +270,7 @@ set background=dark
 "highlight CursorLine ctermbg=DarkYellow guibg=#ac801e
 
 highlight CursorLine ctermbg=16 guibg=Black
-highlight IncSearch ctermbg=DarkMagenta guibg=DarkMagenta
+highlight IncSearch ctermfg=4 ctermbg=DarkMagenta guibg=DarkMagenta
 highlight Search ctermbg=DarkMagenta guibg=DarkMagenta
 "-------------------------------------------------------------------
 
