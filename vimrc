@@ -35,7 +35,10 @@ Bundle 'https://github.com/vim-scripts/git-file.vim'
 
 Bundle 'gregsexton/gitv'
 Bundle 'jnurmine/Zenburn'
-Bundle 'Rip-Rip/clang_complete'
+if has('mac')
+    Bundle 'Rip-Rip/clang_complete'
+endif
+
 Bundle 'guns/ultisnips'
 Bundle 'kien/ctrlp.vim'
 Bundle 'proyvind/Cpp11-Syntax-Support'
@@ -110,7 +113,7 @@ set clipboard=unnamed
 set concealcursor=inv
 set conceallevel=2
 
-let mapleader=","
+let mapleader="\<space>"
 
 au BufNewFile,BufRead *.cpp set syntax=cpp11
 
