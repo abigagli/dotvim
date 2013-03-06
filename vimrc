@@ -11,7 +11,6 @@ Bundle 'gmarik/vundle'
 Bundle 'https://github.com/vim-scripts/TaskList.vim'
 Bundle 'https://github.com/vim-scripts/Tagbar'
 Bundle 'https://github.com/vim-scripts/Intelligent-Tags'
-Bundle 'https://github.com/vim-scripts/PreciseJump'
 Bundle 'https://github.com/vim-scripts/errormarker.vim'
 Bundle 'https://github.com/vim-scripts/unimpaired.vim'
 Bundle 'https://github.com/vim-scripts/YankRing.vim'
@@ -31,9 +30,9 @@ Bundle 'https://github.com/vim-scripts/fugitive.vim'
 Bundle 'https://github.com/vim-scripts/Lucius'
 Bundle 'https://github.com/vim-scripts/bash-support.vim'
 Bundle 'https://github.com/vim-scripts/git-file.vim'
+"Bundle 'https://github.com/vim-scripts/PreciseJump'
 
 
-"Bundle 'godlygeek/csapprox'
 Bundle 'gregsexton/gitv'
 Bundle 'jnurmine/Zenburn'
 Bundle 'Rip-Rip/clang_complete'
@@ -44,9 +43,10 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'sjl/clam.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'godlygeek/tabular'
-"Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'mihaifm/vimpanel'
 "Bundle 'flazz/vim-colorschemes'
+"Bundle 'godlygeek/csapprox'
 "-------------------------------------------------------
 
 
@@ -158,9 +158,11 @@ let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_working_path_mode = 'ra'
 
+"EasyMotion ------------------------------ 
+let g:EasyMotion_leader_key = 'ò'
 
 "Hit F to follow log file
-nmap <leader>F :e<CR>GL:sleep 1<CR><leader>F
+nmap <leader>_ :e<CR>GL:sleep 1<CR><leader>_
 
 "easier use of cscope_map which is based on C-\
 nmap <C-_> <C-\>
