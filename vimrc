@@ -113,7 +113,8 @@ set clipboard=unnamed
 set concealcursor=inv
 set conceallevel=2
 
-let mapleader="\<space>"
+"let mapleader="\<space>"
+let mapleader=","
 
 au BufNewFile,BufRead *.cpp set syntax=cpp11
 
