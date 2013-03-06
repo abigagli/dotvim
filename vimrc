@@ -160,7 +160,7 @@ let g:ctrlp_working_path_mode = 'ra'
 
 
 "Hit F to follow log file
-nnoremap F :e<CR>GL:sleep 1<CR>F
+nmap <leader>F :e<CR>GL:sleep 1<CR><leader>F
 
 "easier use of cscope_map which is based on C-\
 nmap <C-_> <C-\>
