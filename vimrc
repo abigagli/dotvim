@@ -110,8 +110,10 @@ set tildeop
 set autoread
 set clipboard=unnamed
 
-set concealcursor=inv
-set conceallevel=2
+if has ('conceal')
+    set concealcursor=inv
+    set conceallevel=2
+endif
 
 "let mapleader="\<space>"
 let mapleader=","
