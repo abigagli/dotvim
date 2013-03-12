@@ -39,7 +39,11 @@ endif
 
 Bundle 'gregsexton/gitv'
 Bundle 'jnurmine/Zenburn'
-Bundle 'guns/ultisnips'
+
+if has ('python')
+    Bundle 'guns/ultisnips'
+endif
+
 Bundle 'kien/ctrlp.vim'
 Bundle 'proyvind/Cpp11-Syntax-Support'
 Bundle 'altercation/vim-colors-solarized'
