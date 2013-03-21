@@ -1,6 +1,10 @@
 set nocompatible
 filetype off 
 
+let s:uname = system ("uname")
+
+
+
 "Activate vundle and let it manage itself
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -10,7 +14,9 @@ Bundle 'gmarik/vundle'
 "-------------------------------------------------------
 Bundle 'https://github.com/vim-scripts/TaskList.vim'
 Bundle 'https://github.com/vim-scripts/Tagbar'
-Bundle 'https://github.com/vim-scripts/Intelligent-Tags'
+if ! s:uname == "SunOS"
+    Bundle 'https://github.com/vim-scripts/Intelligent-Tags'
+endif
 Bundle 'https://github.com/vim-scripts/errormarker.vim'
 Bundle 'https://github.com/vim-scripts/unimpaired.vim'
 Bundle 'https://github.com/vim-scripts/YankRing.vim'
@@ -154,7 +160,9 @@ let b:did_indent = 1
 autocmd FileType qf wincmd J
 
 "Should let vim realize the file was externally changed
-autocmd Cursorhold * checktime
+if ! s:uname == "SunOS"
+    autocmd Cursorhold * checktime
+endif
 
 "Powerline ------------------------
 set encoding=utf-8
@@ -393,7 +401,7 @@ set completeopt=menuone,menu,longest,preview
 
 if has('mac')
     call SingleCompile#ChooseCompiler ('cpp','clang++_libc++')
-else
+elseif ! s:uname == "SunOS"
     call SingleCompile#ChooseCompiler ('cpp','g++')
 endif
 "-------------------------------------------------------------------
