@@ -14,9 +14,6 @@ Bundle 'gmarik/vundle'
 "-------------------------------------------------------
 Bundle 'https://github.com/vim-scripts/TaskList.vim'
 Bundle 'https://github.com/vim-scripts/Tagbar'
-if ! s:uname == "SunOS"
-    Bundle 'https://github.com/vim-scripts/Intelligent-Tags'
-endif
 Bundle 'https://github.com/vim-scripts/errormarker.vim'
 Bundle 'https://github.com/vim-scripts/unimpaired.vim'
 Bundle 'https://github.com/vim-scripts/YankRing.vim'
@@ -38,18 +35,20 @@ Bundle 'https://github.com/vim-scripts/bash-support.vim'
 Bundle 'https://github.com/vim-scripts/git-file.vim'
 "Bundle 'https://github.com/vim-scripts/PreciseJump'
 
+if s:uname != "SunOS\n"
+    Bundle 'https://github.com/vim-scripts/Intelligent-Tags'
+endif
 
 if has('mac')
     Bundle 'Rip-Rip/clang_complete'
 endif
 
-Bundle 'gregsexton/gitv'
-Bundle 'jnurmine/Zenburn'
-
 if has ('python')
     Bundle 'guns/ultisnips'
 endif
 
+Bundle 'gregsexton/gitv'
+Bundle 'jnurmine/Zenburn'
 Bundle 'kien/ctrlp.vim'
 Bundle 'proyvind/Cpp11-Syntax-Support'
 Bundle 'altercation/vim-colors-solarized'
