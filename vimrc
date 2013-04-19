@@ -43,9 +43,9 @@ if has('mac')
     Bundle 'Rip-Rip/clang_complete'
 endif
 
-if has ('python')
-    Bundle 'guns/ultisnips'
-endif
+"if has ('python')
+"    Bundle 'SirVer/ultisnips'
+"endif
 
 Bundle 'gregsexton/gitv'
 Bundle 'jnurmine/Zenburn'
@@ -431,7 +431,7 @@ let g:clang_complete_copen = 0
 let g:clang_hl_errors = 1
 "New additions for CLIC
 let g:clang_snippets = 1
-let g:clang_snippets_engine = 'ultisnips'
+let g:clang_snippets_engine = 'clang_complete' "'ultisnips'
 let g:clang_conceal_snippets = 1
 let g:clang_auto_user_options = "path, .clang_complete"
 let g:clang_sort_algo = "alpha"
