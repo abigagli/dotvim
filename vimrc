@@ -28,11 +28,13 @@ Bundle 'https://github.com/vim-scripts/bufexplorer.zip'
 Bundle 'https://github.com/vim-scripts/a.vim'
 Bundle 'https://github.com/vim-scripts/SingleCompile'
 Bundle 'https://github.com/vim-scripts/The-NERD-tree'
-Bundle 'https://github.com/vim-scripts/cscope_macros.vim'
+"Bundle 'https://github.com/vim-scripts/cscope_macros.vim'
 Bundle 'https://github.com/vim-scripts/fugitive.vim'
 Bundle 'https://github.com/vim-scripts/Lucius'
 Bundle 'https://github.com/vim-scripts/bash-support.vim'
 Bundle 'https://github.com/vim-scripts/git-file.vim'
+Bundle 'https://github.com/vim-scripts/gtags.vim'
+Bundle 'https://github.com/vim-scripts/listmaps.vim'
 "Bundle 'https://github.com/vim-scripts/PreciseJump'
 
 if s:uname != "SunOS\n"
@@ -58,6 +60,7 @@ Bundle 'godlygeek/tabular'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'nelstrom/vim-qargs'
 Bundle 'nelstrom/vim-visual-star-search'
+Bundle 'sollidsnake/vterm.git'
 "Bundle 'mihaifm/vimpanel'
 "Bundle 'flazz/vim-colorschemes'
 "Bundle 'godlygeek/csapprox'
@@ -184,7 +187,7 @@ let g:EasyMotion_leader_key = 'ò'
 nmap <leader>_ :e<CR>GL:sleep 1<CR><leader>_
 
 "easier use of cscope_map which is based on C-\
-nmap <C-_> <C-\>
+"nmap <C-_> <C-\>
 
 "easy buffer navigation
 nnoremap <leader>l :ls<CR>:b<space>
@@ -201,7 +204,7 @@ nnoremap <F10> :wa <ESC><BAR> :make -j4 DEBUG=1<CR>
 
 
 "Recreate cscope db and reload it
-nnoremap <F9> :execute '!cscope -Rbq' <BAR> cs reset<CR>
+"nnoremap <F9> :execute '!cscope -Rbq' <BAR> cs reset<CR>
 
 "Quick access to Tagbar
 nnoremap <F8> :TagbarToggle<CR>
@@ -439,6 +442,7 @@ let g:clang_complete_macros = 1
 let g:clang_complete_patterns = 0
 let g:clang_debug = 0  "Set to 1 and type :mess after completion to see the exact cmdline flags
 let g:clang_close_preview = 1
+let g:clang_jumpto_declaration_key = "<C-_>"
 "let g:clang_trailing_placeholder=1
 nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
 "let g:clic_filename="/Users/abigagli/develop/commprove/H3G/GTPAnalyzerMT/prj-index/index.db"
@@ -450,6 +454,9 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabLongestEnhanced = 1
 "let g:SuperTabContextDefaultCompletionType = "<c-x><c-n>"
 
+"-------------- Gtags --------------
+":map <C-]> :Gtags<CR><CR>
+:map <C-\> :Gtags -r<CR><CR>
 
 
 "-------------- Alternate --------------
@@ -503,16 +510,16 @@ function! s:Find_in_parent(fln,flsrt,flstp)
   return "Nothing"
 endfunc
 
-let newcsdbpath = s:Find_in_parent("cscope.out",s:windowdir(),"/")
-    echo "Found cscope.out at: " . newcsdbpath
-    "echo "Windowdir: " . s:windowdir()
-if newcsdbpath != "Nothing"
-    if !cscope_connection(3, "out", newcsdbpath)
-        exe "cs add " . newcsdbpath  . "/cscope.out " . newcsdbpath
-    endif
-else
-    echo "cscope not found"
-endif
+"let newcsdbpath = s:Find_in_parent("cscope.out",s:windowdir(),"/")
+"    echo "Found cscope.out at: " . newcsdbpath
+"    "echo "Windowdir: " . s:windowdir()
+"if newcsdbpath != "Nothing"
+"    if !cscope_connection(3, "out", newcsdbpath)
+"        exe "cs add " . newcsdbpath  . "/cscope.out " . newcsdbpath
+"    endif
+"else
+"    echo "cscope not found"
+"endif
 
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
 function! s:RunShellCommand(cmdline)
