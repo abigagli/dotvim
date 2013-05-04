@@ -1,3 +1,15 @@
+" MINIMAL BARE BONES NAVIGATION AS SEEN IN https://vimeo.com/65250028
+" :find
+" set path=**;.git
+" set suffixesadd=.cpp,.hpp,.h
+" set nocompatible
+" set wildmode=full
+" set wildmenu
+" set wildignore=*.o,*.a,*.so
+" :ls & :<number>[s]b
+" :Explore
+" :e scp://host/some/where/to/file.txt
+
 set nocompatible
 filetype off 
 
