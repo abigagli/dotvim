@@ -92,7 +92,7 @@ set writebackup
 set wildchar=<Tab> 
 set wildmenu 
 set wildmode=list:longest
-set wildignore+=*.a,*.o,*.so,*.dylib,*.gz,*.tar,.DS_Store
+set wildignore+=*.a,*.o,*.so,*.dylib,*.gz,*.tar,.DS_Store,*/.git/*,*/.hg/*,*/.svn/*
 set scrolloff=3
 set hidden
 set makeprg=gmake
