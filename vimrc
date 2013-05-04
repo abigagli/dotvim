@@ -180,6 +180,8 @@ let g:ctrlp_by_filename = 1
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_root_markers = ['Version.make']
+let g:ctrlp_user_command = 'find %s -type f'
 
 "EasyMotion ------------------------------ 
 let g:EasyMotion_leader_key = 'ò'
