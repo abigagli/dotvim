@@ -31,7 +31,6 @@ Bundle 'https://github.com/vim-scripts/unimpaired.vim'
 Bundle 'https://github.com/vim-scripts/YankRing.vim'
 Bundle 'https://github.com/vim-scripts/ack.vim'
 Bundle 'https://github.com/vim-scripts/The-NERD-Commenter'
-Bundle 'https://github.com/vim-scripts/SuperTab-continued.'
 Bundle 'https://github.com/vim-scripts/Screen-vim---gnu-screentmux'
 Bundle 'https://github.com/vim-scripts/surround.vim'
 Bundle 'https://github.com/vim-scripts/toggle_mouse'
@@ -57,9 +56,9 @@ if has('mac')
     Bundle 'Rip-Rip/clang_complete'
 endif
 
-"if has ('python')
-"    Bundle 'SirVer/ultisnips'
-"endif
+if has ('python')
+    Bundle 'SirVer/ultisnips'
+endif
 
 Bundle 'gregsexton/gitv'
 Bundle 'jnurmine/Zenburn'
@@ -73,8 +72,9 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'nelstrom/vim-qargs'
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'sollidsnake/vterm.git'
-Bundle 'vim-peepopen'
+Bundle 'lillq/peepopenvim'
 Bundle 'dahu/LearnVim'
+Bundle 'ervandew/supertab'
 "Bundle 'mihaifm/vimpanel'
 "Bundle 'flazz/vim-colorschemes'
 "Bundle 'godlygeek/csapprox'
@@ -450,7 +450,7 @@ let g:clang_complete_copen = 0
 let g:clang_hl_errors = 1
 "New additions for CLIC
 let g:clang_snippets = 1
-let g:clang_snippets_engine = 'clang_complete' "'ultisnips'
+let g:clang_snippets_engine = 'ultisnips' "'clang_complete' 
 let g:clang_conceal_snippets = 1
 let g:clang_auto_user_options = "path, .clang_complete"
 let g:clang_sort_algo = "alpha"
