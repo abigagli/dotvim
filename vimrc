@@ -137,6 +137,7 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-
 set tildeop
 set autoread
 set clipboard=unnamed
+set noesckeys
 
 if has ('conceal')
     set concealcursor=inv
