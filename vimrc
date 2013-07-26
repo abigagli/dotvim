@@ -75,6 +75,7 @@ Bundle 'sollidsnake/vterm.git'
 Bundle 'lillq/peepopenvim'
 Bundle 'dahu/LearnVim'
 Bundle 'ervandew/supertab'
+Bundle 'mhinz/vim-startify'
 "Bundle 'mihaifm/vimpanel'
 "Bundle 'flazz/vim-colorschemes'
 "Bundle 'godlygeek/csapprox'
@@ -453,7 +454,8 @@ let g:clang_hl_errors = 1
 let g:clang_snippets = 1
 let g:clang_snippets_engine = 'ultisnips' "'clang_complete' 
 let g:clang_conceal_snippets = 1
-let g:clang_auto_user_options = "path, .clang_complete"
+let g:clang_auto_user_options = "path, .clang_complete, compile_commands.json"
+let g:clang_compilation_database = "BUILD"
 let g:clang_sort_algo = "alpha"
 let g:clang_complete_macros = 1
 let g:clang_complete_patterns = 0
