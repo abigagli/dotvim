@@ -314,6 +314,11 @@ set background=dark
 highlight CursorLine ctermbg=16 guibg=Black
 highlight IncSearch ctermfg=4 ctermbg=DarkMagenta guibg=DarkMagenta
 highlight Search ctermbg=DarkMagenta guibg=DarkMagenta
+
+"with these you can get iTerm to render a background image
+"highlight Normal ctermbg=NONE
+"highlight NonText ctermbg=NONE
+
 "-------------------------------------------------------------------
 
 if has('statusline')
@@ -455,7 +460,7 @@ let g:clang_snippets = 1
 let g:clang_snippets_engine = 'ultisnips' "'clang_complete' 
 let g:clang_conceal_snippets = 1
 let g:clang_auto_user_options = "path, .clang_complete, compile_commands.json"
-let g:clang_compilation_database = "BUILD"
+"let g:clang_compilation_database = 
 let g:clang_sort_algo = "alpha"
 let g:clang_complete_macros = 1
 let g:clang_complete_patterns = 0
@@ -481,7 +486,8 @@ let g:SuperTabLongestEnhanced = 1
 "-------------- Alternate --------------
 let g:alternateExtensions_m = "h"
 let g:alternateExtensions_mm = "h"
-let g:alternateExtensions_h = "m,mm,c,cpp,cc,cxx"
+let g:alternateExtensions_h = "m,mm,c,cpp,cc,cxx,CC"
+let g:alternateNoDefaultAlternate = 1
 
 "-------------------- TASKLIST ------------------------------------
 "tasklist remapped to <Leader>v to avoid conflict with commandT
