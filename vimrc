@@ -138,7 +138,13 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-
 set tildeop
 set autoread
 set clipboard=unnamed
-set noesckeys
+
+"Instead of disabling esckeys to remove the pause i.e. when doing esc-O in
+"insert mode, just use a much shorter timeout for key-codes setting ttimeoutlen
+"see http://stackoverflow.com/questions/2158516/delay-before-o-opens-a-new-line
+"and :h esckeys
+"set noesckeys
+set ttimeoutlen=100
 
 if has ('conceal')
     set concealcursor=inv
