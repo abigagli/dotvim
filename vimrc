@@ -138,7 +138,7 @@ set viminfo+=%
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 set tildeop
 set autoread
-set clipboard=unnamedplus
+set clipboard=unnamed
 
 "Instead of disabling esckeys to remove the pause i.e. when doing esc-O in
 "insert mode, just use a much shorter timeout for key-codes setting ttimeoutlen
