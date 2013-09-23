@@ -36,7 +36,7 @@ Bundle 'https://github.com/vim-scripts/surround.vim'
 Bundle 'https://github.com/vim-scripts/toggle_mouse'
 Bundle 'https://github.com/vim-scripts/grep.vim'
 Bundle 'https://github.com/vim-scripts/bufexplorer.zip'
-Bundle 'https://github.com/vim-scripts/a.vim'
+"Bundle 'https://github.com/vim-scripts/a.vim'
 Bundle 'https://github.com/vim-scripts/SingleCompile'
 Bundle 'https://github.com/vim-scripts/The-NERD-tree'
 "Bundle 'https://github.com/vim-scripts/cscope_macros.vim'
@@ -76,6 +76,7 @@ Bundle 'lillq/peepopenvim'
 Bundle 'dahu/LearnVim'
 Bundle 'ervandew/supertab'
 Bundle 'mhinz/vim-startify'
+Bundle 'derekwyatt/vim-fswitch'
 "Bundle 'mihaifm/vimpanel'
 "Bundle 'flazz/vim-colorschemes'
 "Bundle 'godlygeek/csapprox'
@@ -137,7 +138,7 @@ set viminfo+=%
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 set tildeop
 set autoread
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 "Instead of disabling esckeys to remove the pause i.e. when doing esc-O in
 "insert mode, just use a much shorter timeout for key-codes setting ttimeoutlen
@@ -238,8 +239,24 @@ nnoremap <F5> :buffers<CR>:buffer<Space>
 nnoremap <F11> :YRShow<CR>
 
 "Quick jump to alternate file
-nnoremap <leader>a :A<CR>
-nnoremap <leader>av :AV<CR>
+"nnoremap <leader>a :A<CR>
+"nnoremap <leader>av :AV<CR>
+
+"FSHere configuration
+nnoremap <silent> <leader>a :FSHere<CR>
+nnoremap <silent> <leader>av :FSSplitLeft<CR>
+
+augroup mycppfiles
+   au!
+   au BufEnter *.cpp let b:fswitchdst  = 'h,hpp'
+   au BufEnter *.cpp let b:fswitchlocs = './,reg:|Source|Include|,reg:|Source|Include/**|,reg:|source|include|,reg:|source|include/**|'
+
+   au BufEnter *.c let b:fswitchdst  = 'h'
+   au BufEnter *.c let b:fswitchlocs = './,reg:|Source|Include|,reg:|Source|Include/**|,reg:|source|include|,reg:|source|include/**|'
+
+   au BufEnter *.h let b:fswitchdst  = 'cpp,cc,C'
+   au BufEnter *.h let b:fswitchlocs = './,reg:|Include|Source|,reg:|Include.*|Source|,reg:|include|source|,reg:|include.*|source|'
+augroup END
 
 "Quick difference from when file was opened
 nnoremap <leader>do :DiffOrig<cr>
