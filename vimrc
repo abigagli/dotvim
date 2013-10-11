@@ -84,6 +84,7 @@ if has ('mac')
 endif
 
 Bundle 'scrooloose/syntastic'
+Bundle 'Raimondi/delimitMate'
 
 "Bundle 'mihaifm/vimpanel'
 "Bundle 'flazz/vim-colorschemes'
