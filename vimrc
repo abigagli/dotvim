@@ -31,7 +31,7 @@ Bundle 'https://github.com/vim-scripts/unimpaired.vim'
 Bundle 'https://github.com/vim-scripts/YankRing.vim'
 Bundle 'https://github.com/vim-scripts/ack.vim'
 Bundle 'https://github.com/vim-scripts/The-NERD-Commenter'
-Bundle 'https://github.com/vim-scripts/Screen-vim---gnu-screentmux'
+"Bundle 'https://github.com/vim-scripts/Screen-vim---gnu-screentmux'
 Bundle 'https://github.com/vim-scripts/surround.vim'
 Bundle 'https://github.com/vim-scripts/toggle_mouse'
 Bundle 'https://github.com/vim-scripts/grep.vim'
@@ -48,13 +48,13 @@ Bundle 'https://github.com/vim-scripts/gtags.vim'
 Bundle 'https://github.com/vim-scripts/listmaps.vim'
 "Bundle 'https://github.com/vim-scripts/PreciseJump'
 
-if s:uname != "SunOS\n"
-    Bundle 'https://github.com/vim-scripts/Intelligent-Tags'
-endif
+"if s:uname != "SunOS\n"
+"    Bundle 'https://github.com/vim-scripts/Intelligent-Tags'
+"endif
 
-if has('mac')
-    Bundle 'Rip-Rip/clang_complete'
-endif
+"if has('mac')
+"    Bundle 'Rip-Rip/clang_complete'
+"endif
 
 if has ('python')
     Bundle 'SirVer/ultisnips'
@@ -74,9 +74,17 @@ Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'sollidsnake/vterm.git'
 Bundle 'lillq/peepopenvim'
 Bundle 'dahu/LearnVim'
-Bundle 'ervandew/supertab'
+"Bundle 'ervandew/supertab'
 Bundle 'mhinz/vim-startify'
 Bundle 'derekwyatt/vim-fswitch'
+Bundle 'jalcine/cmake.vim'
+
+if s:uname != "SunOS\n"
+    Bundle 'Valloric/YouCompleteMe'
+endif
+
+Bundle 'scrooloose/syntastic'
+
 "Bundle 'mihaifm/vimpanel'
 "Bundle 'flazz/vim-colorschemes'
 "Bundle 'godlygeek/csapprox'
@@ -179,8 +187,6 @@ endfunction
 "Disable cmake-indent which apparently screws up c/c++ indenting
 let b:did_indent = 1
 
-"neocomplcache ------------------------
-"let g:neocomplcache_enable_at_startup = 1
 
 "Always put quickfix window at the bottom of the window layout
 autocmd FileType qf wincmd J
@@ -235,7 +241,7 @@ nnoremap <F10> :wa <ESC><BAR> :make -j4 DEBUG=1<CR>
 nnoremap <F8> :TagbarToggle<CR>
 
 "Quick access to buffer list
-nnoremap <F5> :buffers<CR>:buffer<Space>
+"nnoremap <F5> :buffers<CR>:buffer<Space>
 nnoremap <F11> :YRShow<CR>
 
 "Quick jump to alternate file
@@ -411,6 +417,18 @@ augroup filetype
 augroup END
 "-------------------------------------------------------------------
 
+
+"---------------------------- YOUCOMPLETEME ---------------------------
+nnoremap <leader>u :YcmForceCompileAndDiagnostics<CR>
+let g:ycm_confirm_extra_conf = 0
+"let g:ycm_key_list_previous_completion=['<Up>']
+
+"---------------------------- ULTISNIPS ---------------------------
+let g:UltiSnipsExpandTrigger="<c-j>"
+
+
+
+
 "------------------ ECLIM            -------------------------------
 let g:EclimCSearchSingleResult='edit' "'split', 'edit' or 'lopen'
 "let g:EclimProjectStatusLine
@@ -480,7 +498,7 @@ let g:clang_complete_copen = 0
 let g:clang_hl_errors = 1
 "New additions for CLIC
 let g:clang_snippets = 1
-let g:clang_snippets_engine = 'ultisnips' "'clang_complete' 
+let g:clang_snippets_engine =  'ultisnips' "'clang_complete' 
 let g:clang_conceal_snippets = 1
 let g:clang_auto_user_options = "path, .clang_complete, compile_commands.json"
 "let g:clang_compilation_database = 
