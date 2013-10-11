@@ -228,8 +228,8 @@ nnoremap <leader>l :ls<CR>:b<space>
 let &errorformat="%f:%l:%c: %t%*[^:]:%m,%f:%l: %t%*[^:]:%m," . &errorformat
 
 "Easier escape
-ino jj <esc>
-cno jj <c-c>
+inoremap jk <esc>
+cnoremap jk <c-c>
 
 "Quick access to make
 nnoremap <F10> :wa <ESC><BAR> :make -j4 DEBUG=1<CR>
