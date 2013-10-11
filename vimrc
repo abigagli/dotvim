@@ -420,10 +420,13 @@ augroup END
 
 "---------------------------- YOUCOMPLETEME ---------------------------
 nnoremap <leader>u :YcmForceCompileAndDiagnostics<CR>
+let g:ycm_global_ycm_extra_conf = $HOME . '/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
-"let g:ycm_key_list_previous_completion=['<Up>']
+"let g:ycm_autoclose_preview_window_after_insertion = 0
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "---------------------------- ULTISNIPS ---------------------------
+"Make ultisnips work ok with youcompleteme
 let g:UltiSnipsExpandTrigger="<c-j>"
 
 
