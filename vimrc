@@ -79,7 +79,7 @@ Bundle 'mhinz/vim-startify'
 Bundle 'derekwyatt/vim-fswitch'
 Bundle 'jalcine/cmake.vim'
 
-if s:uname != "SunOS\n"
+if has ('mac')
     Bundle 'Valloric/YouCompleteMe'
 endif
 
