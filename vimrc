@@ -149,6 +149,8 @@ set tildeop
 set autoread
 set clipboard=unnamed
 
+set virtualedit=block
+
 if has ('persistent_undo')
     set undofile
     set undodir=$HOME/tmp/VIM_UNDO_FILES
@@ -289,6 +291,7 @@ nnoremap <leader>dc :q<cr>:diffoff!<cr>
 "regexes
 nnoremap / /\v
 vnoremap / /\v
+cmap s/ s/\v
 
 "Bubble single lines
 nmap <UP> [e
