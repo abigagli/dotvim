@@ -191,6 +191,13 @@ endfunction
  
 "Some nifty tricks from Instantly-better-vim (Damian Conway, OSCON 2012/2013)
 nnoremap <SPACE> <PAGEDOWN>
+runtime plugin/dragvisuals.vim
+
+vmap  <expr>  <DOWN>   DVB_Drag('down')
+vmap  <expr>  <UP>     DVB_Drag('up')
+vmap  <expr>  <RIGHT>  DVB_Drag('right')
+vmap  <expr>  <LEFT>   DVB_Drag('left')
+vmap  <expr>  D        DVB_Duplicate()
  
  
  
@@ -284,12 +291,12 @@ nnoremap / /\v
 vnoremap / /\v
 
 "Bubble single lines
-nnoremap <Up> [e
-nnoremap <Down> ]e
+nmap <UP> [e
+nmap <DOWN> ]e
 
 "Bubble multiple lines
-vnoremap <Up> [egv
-vnoremap <Down> ]egv
+"vmap <UP> [egv
+"vmap <DOWN> ]egv
 
 "Quick open of .vimrc in a right vertical split
 nnoremap <leader>erc <C-w>v<C-w>l:e $MYVIMRC<cr>
