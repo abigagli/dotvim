@@ -149,6 +149,13 @@ set tildeop
 set autoread
 set clipboard=unnamed
 
+if has ('persistent_undo')
+    set undofile
+    set undodir=$HOME/tmp/VIM_UNDO_FILES
+endif
+
+
+
 "Instead of disabling esckeys to remove the pause i.e. when doing esc-O in
 "insert mode, just use a much shorter timeout for key-codes setting ttimeoutlen
 "see http://stackoverflow.com/questions/2158516/delay-before-o-opens-a-new-line
