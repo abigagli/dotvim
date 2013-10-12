@@ -182,6 +182,8 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""
  
  
+"Some nifty tricks from Instantly-better-vim (Damian Conway, OSCON 2012/2013)
+nnoremap <SPACE> <PAGEDOWN>
  
  
  
