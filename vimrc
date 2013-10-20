@@ -85,6 +85,8 @@ endif
 
 Bundle 'scrooloose/syntastic'
 Bundle 'Raimondi/delimitMate'
+Bundle 'sjl/gundo.vim'
+Bundle 'airblade/vim-gitgutter'
 
 "Bundle 'mihaifm/vimpanel'
 "Bundle 'flazz/vim-colorschemes'
@@ -117,7 +119,7 @@ set writebackup
 set wildchar=<Tab> 
 set wildmenu 
 set wildmode=list:longest
-set wildignore+=*.a,*.o,*.so,*.dylib,*.gz,*.tar,.DS_Store,*/.git/*,*/.hg/*,*/.svn/*
+set wildignore+=*.a,*.o,*.so,*.dylib,*.gz,*.tar,.DS_Store,*/.hg/*,*/.svn/*
 set scrolloff=3
 set hidden
 set makeprg=gmake
@@ -155,7 +157,6 @@ if has ('persistent_undo')
     set undofile
     set undodir=$HOME/tmp/VIM_UNDO_FILES
 endif
-
 
 
 "Instead of disabling esckeys to remove the pause i.e. when doing esc-O in
@@ -814,3 +815,7 @@ function! SearchDash()
   redraw!
 endfunction
 map <leader>d :call SearchDash()<CR>
+
+if has ('mac')
+    noremap <C-I> :pyf /Volumes/develop/LLVM_FACTORY/LLVM/tools/clang/tools/clang-format/clang-format.py<CR>
+endif
