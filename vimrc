@@ -79,7 +79,7 @@ Bundle 'mhinz/vim-startify'
 Bundle 'derekwyatt/vim-fswitch'
 Bundle 'jalcine/cmake.vim'
 
-if has ('mac')
+if s:uname != "SunOS\n"
     Bundle 'Valloric/YouCompleteMe'
 endif
 
@@ -816,6 +816,6 @@ function! SearchDash()
 endfunction
 map <leader>d :call SearchDash()<CR>
 
-if has ('mac')
-    noremap <C-I> :pyf /Volumes/develop/LLVM_FACTORY/LLVM/tools/clang/tools/clang-format/clang-format.py<CR>
+if has('mac')
+    noremap <C-I> :pyf ~/scripts/clang-format.py<CR>
 endif
