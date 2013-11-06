@@ -232,7 +232,7 @@ let g:ctrlp_root_markers = ['Version.make']
 let g:ctrlp_user_command = 'find %s -type f'
 
 "EasyMotion ------------------------------ 
-let g:EasyMotion_leader_key = 'ò'
+"let g:EasyMotion_leader_key = 'ò'
 
 "Hit F to follow log file
 nmap <leader>_ :e<CR>GL:sleep 1<CR><leader>_
