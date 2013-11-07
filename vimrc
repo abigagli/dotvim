@@ -87,7 +87,6 @@ Bundle 'scrooloose/syntastic'
 Bundle 'Raimondi/delimitMate'
 Bundle 'sjl/gundo.vim'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'ruda/satori'
 
 "Bundle 'mihaifm/vimpanel'
 "Bundle 'flazz/vim-colorschemes'
