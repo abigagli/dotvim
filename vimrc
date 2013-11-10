@@ -88,7 +88,8 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'sjl/gundo.vim'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'christoomey/vim-tmux-navigator'
-
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-easytags'
 "Bundle 'mihaifm/vimpanel'
 "Bundle 'flazz/vim-colorschemes'
 "Bundle 'godlygeek/csapprox'
@@ -99,7 +100,7 @@ syntax on
 filetype plugin indent on
 
 "source $VIMRUNTIME/vimrc_example.vim
-set tags=./tags; "quantiqa-* 
+set tags=./tags,./.tags; "quantiqa-* 
 set path+=./$HOST_TUPLE/include;quantiqa-*
 set path+=./3rdParty/cal/$HOST_TUPLE/include;quantiqa-*
 set path+=$GCCROOT/include/c++/**
@@ -231,6 +232,15 @@ let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['Version.make']
 let g:ctrlp_user_command = 'find %s -type f'
+
+"easytags -------------------------------
+let g:easytags_updatetime_warn = 0
+let g:easytags_autorecurse = 1
+let g:easytags_include_members = 1
+let g:easytags_dynamic_files = 1
+let g:easytags_on_cursorhold = 1
+let g:easytags_auto_update = 0
+highlight link cMember Special
 
 "EasyMotion ------------------------------ 
 "let g:EasyMotion_leader_key = 'ò'
@@ -445,6 +455,7 @@ augroup END
 nnoremap <leader>u :YcmForceCompileAndDiagnostics<CR>
 let g:ycm_global_ycm_extra_conf = $HOME . '/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_collect_identifiers_from_tags_files = 1
 "let g:ycm_autoclose_preview_window_after_insertion = 0
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
