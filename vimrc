@@ -502,38 +502,38 @@ endif
 "-------------------------------------------------------------------
 
 "------------------ CLANG COMPLETE -------------------------------
-if has('mac')
-    let g:clang_exec = system("xcrun -f clang++")
-    let g:clang_user_options = '-stdlib=libc++ -std=c++11 -I' . $BOOSTROOT . '/include'
-    "let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include -I" . $LIBCXXROOT . "/include" 
-    let xcode_in_use = split(system ("xcode-select --print-path"), "\n")
-    let g:clang_library_path = xcode_in_use[0] . "/Toolchains/XcodeDefault.xctoolchain/usr/lib"
-else
-    let g:clang_exec = $LLVMROOT . "/bin/clang++"
-    let g:clang_user_options = '-std=c++11 -I' . $BOOSTROOT . '/include'
-    let g:clang_library_path = $LLVMROOT . "/lib"
-endif
-
-let g:clang_complete_auto = 0
-let g:clang_auto_select = 1
-let g:clang_use_library = 1
-let g:clang_complete_patterns = 1
-let g:clang_complete_copen = 0
-let g:clang_hl_errors = 1
-"New additions for CLIC
-let g:clang_snippets = 1
-let g:clang_snippets_engine =  'ultisnips' "'clang_complete' 
-let g:clang_conceal_snippets = 1
-let g:clang_auto_user_options = "path, .clang_complete, compile_commands.json"
-"let g:clang_compilation_database = 
-let g:clang_sort_algo = "alpha"
-let g:clang_complete_macros = 1
-let g:clang_complete_patterns = 0
-let g:clang_debug = 0  "Set to 1 and type :mess after completion to see the exact cmdline flags
-let g:clang_close_preview = 1
-let g:clang_jumpto_declaration_key = "<C-_>"
-"let g:clang_trailing_placeholder=1
-nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
+"if has('mac')
+"    let g:clang_exec = system("xcrun -f clang++")
+"    let g:clang_user_options = '-stdlib=libc++ -std=c++11 -I' . $BOOSTROOT . '/include'
+"    "let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include -I" . $LIBCXXROOT . "/include" 
+"    let xcode_in_use = split(system ("xcode-select --print-path"), "\n")
+"    let g:clang_library_path = xcode_in_use[0] . "/Toolchains/XcodeDefault.xctoolchain/usr/lib"
+"else
+"    let g:clang_exec = $LLVMROOT . "/bin/clang++"
+"    let g:clang_user_options = '-std=c++11 -I' . $BOOSTROOT . '/include'
+"    let g:clang_library_path = $LLVMROOT . "/lib"
+"endif
+"
+"let g:clang_complete_auto = 0
+"let g:clang_auto_select = 1
+"let g:clang_use_library = 1
+"let g:clang_complete_patterns = 1
+"let g:clang_complete_copen = 0
+"let g:clang_hl_errors = 1
+""New additions for CLIC
+"let g:clang_snippets = 1
+"let g:clang_snippets_engine =  'ultisnips' "'clang_complete' 
+"let g:clang_conceal_snippets = 1
+"let g:clang_auto_user_options = "path, .clang_complete, compile_commands.json"
+""let g:clang_compilation_database = 
+"let g:clang_sort_algo = "alpha"
+"let g:clang_complete_macros = 1
+"let g:clang_complete_patterns = 0
+"let g:clang_debug = 0  "Set to 1 and type :mess after completion to see the exact cmdline flags
+"let g:clang_close_preview = 1
+"let g:clang_jumpto_declaration_key = "<C-_>"
+""let g:clang_trailing_placeholder=1
+"nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
 "let g:clic_filename="/Users/abigagli/develop/commprove/H3G/GTPAnalyzerMT/prj-index/index.db"
 "-----------------------------------------------------------------
 
