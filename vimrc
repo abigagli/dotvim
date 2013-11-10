@@ -87,6 +87,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'Raimondi/delimitMate'
 Bundle 'sjl/gundo.vim'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'christoomey/vim-tmux-navigator'
 
 "Bundle 'mihaifm/vimpanel'
 "Bundle 'flazz/vim-colorschemes'
@@ -330,10 +331,11 @@ noremap <leader>ev :vsp <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap S "_diwP
 
 "To ease jumping around in windows
-nnoremap <C-H> <C-W>h
-nnoremap <C-J> <C-W>j
-nnoremap <C-K> <C-W>k
-nnoremap <C-L> <C-W>l
+"DISABLED TO AVOID PROBLEMS WITH vim-tmux-navigator
+"nnoremap <C-H> <C-W>h
+"nnoremap <C-J> <C-W>j
+"nnoremap <C-K> <C-W>k
+"nnoremap <C-L> <C-W>l
 
 "Clear highlighted search
 nnoremap <silent> <leader><space> :nohlsearch<CR>
