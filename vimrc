@@ -39,7 +39,7 @@ Bundle 'https://github.com/vim-scripts/bufexplorer.zip'
 "Bundle 'https://github.com/vim-scripts/a.vim'
 Bundle 'https://github.com/vim-scripts/SingleCompile'
 Bundle 'https://github.com/vim-scripts/The-NERD-tree'
-"Bundle 'https://github.com/vim-scripts/cscope_macros.vim'
+Bundle 'https://github.com/vim-scripts/cscope_macros.vim'
 Bundle 'https://github.com/vim-scripts/fugitive.vim'
 Bundle 'https://github.com/vim-scripts/Lucius'
 Bundle 'https://github.com/vim-scripts/bash-support.vim'
@@ -90,6 +90,8 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-easytags'
+Bundle 'mbadran/headlights'
+
 "Bundle 'mihaifm/vimpanel'
 "Bundle 'flazz/vim-colorschemes'
 "Bundle 'godlygeek/csapprox'
@@ -249,7 +251,7 @@ highlight link cMember Special
 nmap <leader>_ :e<CR>GL:sleep 1<CR><leader>_
 
 "easier use of cscope_map which is based on C-\
-"nmap <C-_> <C-\>
+nmap <C-_> <C-\>
 
 "easy buffer navigation
 nnoremap <leader>l :ls<CR>:b<space>
@@ -587,42 +589,6 @@ vnoremap <leader>a: :Tabularize /:\zs<CR>
 
 
 "-------------- Functions ----------------
-
-function! s:windowdir()
-  if winbufnr(0) == -1
-    return getcwd()
-  endif
-  return fnamemodify(bufname(winbufnr(0)), ':p:h')
-endfunc
-
-function! s:Find_in_parent(fln,flsrt,flstp)
-  let here = a:flsrt
-  while ( strlen( here) > 0 )
-    if filereadable( here . "/" . a:fln )
-      return here
-    endif
-    let fr = match(here, "/[^/]*$")
-    if fr == -1
-      break
-    endif
-    let here = strpart(here, 0, fr)
-    if here == a:flstp
-      break
-    endif
-  endwhile
-  return "Nothing"
-endfunc
-
-"let newcsdbpath = s:Find_in_parent("cscope.out",s:windowdir(),"/")
-"    echo "Found cscope.out at: " . newcsdbpath
-"    "echo "Windowdir: " . s:windowdir()
-"if newcsdbpath != "Nothing"
-"    if !cscope_connection(3, "out", newcsdbpath)
-"        exe "cs add " . newcsdbpath  . "/cscope.out " . newcsdbpath
-"    endif
-"else
-"    echo "cscope not found"
-"endif
 
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
 function! s:RunShellCommand(cmdline)
