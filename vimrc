@@ -193,6 +193,10 @@ function! QuickfixFilenames()
   endfor
   return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
 endfunction
+
+"a mapping to perform calculations
+nnoremap Q 0yt=A<C-r>=<C-r>"<CR><Esc>"
+
 """"""""""""""""""""""""""""""""""""""""""""""
  
  
