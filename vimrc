@@ -245,8 +245,15 @@ let g:easytags_updatetime_warn = 0
 let g:easytags_autorecurse = 1
 let g:easytags_include_members = 1
 let g:easytags_dynamic_files = 1
-let g:easytags_on_cursorhold = 1
+let g:easytags_on_cursorhold = 0
 let g:easytags_auto_update = 0
+let g:easytags_auto_highlight = 0
+
+"Using g:easytags_events to automatically update/highlight (depending on
+"g:easytags_auto_update/g:easytags_auto_highlight) tags for the current file
+"right after you save the file. NOTE: THIS CAUSES
+"g:easytags_always_enabled/g:easytags_on_cursorhold to be completely ignored
+"let g:easytags_events = ['BufWritePost']
 highlight link cMember Special
 
 "EasyMotion ------------------------------ 
