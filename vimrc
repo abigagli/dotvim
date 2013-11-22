@@ -91,6 +91,8 @@ Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-easytags'
 Bundle 'mbadran/headlights'
+Bundle 'wesleyche/SrcExpl'
+Bundle 'wesleyche/Trinity'
 
 "Bundle 'mihaifm/vimpanel'
 "Bundle 'flazz/vim-colorschemes'
