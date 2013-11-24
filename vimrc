@@ -68,7 +68,8 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'sjl/clam.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'godlygeek/tabular'
-Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'Lokaltog/vim-easymotion'
+Bundle 'supasorn/vim-easymotion'
 Bundle 'nelstrom/vim-qargs'
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'sollidsnake/vterm.git'
@@ -204,7 +205,7 @@ nnoremap Q 0yt=A<C-r>=<C-r>"<CR><Esc>"
  
  
 "Some nifty tricks from Instantly-better-vim (Damian Conway, OSCON 2012/2013)
-nnoremap <SPACE> <PAGEDOWN>
+"nnoremap <SPACE> <PAGEDOWN>
 runtime plugin/dragvisuals.vim
 
 vmap  <expr>  <DOWN>   DVB_Drag('down')
@@ -259,7 +260,7 @@ let g:easytags_auto_highlight = 0
 highlight link cMember Special
 
 "EasyMotion ------------------------------ 
-"let g:EasyMotion_leader_key = 'ò'
+let g:EasyMotion_leader_key = '<SPACE>'
 
 "Hit F to follow log file
 nmap <leader>_ :e<CR>GL:sleep 1<CR><leader>_
