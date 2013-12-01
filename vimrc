@@ -28,7 +28,7 @@ Bundle 'https://github.com/vim-scripts/TaskList.vim'
 Bundle 'https://github.com/vim-scripts/Tagbar'
 Bundle 'https://github.com/vim-scripts/errormarker.vim'
 Bundle 'https://github.com/vim-scripts/unimpaired.vim'
-Bundle 'https://github.com/vim-scripts/YankRing.vim'
+"Bundle 'https://github.com/vim-scripts/YankRing.vim'
 Bundle 'https://github.com/vim-scripts/ack.vim'
 Bundle 'https://github.com/vim-scripts/The-NERD-Commenter'
 "Bundle 'https://github.com/vim-scripts/Screen-vim---gnu-screentmux'
@@ -94,6 +94,8 @@ Bundle 'xolox/vim-easytags'
 Bundle 'mbadran/headlights'
 Bundle 'wesleyche/SrcExpl'
 Bundle 'wesleyche/Trinity'
+Bundle 'tpope/vim-repeat'
+Bundle 'svermeulen/vim-easyclip'
 
 "Bundle 'mihaifm/vimpanel'
 "Bundle 'flazz/vim-colorschemes'
@@ -233,7 +235,7 @@ set encoding=utf-8
 let g:Powerline_symbols = 'fancy'
 
 "yankring ------------------------
-let g:yankring_manual_clipboard_check=1
+"let g:yankring_manual_clipboard_check=1
 
 "ctrlp ----------------------------
 let g:ctrlp_by_filename = 1
