@@ -483,16 +483,16 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 
 
 
-"------------------ ECLIM            -------------------------------
-let g:EclimCSearchSingleResult='edit' "'split', 'edit' or 'lopen'
-"let g:EclimProjectStatusLine
-let g:EclimCValidate=0 "Use :Validate to manually validate
-let g:EclimValidateSortResults='severity' "'occurrence'
-let g:EclimLocationListHeight=10
-nnoremap <silent> <cr> :CSearchContext<cr>
-" Restore original <cr> behavior in quickfix window to have enter work as
-" expected there
-autocmd BufReadPost quickfix nnoremap <buffer> <cr> <cr>
+""------------------ ECLIM            -------------------------------
+"let g:EclimCSearchSingleResult='edit' "'split', 'edit' or 'lopen'
+""let g:EclimProjectStatusLine
+"let g:EclimCValidate=0 "Use :Validate to manually validate
+"let g:EclimValidateSortResults='severity' "'occurrence'
+"let g:EclimLocationListHeight=10
+"nnoremap <silent> <cr> :CSearchContext<cr>
+"" Restore original <cr> behavior in quickfix window to have enter work as
+"" expected there
+"autocmd BufReadPost quickfix nnoremap <buffer> <cr> <cr>
 
 "-------------------------------------------------------------------
 
