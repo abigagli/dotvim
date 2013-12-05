@@ -469,6 +469,8 @@ augroup filetype
 augroup END
 "-------------------------------------------------------------------
 
+"---------------------------- EASYCLIP ---------------------------
+let g:EasyClipAutoFormat = 1
 
 "---------------------------- YOUCOMPLETEME ---------------------------
 nnoremap <leader>u :YcmForceCompileAndDiagnostics<CR>
