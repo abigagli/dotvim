@@ -85,7 +85,7 @@ if s:uname != "SunOS\n"
 endif
 
 Bundle 'scrooloose/syntastic'
-Bundle 'Raimondi/delimitMate'
+"Bundle 'Raimondi/delimitMate'
 Bundle 'sjl/gundo.vim'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'christoomey/vim-tmux-navigator'
@@ -95,7 +95,8 @@ Bundle 'mbadran/headlights'
 Bundle 'wesleyche/SrcExpl'
 Bundle 'wesleyche/Trinity'
 Bundle 'tpope/vim-repeat'
-Bundle 'svermeulen/vim-easyclip'
+Bundle 'lightxue/SwissCalc'
+"Bundle 'svermeulen/vim-easyclip'
 
 "Bundle 'mihaifm/vimpanel'
 "Bundle 'flazz/vim-colorschemes'
@@ -470,7 +471,7 @@ augroup END
 "-------------------------------------------------------------------
 
 "---------------------------- EASYCLIP ---------------------------
-let g:EasyClipAutoFormat = 1
+"let g:EasyClipAutoFormat = 1
 
 "---------------------------- YOUCOMPLETEME ---------------------------
 nnoremap <leader>u :YcmForceCompileAndDiagnostics<CR>
