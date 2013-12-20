@@ -91,6 +91,7 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-easytags'
+Bundle 'xolox/vim-session'
 Bundle 'mbadran/headlights'
 Bundle 'wesleyche/SrcExpl'
 Bundle 'wesleyche/Trinity'
@@ -469,6 +470,9 @@ augroup filetype
     au! BufRead,BufNewFile *Makefile*     set filetype=make
 augroup END
 "-------------------------------------------------------------------
+"---------------------------- VIM-SESSION ---------------------------
+let g:session_autoload='no'
+let g:session_autosave='no'
 
 "---------------------------- EASYCLIP ---------------------------
 "let g:EasyClipAutoFormat = 1
