@@ -471,8 +471,9 @@ augroup filetype
 augroup END
 "-------------------------------------------------------------------
 "---------------------------- VIM-SESSION ---------------------------
-let g:session_autoload='no'
-let g:session_autosave='no'
+let g:session_autoload='prompt'
+let g:session_autosave='prompt'
+let g:session_autosave_periodic=60
 
 "---------------------------- EASYCLIP ---------------------------
 "let g:EasyClipAutoFormat = 1
