@@ -11,7 +11,7 @@
 " :e scp://host/some/where/to/file.txt
 
 set nocompatible
-filetype off 
+filetype off
 
 let s:uname = system ("uname")
 
@@ -66,7 +66,8 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'proyvind/Cpp11-Syntax-Support'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'sjl/clam.vim'
-Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/vim-powerline'
+Bundle 'bling/vim-airline'
 Bundle 'godlygeek/tabular'
 "Bundle 'Lokaltog/vim-easymotion'
 Bundle 'supasorn/vim-easymotion'
@@ -109,7 +110,7 @@ syntax on
 filetype plugin indent on
 
 "source $VIMRUNTIME/vimrc_example.vim
-set tags=./tags,./.tags; "quantiqa-* 
+set tags=./tags,./.tags; "quantiqa-*
 set path+=./$HOST_TUPLE/include;quantiqa-*
 set path+=./3rdParty/cal/$HOST_TUPLE/include;quantiqa-*
 set path+=$GCCROOT/include/c++/**
@@ -127,8 +128,8 @@ set autoindent
 set cursorline
 set nobackup
 set writebackup
-set wildchar=<Tab> 
-set wildmenu 
+set wildchar=<Tab>
+set wildmenu
 set wildmode=list:longest
 set wildignore+=*.a,*.o,*.so,*.dylib,*.gz,*.tar,.DS_Store,*/.hg/*,*/.svn/*
 set scrolloff=3
@@ -206,8 +207,8 @@ endfunction
 nnoremap Q 0yt=A<C-r>=<C-r>"<CR><Esc>"
 
 """"""""""""""""""""""""""""""""""""""""""""""
- 
- 
+
+
 "Some nifty tricks from Instantly-better-vim (Damian Conway, OSCON 2012/2013)
 "nnoremap <SPACE> <PAGEDOWN>
 runtime plugin/dragvisuals.vim
@@ -217,9 +218,9 @@ vmap  <expr>  <UP>     DVB_Drag('up')
 vmap  <expr>  <RIGHT>  DVB_Drag('right')
 vmap  <expr>  <LEFT>   DVB_Drag('left')
 vmap  <expr>  D        DVB_Duplicate()
- 
- 
- 
+
+
+
 "Disable cmake-indent which apparently screws up c/c++ indenting
 let b:did_indent = 1
 
@@ -263,7 +264,7 @@ let g:easytags_auto_highlight = 0
 "let g:easytags_events = ['BufWritePost']
 highlight link cMember Special
 
-"EasyMotion ------------------------------ 
+"EasyMotion ------------------------------
 let g:EasyMotion_leader_key = '<SPACE>'
 
 "Hit F to follow log file
@@ -410,14 +411,14 @@ if has('statusline')
 endif
 
 if has('cmdline_info')
-	set ruler " show the ruler
-	set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
-	set showcmd " show partial commands in status line and
+    set ruler " show the ruler
+    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
+    set showcmd " show partial commands in status line and
                 " selected characters/lines in visual mode
 endif
 
 if has('gui_running')
-	set guioptions-=T " remove the toolbar
+    set guioptions-=T " remove the toolbar
     set lines=60 " 40 lines of text instead of 24,
     set columns=120
 endif
@@ -427,7 +428,7 @@ endif
 " Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+    \ | wincmd p | diffthis
 endif
 
 "---------------------------- FROM LLVM VIMRC ---------------------------
@@ -545,7 +546,7 @@ endif
 "if has('mac')
 "    let g:clang_exec = system("xcrun -f clang++")
 "    let g:clang_user_options = '-stdlib=libc++ -std=c++11 -I' . $BOOSTROOT . '/include'
-"    "let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include -I" . $LIBCXXROOT . "/include" 
+"    "let g:clang_user_options="-std=c++11 -stdlib=libc++ -I" . $BOOSTROOT . "/include -I" . $LIBCXXROOT . "/include"
 "    let xcode_in_use = split(system ("xcode-select --print-path"), "\n")
 "    let g:clang_library_path = xcode_in_use[0] . "/Toolchains/XcodeDefault.xctoolchain/usr/lib"
 "else
@@ -562,10 +563,10 @@ endif
 "let g:clang_hl_errors = 1
 ""New additions for CLIC
 "let g:clang_snippets = 1
-"let g:clang_snippets_engine =  'ultisnips' "'clang_complete' 
+"let g:clang_snippets_engine =  'ultisnips' "'clang_complete'
 "let g:clang_conceal_snippets = 1
 "let g:clang_auto_user_options = "path, .clang_complete, compile_commands.json"
-""let g:clang_compilation_database = 
+""let g:clang_compilation_database =
 "let g:clang_sort_algo = "alpha"
 "let g:clang_complete_macros = 1
 "let g:clang_complete_patterns = 0
@@ -775,27 +776,27 @@ nmap <silent> <F5> :call ClangCheck()<CR><CR>
 
 
 
-" Searches Dash for the word under your cursor in vim, using the keyword 
-" operator, based on file type. E.g. for JavaScript files, I have it 
+" Searches Dash for the word under your cursor in vim, using the keyword
+" operator, based on file type. E.g. for JavaScript files, I have it
 " configured to search j:term, which immediately brings up the JS doc
 " for that keyword. Might need some customisation for your own keywords!
- 
+
 function! SearchDash()
   " Some setup
   let s:browser = "/usr/bin/open"
   let s:wordUnderCursor = expand("<cword>")
- 
+
   " Get the filetype (everything after the first ., for special cases
   " such as index.html.haml or abc.css.scss.erb)
   let s:fileType = substitute(expand("%"),"^[^.]*\.","",1)
- 
+
   " Alternative ways of getting filetype, aborted
   " let s:fileType = expand("%:e")
   " let s:searchType = b:current_syntax.":"
- 
+
   " Match it and set the searchType -- make sure these are the right shortcuts
   " in Dash! Sort by priority in the match list below if necessary, because
-  " Tilt-enabled projects may have endings like .scss.erb. 
+  " Tilt-enabled projects may have endings like .scss.erb.
   if match(s:fileType, "js") != -1
     let s:searchType = "js:"     " can assign this to jQuery, too
   elseif match(s:fileType, "css") != -1
@@ -811,7 +812,7 @@ function! SearchDash()
   else
     let s:searchType = ""
   endif
- 
+
   " Run it
   let s:url = "dash://".s:searchType.s:wordUnderCursor
   let s:cmd ="silent ! " . s:browser . " " . s:url
