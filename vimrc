@@ -161,7 +161,17 @@ set viminfo+=%
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 set tildeop
 set autoread
-set clipboard=unnamed
+
+if $TMUX == ""
+    "When running in tmux and reattaching to an old session that is running
+    "a shell that has an outdated value of DISPLAY value, having "unnamed" in
+    "the clipboard options causes an "E353: Nothing in register *" at every 
+    "attempt to paste. (see "http://stackoverflow.com/questions/11404800/fix-vim-tmux-yank-paste-on-unnamed-register).
+    "Simplest workaround is to add "unnamed" to clipboard options only when
+    "_NOT_ running under tmux
+    set clipboard+=unnamed
+endif
+
 set exrc
 
 set virtualedit=block
