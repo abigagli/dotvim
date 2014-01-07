@@ -827,5 +827,5 @@ endfunction
 map <leader>d :call SearchDash()<CR>
 
 if has('mac')
-    noremap <C-I> :pyf ~/scripts/clang-format.py<CR>
+    noremap <leader>f :pyf ~/scripts/clang-format.py<CR>
 endif
