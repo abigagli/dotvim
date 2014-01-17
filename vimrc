@@ -199,7 +199,10 @@ let mapleader=","
 
 au BufNewFile,BufRead *.cpp set syntax=cpp11
 
-"AFTER SEEING VIMCAST
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
+"VIMCAST"""""""""""""""""""""""""""""""""""""
 vnoremap . :norm.<CR>
 
 
