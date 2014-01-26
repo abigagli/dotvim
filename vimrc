@@ -98,6 +98,7 @@ Bundle 'wesleyche/SrcExpl'
 Bundle 'wesleyche/Trinity'
 Bundle 'tpope/vim-repeat'
 Bundle 'lightxue/SwissCalc'
+Bundle 'gcmt/surfer.vim'
 "Bundle 'svermeulen/vim-easyclip'
 
 "Bundle 'mihaifm/vimpanel'
@@ -505,6 +506,8 @@ nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:UltiSnipsExpandTrigger="<c-j>"
 
 
+"---------------------------- SURFER ---------------------------
+let g:surfer_root_markers = [ 'Version.make' ]
 
 
 ""------------------ ECLIM            -------------------------------
