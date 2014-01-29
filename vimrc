@@ -161,6 +161,7 @@ set viminfo+=%
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 set tildeop
 set autoread
+set mps+=<:>
 
 if $TMUX == ""
     "When running in tmux and reattaching to an old session that is running
