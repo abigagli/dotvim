@@ -163,6 +163,7 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-
 set tildeop
 set autoread
 set mps+=<:>
+set directory=/var/tmp,/tmp
 
 if $TMUX == ""
     "When running in tmux and reattaching to an old session that is running
