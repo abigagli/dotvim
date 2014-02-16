@@ -69,8 +69,8 @@ Bundle 'sjl/clam.vim'
 "Bundle 'Lokaltog/vim-powerline'
 Bundle 'bling/vim-airline'
 Bundle 'godlygeek/tabular'
-"Bundle 'Lokaltog/vim-easymotion'
-Bundle 'supasorn/vim-easymotion'
+Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'supasorn/vim-easymotion'
 Bundle 'nelstrom/vim-qargs'
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'sollidsnake/vterm.git'
@@ -99,11 +99,7 @@ Bundle 'wesleyche/Trinity'
 Bundle 'tpope/vim-repeat'
 Bundle 'lightxue/SwissCalc'
 Bundle 'gcmt/surfer.vim'
-"Bundle 'svermeulen/vim-easyclip'
-
-"Bundle 'mihaifm/vimpanel'
-"Bundle 'flazz/vim-colorschemes'
-"Bundle 'godlygeek/csapprox'
+Bundle 'bothra90/Conque-Shell'
 "-------------------------------------------------------
 
 
@@ -281,7 +277,7 @@ let g:easytags_auto_highlight = 0
 highlight link cMember Special
 
 "EasyMotion ------------------------------
-let g:EasyMotion_leader_key = '<SPACE>'
+"let g:EasyMotion_leader_key = '<SPACE>'
 
 "Hit F to follow log file
 nmap <leader>_ :e<CR>GL:sleep 1<CR><leader>_
