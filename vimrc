@@ -46,7 +46,6 @@ Bundle 'https://github.com/vim-scripts/bash-support.vim'
 Bundle 'https://github.com/vim-scripts/git-file.vim'
 Bundle 'https://github.com/vim-scripts/gtags.vim'
 Bundle 'https://github.com/vim-scripts/listmaps.vim'
-"Bundle 'https://github.com/vim-scripts/PreciseJump'
 
 "if s:uname != "SunOS\n"
 "    Bundle 'https://github.com/vim-scripts/Intelligent-Tags'
