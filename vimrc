@@ -82,17 +82,17 @@ Bundle 'jalcine/cmake.vim'
 
 if s:uname != "SunOS\n"
     Bundle 'Valloric/YouCompleteMe'
+    Bundle 'airblade/vim-gitgutter'
+    Bundle 'mbadran/headlights'
 endif
 
 Bundle 'scrooloose/syntastic'
 "Bundle 'Raimondi/delimitMate'
 Bundle 'sjl/gundo.vim'
-Bundle 'airblade/vim-gitgutter'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-easytags'
 Bundle 'xolox/vim-session'
-Bundle 'mbadran/headlights'
 Bundle 'wesleyche/SrcExpl'
 Bundle 'wesleyche/Trinity'
 Bundle 'tpope/vim-repeat'
