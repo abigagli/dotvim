@@ -99,6 +99,10 @@ Bundle 'tpope/vim-repeat'
 Bundle 'lightxue/SwissCalc'
 Bundle 'gcmt/surfer.vim'
 Bundle 'bothra90/Conque-Shell'
+if has('mac')
+    Bundle 'gilligan/vim-lldb'
+endif
+
 "-------------------------------------------------------
 
 
