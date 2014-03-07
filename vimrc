@@ -54,7 +54,7 @@ Bundle 'https://github.com/vim-scripts/Conque-GDB'
 
 if has('mac')
 "   Bundle 'Rip-Rip/clang_complete'
-    Bundle 'lillq/peepopenvim'
+"    Bundle 'lillq/peepopenvim'
 endif
 
 if has ('python')
