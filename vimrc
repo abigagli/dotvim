@@ -46,14 +46,16 @@ Bundle 'https://github.com/vim-scripts/bash-support.vim'
 Bundle 'https://github.com/vim-scripts/git-file.vim'
 Bundle 'https://github.com/vim-scripts/gtags.vim'
 Bundle 'https://github.com/vim-scripts/listmaps.vim'
+Bundle 'https://github.com/vim-scripts/Conque-GDB'
 
 "if s:uname != "SunOS\n"
 "    Bundle 'https://github.com/vim-scripts/Intelligent-Tags'
 "endif
 
-"if has('mac')
-"    Bundle 'Rip-Rip/clang_complete'
-"endif
+if has('mac')
+"   Bundle 'Rip-Rip/clang_complete'
+    Bundle 'lillq/peepopenvim'
+endif
 
 if has ('python')
     Bundle 'SirVer/ultisnips'
@@ -73,7 +75,6 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'nelstrom/vim-qargs'
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'sollidsnake/vterm.git'
-Bundle 'lillq/peepopenvim'
 Bundle 'dahu/LearnVim'
 "Bundle 'ervandew/supertab'
 Bundle 'mhinz/vim-startify'
@@ -97,8 +98,8 @@ Bundle 'wesleyche/SrcExpl'
 Bundle 'wesleyche/Trinity'
 Bundle 'tpope/vim-repeat'
 Bundle 'lightxue/SwissCalc'
-Bundle 'gcmt/surfer.vim'
-Bundle 'bothra90/Conque-Shell'
+"Bundle 'gcmt/surfer.vim'
+"Bundle 'bothra90/Conque-Shell'
 "-------------------------------------------------------
 
 
