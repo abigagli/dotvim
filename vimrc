@@ -79,7 +79,7 @@ Bundle 'dahu/LearnVim'
 "Bundle 'ervandew/supertab'
 Bundle 'mhinz/vim-startify'
 Bundle 'derekwyatt/vim-fswitch'
-Bundle 'jalcine/cmake.vim'
+"Bundle 'jalcine/cmake.vim'
 
 if s:uname != "SunOS\n"
     Bundle 'Valloric/YouCompleteMe'
