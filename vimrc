@@ -54,7 +54,7 @@ Bundle 'https://github.com/vim-scripts/Conque-GDB'
 
 if has('mac')
 "   Bundle 'Rip-Rip/clang_complete'
-"    Bundle 'lillq/peepopenvim'
+"   Bundle 'lillq/peepopenvim'
 endif
 
 if has ('python')
@@ -101,6 +101,7 @@ Bundle 'lightxue/SwissCalc'
 if has('mac')
     Bundle 'gilligan/vim-lldb'
 endif
+Bundle 'tpope/vim-dispatch'
 "-------------------------------------------------------
 
 
@@ -253,6 +254,11 @@ let g:Powerline_symbols = 'fancy'
 "yankring ------------------------
 let g:yankring_manual_clipboard_check=1
 
+
+"cmake.vim -----------------------
+let g:cmake_set_makeprg = 0
+
+
 "ctrlp ----------------------------
 let g:ctrlp_by_filename = 1
 let g:ctrlp_map = '<leader>t'
@@ -297,7 +303,7 @@ inoremap jk <esc>
 cnoremap jk <c-c>
 
 "Quick access to make
-nnoremap <F10> :wa <ESC><BAR> :make -j4 DEBUG=1<CR>
+nnoremap <F10> :wa <ESC><BAR> :Make -j4 DEBUG=1<CR>
 
 
 "Recreate cscope db and reload it
