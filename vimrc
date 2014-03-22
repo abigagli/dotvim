@@ -59,6 +59,7 @@ endif
 
 if has ('python')
     Bundle 'SirVer/ultisnips'
+    Bundle 'honza/vim-snippets'
 endif
 
 Bundle 'gregsexton/gitv'
@@ -509,6 +510,9 @@ nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "---------------------------- ULTISNIPS ---------------------------
 "Make ultisnips work ok with youcompleteme
 let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-f>"
+" let g:UltiSnipsEditSplit="vertical"
 
 
 "---------------------------- SURFER ---------------------------
