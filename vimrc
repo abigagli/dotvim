@@ -103,6 +103,7 @@ if has('mac')
     Bundle 'gilligan/vim-lldb'
 endif
 Bundle 'tpope/vim-dispatch'
+Bundle 'Wolfy87/vim-enmasse'
 "-------------------------------------------------------
 
 
