@@ -223,7 +223,8 @@ endfunction
 nnoremap Q 0yt=A<C-r>=<C-r>"<CR><Esc>"
 
 """"""""""""""""""""""""""""""""""""""""""""""
-
+"Easily select pasted text
+nnoremap <expr> gb '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 "Some nifty tricks from Instantly-better-vim (Damian Conway, OSCON 2012/2013)
 "nnoremap <SPACE> <PAGEDOWN>
