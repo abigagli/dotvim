@@ -104,6 +104,7 @@ if has('mac')
 endif
 Bundle 'tpope/vim-dispatch'
 Bundle 'Wolfy87/vim-enmasse'
+Bundle 'tommcdo/vim-exchange'
 "-------------------------------------------------------
 
 
