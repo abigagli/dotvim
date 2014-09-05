@@ -560,7 +560,7 @@ set completeopt=menuone,menu,longest,preview
              \'g++ self-built', '$GCCROOT/bin/g++', '-g3 -std=c++11 -D_GLIBCXX_USE_NANOSLEEP -Wall -fno-pie -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -L$BOOSTROOT/darwin-fsfgcc/static/lib -lboost_all -o %:r', './%:r')
 
  call SingleCompile#SetCompilerTemplate('cpp', 'clang++_libc++',
-             \'clang++ self-built with libcxx', '$LLVMROOT/bin/clang++', '-g3 -std=c++11 -stdlib=libc++ -Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -fno-pie -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -L$HOME/lib -L$BOOSTROOT/clang-xcode/static/lib -lboost_all -lgtest_main -o %:r', './%:r')
+             \'clang++ self-built with libcxx', '$LLVMROOT/bin/clang++', '-g3 -std=c++1y -stdlib=libc++ -Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -fno-pie -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -L$HOME/lib -L$BOOSTROOT/clang-xcode/static/lib -lboost_all -lgtest_main -o %:r', './%:r')
 
 
 if has('mac')
