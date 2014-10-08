@@ -647,7 +647,7 @@ function! TrimWhiteSpace()
     %s/\s\+$//e
 endfunction
 
-autocmd Filetype c,cpp,cc,cxx,h,hpp,hxx,python,ruby,java,bash autocmd BufWritePre <buffer> :call TrimWhiteSpace()
+autocmd Filetype c,cpp,cc,cxx,h,hpp,hxx,python,ruby,java,bash,d autocmd BufWritePre <buffer> :call TrimWhiteSpace()
 
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
 function! s:RunShellCommand(cmdline)
