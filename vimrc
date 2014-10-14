@@ -105,6 +105,9 @@ endif
 Bundle 'tpope/vim-dispatch'
 Bundle 'Wolfy87/vim-enmasse'
 Bundle 'tommcdo/vim-exchange'
+if has('mac')
+    Bundle 'rizzatti/dash.vim'
+endif
 "-------------------------------------------------------
 
 
@@ -286,6 +289,11 @@ let g:easytags_auto_highlight = 0
 "g:easytags_always_enabled/g:easytags_on_cursorhold to be completely ignored
 "let g:easytags_events = ['BufWritePost']
 highlight link cMember Special
+
+"Dash
+if has('mac')
+    nmap <silent> <leader>D <Plug>DashSearch
+endif
 
 "EasyMotion ------------------------------
 "let g:EasyMotion_leader_key = '<SPACE>'
