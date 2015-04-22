@@ -108,7 +108,7 @@ Plugin 'tommcdo/vim-exchange'
 if has('mac')
     Plugin 'rizzatti/dash.vim'
 endif
-Plugin 'garious/vim-llvm'
+"Plugin 'garious/vim-llvm'
 "-------------------------------------------------------
 
 
