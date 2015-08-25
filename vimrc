@@ -109,6 +109,7 @@ if has('mac')
     Plugin 'rizzatti/dash.vim'
 endif
 "Plugin 'garious/vim-llvm'
+Plugin 'rhysd/wandbox-vim'
 "-------------------------------------------------------
 
 
@@ -650,7 +651,27 @@ vnoremap <leader>a{ :Tabularize /{<CR>
 nnoremap <leader>a: :Tabularize /:\zs<CR>
 vnoremap <leader>a: :Tabularize /:\zs<CR>
 
+"------------- Wandbox  ------------------
+" Set default compilers for each filetype
+if ! exists('g:wandbox#default_compiler')
+    let g:wandbox#default_compiler = {}
+endif
+let g:wandbox#default_compiler = {
+\   'cpp' : 'clang-head',
+\ }
 
+" Set default options for each filetype.  Type of value is string or list of string
+if ! exists('g:wandbox#default_options')
+    let g:wandbox#default_options = {}
+endif
+let g:wandbox#default_options = {
+\   'cpp' : 'warning,optimize,boost-1.59,sprout,verbose',
+\ }
+
+" Set extra options for compilers if you need
+let g:wandbox#default_extra_options = {
+\   'clang-head' : '-std=c++14',
+\ }
 "-------------- Functions ----------------
 function! TrimWhiteSpace()
     %s/\s\+$//e
