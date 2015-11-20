@@ -11,115 +11,111 @@
 " :e scp://host/some/where/to/file.txt
 
 set nocompatible
-filetype off
 
 let s:uname = system ("uname")
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
 
-
-"Activate vundle and let it manage itself
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Plugin 'gmarik/vundle'
-
-"And now all the bundles I want to use
+" VIM-PLUG
 "-------------------------------------------------------
-Plugin 'https://github.com/vim-scripts/TaskList.vim'
-Plugin 'https://github.com/vim-scripts/Tagbar'
-Plugin 'https://github.com/vim-scripts/errormarker.vim'
-Plugin 'https://github.com/vim-scripts/unimpaired.vim'
-Plugin 'https://github.com/vim-scripts/YankRing.vim'
-Plugin 'https://github.com/vim-scripts/ack.vim'
-Plugin 'https://github.com/vim-scripts/The-NERD-Commenter'
-"Plugin 'https://github.com/vim-scripts/Screen-vim---gnu-screentmux'
-Plugin 'https://github.com/vim-scripts/surround.vim'
-Plugin 'https://github.com/vim-scripts/toggle_mouse'
-Plugin 'https://github.com/vim-scripts/grep.vim'
-Plugin 'https://github.com/vim-scripts/bufexplorer.zip'
-"Plugin 'https://github.com/vim-scripts/a.vim'
-Plugin 'https://github.com/vim-scripts/SingleCompile'
-Plugin 'https://github.com/vim-scripts/The-NERD-tree'
-Plugin 'https://github.com/vim-scripts/cscope_macros.vim'
-Plugin 'https://github.com/vim-scripts/fugitive.vim'
-Plugin 'https://github.com/vim-scripts/Lucius'
-Plugin 'https://github.com/vim-scripts/bash-support.vim'
-Plugin 'https://github.com/vim-scripts/git-file.vim'
-Plugin 'https://github.com/vim-scripts/gtags.vim'
-Plugin 'https://github.com/vim-scripts/listmaps.vim'
-"Plugin 'https://github.com/vim-scripts/Conque-GDB'
+call plug#begin('~/.vim/bundle')
+Plug 'https://github.com/vim-scripts/TaskList.vim'
+Plug 'https://github.com/vim-scripts/Tagbar'
+Plug 'https://github.com/vim-scripts/errormarker.vim'
+Plug 'https://github.com/vim-scripts/unimpaired.vim'
+Plug 'https://github.com/vim-scripts/YankRing.vim'
+Plug 'https://github.com/vim-scripts/ack.vim'
+Plug 'https://github.com/vim-scripts/The-NERD-Commenter'
+"Plug 'https://github.com/vim-scripts/Screen-vim---gnu-screentmux'
+Plug 'https://github.com/vim-scripts/surround.vim'
+Plug 'https://github.com/vim-scripts/toggle_mouse'
+Plug 'https://github.com/vim-scripts/grep.vim'
+Plug 'https://github.com/vim-scripts/bufexplorer.zip'
+"Plug 'https://github.com/vim-scripts/a.vim'
+Plug 'https://github.com/vim-scripts/SingleCompile'
+Plug 'https://github.com/vim-scripts/The-NERD-tree', {'on': 'NERDTreeToggle'}
+Plug 'https://github.com/vim-scripts/cscope_macros.vim'
+Plug 'https://github.com/vim-scripts/fugitive.vim'
+Plug 'https://github.com/vim-scripts/Lucius'
+Plug 'https://github.com/vim-scripts/bash-support.vim'
+Plug 'https://github.com/vim-scripts/git-file.vim'
+Plug 'https://github.com/vim-scripts/gtags.vim'
+Plug 'https://github.com/vim-scripts/listmaps.vim'
+"Plug 'https://github.com/vim-scripts/Conque-GDB'
 
 "if s:uname != "SunOS\n"
-"    Plugin 'https://github.com/vim-scripts/Intelligent-Tags'
+"    Plug 'https://github.com/vim-scripts/Intelligent-Tags'
 "endif
 
 if has('mac')
-"   Plugin 'Rip-Rip/clang_complete'
-"   Plugin 'lillq/peepopenvim'
+"   Plug 'Rip-Rip/clang_complete'
+"   Plug 'lillq/peepopenvim'
 endif
 
 if has ('python')
-    Plugin 'SirVer/ultisnips'
-    Plugin 'honza/vim-snippets'
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
 endif
 
-Plugin 'gregsexton/gitv'
-Plugin 'jnurmine/Zenburn'
-Plugin 'kien/ctrlp.vim'
-Plugin 'proyvind/Cpp11-Syntax-Support'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'sjl/clam.vim'
-"Plugin 'Lokaltog/vim-powerline'
-Plugin 'bling/vim-airline'
-Plugin 'godlygeek/tabular'
-Plugin 'Lokaltog/vim-easymotion'
-"Plugin 'supasorn/vim-easymotion'
-Plugin 'nelstrom/vim-qargs'
-Plugin 'nelstrom/vim-visual-star-search'
-Plugin 'sollidsnake/vterm.git'
-Plugin 'dahu/LearnVim'
-"Plugin 'ervandew/supertab'
-Plugin 'mhinz/vim-startify'
-Plugin 'derekwyatt/vim-fswitch'
-"Plugin 'jalcine/cmake.vim'
+Plug 'gregsexton/gitv'
+Plug 'jnurmine/Zenburn'
+Plug 'kien/ctrlp.vim'
+Plug 'proyvind/Cpp11-Syntax-Support'
+Plug 'altercation/vim-colors-solarized'
+Plug 'sjl/clam.vim'
+"Plug 'Lokaltog/vim-powerline'
+Plug 'bling/vim-airline'
+Plug 'godlygeek/tabular'
+Plug 'Lokaltog/vim-easymotion'
+"Plug 'supasorn/vim-easymotion'
+Plug 'nelstrom/vim-qargs'
+Plug 'nelstrom/vim-visual-star-search'
+Plug 'dahu/LearnVim'
+"Plug 'ervandew/supertab'
+Plug 'mhinz/vim-startify'
+Plug 'derekwyatt/vim-fswitch'
+"Plug 'jalcine/cmake.vim'
 
 if s:uname != "SunOS\n"
-    Plugin 'Valloric/YouCompleteMe'
-    Plugin 'airblade/vim-gitgutter'
-    Plugin 'mbadran/headlights'
+    Plug 'Valloric/YouCompleteMe'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'mbadran/headlights'
 endif
 
-Plugin 'scrooloose/syntastic'
-"Plugin 'Raimondi/delimitMate'
-Plugin 'sjl/gundo.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'xolox/vim-misc'
-"Plugin 'xolox/vim-easytags'
-Plugin 'xolox/vim-session'
-Plugin 'wesleyche/SrcExpl'
-Plugin 'wesleyche/Trinity'
-Plugin 'tpope/vim-repeat'
-Plugin 'lightxue/SwissCalc'
+Plug 'scrooloose/syntastic'
+"Plug 'Raimondi/delimitMate'
+Plug 'sjl/gundo.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'xolox/vim-misc'
+"Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-session'
+Plug 'wesleyche/SrcExpl'
+Plug 'wesleyche/Trinity'
+Plug 'tpope/vim-repeat'
+Plug 'lightxue/SwissCalc'
 if has('mac')
-    "Plugin 'gilligan/vim-lldb'
+    "Plug 'gilligan/vim-lldb'
 endif
-Plugin 'tpope/vim-dispatch'
-Plugin 'Wolfy87/vim-enmasse'
-Plugin 'tommcdo/vim-exchange'
+Plug 'tpope/vim-dispatch'
+Plug 'Wolfy87/vim-enmasse'
+Plug 'tommcdo/vim-exchange'
 if has('mac')
-    Plugin 'rizzatti/dash.vim'
+    Plug 'rizzatti/dash.vim'
 endif
-"Plugin 'garious/vim-llvm'
-Plugin 'rhysd/wandbox-vim'
+"Plug 'garious/vim-llvm'
+Plug 'rhysd/wandbox-vim'
+"Plug 'tpope/vim-sensible'
+
+call plug#end()
 "-------------------------------------------------------
 
-
-syntax on
-filetype plugin indent on
-
-"source $VIMRUNTIME/vimrc_example.vim
 set tags=./tags,./.tags; "quantiqa-*
-set path+=./$HOST_TUPLE/include;quantiqa-*
-set path+=./3rdParty/cal/$HOST_TUPLE/include;quantiqa-*
+"set path+=./$HOST_TUPLE/include;quantiqa-*
+"set path+=./3rdParty/cal/$HOST_TUPLE/include;quantiqa-*
 set path+=$GCCROOT/include/c++/**
 set path+=$BOOSTROOT/include
 set path+=$LLVMROOT/include
