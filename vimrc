@@ -137,7 +137,7 @@ set wildmode=list:longest
 set wildignore+=*.a,*.o,*.so,*.dylib,*.gz,*.tar,.DS_Store,*/.hg/*,*/.svn/*
 set scrolloff=3
 set hidden
-set makeprg=gmake
+set makeprg=make
 "set makeprg=osascript\ -e\ 'tell\ app\ \"Xcode\"\ to\ build'\ -e\ 'tell\ app\ \"MacVim\"\ to\ activate'
 set incsearch
 set hlsearch
@@ -513,7 +513,7 @@ nnoremap <leader>u :YcmForceCompileAndDiagnostics<CR>
 let g:ycm_global_ycm_extra_conf = $HOME . '/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
-"let g:ycm_autoclose_preview_window_after_insertion = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "---------------------------- ULTISNIPS ---------------------------
