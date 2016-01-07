@@ -63,7 +63,9 @@ endif
 
 Plug 'gregsexton/gitv'
 Plug 'jnurmine/Zenburn'
-Plug 'kien/ctrlp.vim'
+"Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'proyvind/Cpp11-Syntax-Support'
 Plug 'altercation/vim-colors-solarized'
 Plug 'sjl/clam.vim'
@@ -265,21 +267,21 @@ let g:cmake_set_makeprg = 0
 
 
 "ctrlp ----------------------------
-let g:ctrlp_by_filename = 1
-let g:ctrlp_map = '<leader>t'
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_root_markers = ['Version.make']
-let g:ctrlp_user_command = 'find %s -type f'
+"let g:ctrlp_by_filename = 1
+"let g:ctrlp_map = '<leader>t'
+"let g:ctrlp_cmd = 'CtrlPMixed'
+"let g:ctrlp_working_path_mode = 'ra'
+"let g:ctrlp_root_markers = ['Version.make']
+"let g:ctrlp_user_command = 'find %s -type f'
 
 "easytags -------------------------------
-let g:easytags_updatetime_warn = 0
-let g:easytags_autorecurse = 1
-let g:easytags_include_members = 1
-let g:easytags_dynamic_files = 1
-let g:easytags_on_cursorhold = 0
-let g:easytags_auto_update = 0
-let g:easytags_auto_highlight = 0
+"let g:easytags_updatetime_warn = 0
+"let g:easytags_autorecurse = 1
+"let g:easytags_include_members = 1
+"let g:easytags_dynamic_files = 1
+"let g:easytags_on_cursorhold = 0
+"let g:easytags_auto_update = 0
+"let g:easytags_auto_highlight = 0
 
 "Using g:easytags_events to automatically update/highlight (depending on
 "g:easytags_auto_update/g:easytags_auto_highlight) tags for the current file
