@@ -11,8 +11,14 @@
 " :e scp://host/some/where/to/file.txt
 
 set nocompatible
-
 let s:uname = system ("uname")
+
+" cgrep config =======================
+if s:uname == "Linux\n"
+    set grepprg=cgrep
+endif
+
+
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
