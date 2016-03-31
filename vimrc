@@ -588,8 +588,9 @@ set completeopt=menuone,menu,longest,preview
  call SingleCompile#SetCompilerTemplate('cpp', 'g++',
              \'g++ self-built', '$GCCROOT/bin/g++', '-g3 -std=c++11 -D_GLIBCXX_USE_NANOSLEEP -Wall -fno-pie -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -L$BOOSTROOT/darwin-fsfgcc/static/lib -lboost_all -o %:r', './%:r')
 
+silent let s:clang_exe = systemlist ('xcrun -f clang++')[0] "use systemlist as it appears to be automatically stripping the unwanted newline
  call SingleCompile#SetCompilerTemplate('cpp', 'clang++_libc++',
-             \'clang++ release with libc++', '$HOME/LLVM-RELEASE/bin/clang++', '-g3 -std=c++14 -stdlib=libc++ -Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -fno-pie -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -L$HOME/lib -L$BOOSTROOT/clang-xcode/static/lib -lboost_all -lgtest_main -o %:r', './%:r')
+             \'clang++ release with libc++', s:clang_exe, '-g3 -std=c++14 -stdlib=libc++ -Weverything -Wno-padded -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -fno-pie -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -L$HOME/lib -L$BOOSTROOT/clang-xcode/static/lib -lboost_all -lgtest_main -o %:r', './%:r')
 
 
 if has('mac')
