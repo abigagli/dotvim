@@ -117,6 +117,7 @@ endif
 "Plug 'garious/vim-llvm'
 Plug 'rhysd/wandbox-vim'
 "Plug 'tpope/vim-sensible'
+Plug 'pelodelfuego/vim-swoop'
 
 call plug#end()
 "-------------------------------------------------------
