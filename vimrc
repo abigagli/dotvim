@@ -586,7 +586,7 @@ set completeopt=menuone,menu,longest,preview
 
 "------------------------ SINGLE COMPILE ---------------------------
  call SingleCompile#SetCompilerTemplate('cpp', 'g++',
-             \'g++ self-built', '$GCCROOT/bin/g++', '-g3 -std=c++11 -D_GLIBCXX_USE_NANOSLEEP -Wall -fno-pie -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -L$BOOSTROOT/darwin-fsfgcc/static/lib -lboost_all -o %:r', './%:r')
+             \'g++', 'g++', '-g3 -std=c++1y -Wall -I$HOME/include -o %:r', './%:r')
 
 if has('mac')
     silent let s:clang_exe = systemlist ('xcrun -f clang++')[0] "use systemlist as it appears to be automatically stripping the unwanted newline
