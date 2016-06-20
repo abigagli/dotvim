@@ -118,6 +118,7 @@ endif
 Plug 'rhysd/wandbox-vim'
 "Plug 'tpope/vim-sensible'
 Plug 'pelodelfuego/vim-swoop'
+Plug 'fcpg/vim-fahrenheit'
 
 call plug#end()
 "-------------------------------------------------------
@@ -439,7 +440,9 @@ endif
 
 let g:solarized_contrast="normal"
 let g:solarized_visibility="high"
-colorscheme solarized
+
+colorscheme fahrenheit
+"colorscheme solarized
 "colorscheme ir_black
 "colorscheme zenburn
 set background=dark
