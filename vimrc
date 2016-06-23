@@ -120,6 +120,7 @@ Plug 'rhysd/wandbox-vim'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'fcpg/vim-fahrenheit'
 "Plug 'CoatiSoftware/vim-coati'
+Plug 'embear/vim-localvimrc'
 
 call plug#end()
 "-------------------------------------------------------
@@ -699,6 +700,12 @@ let g:wandbox#default_options = {
 let g:wandbox#default_extra_options = {
 \   'clang-head' : '-std=c++14',
 \ }
+
+"------------- vim-localvimrc ------------------
+let g:localvimrc_ask = 0
+
+
+
 "-------------- Functions ----------------
 function! TrimWhiteSpace()
     %s/\s\+$//e
