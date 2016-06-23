@@ -126,9 +126,10 @@ call plug#end()
 set tags=./tags,./.tags; "quantiqa-*
 "set path+=./$HOST_TUPLE/include;quantiqa-*
 "set path+=./3rdParty/cal/$HOST_TUPLE/include;quantiqa-*
+set path=.,/usr/include/**,,
 set path+=$GCCROOT/include/c++/**
-set path+=$BOOSTROOT/include
-set path+=$LLVMROOT/include
+set path+=$BOOSTROOT/include/**
+set path+=$LLVMROOT/include/**
 
 
 set mouse=a
