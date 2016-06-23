@@ -119,6 +119,7 @@ Plug 'rhysd/wandbox-vim'
 "Plug 'tpope/vim-sensible'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'fcpg/vim-fahrenheit'
+"Plug 'CoatiSoftware/vim-coati'
 
 call plug#end()
 "-------------------------------------------------------
