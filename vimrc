@@ -121,6 +121,7 @@ Plug 'pelodelfuego/vim-swoop'
 Plug 'fcpg/vim-fahrenheit'
 "Plug 'CoatiSoftware/vim-coati'
 Plug 'embear/vim-localvimrc'
+Plug 'alessandroyorba/sierra'
 
 call plug#end()
 "-------------------------------------------------------
