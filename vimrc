@@ -908,3 +908,20 @@ endif
 
 noremap <F1> :pyf ~/scripts/clang-format.py<CR>
 inoremap <F1> <ESC>:pyf ~/scripts/clang-format.py<CR>i
+
+
+"Easy renaming of variables, see http://stackoverflow.com/questions/597687/changing-variable-names-in-vim
+" For local replace
+"nnoremap gr gd[{V%::s/<C-R>///gc<left><left><left>
+" For global replace
+"nnoremap gR gD:%s/<C-R>///gc<left><left><left>
+
+"Better version: https://gist.github.com/AndrewRayCode/048616a2e3f5d1b5a9ad
+function! Refactor()
+    call inputsave()
+    let @z=input("What do you want to rename '" . @z . "' to? ")
+    call inputrestore()
+endfunction
+
+" Locally (local to block) rename a variable
+nmap <Leader>rf "zyiw:call Refactor()<cr>mx:silent! norm gd<cr>[{V%:s/<C-R>//<c-r>z/gc<cr>`x
