@@ -122,6 +122,7 @@ Plug 'fcpg/vim-fahrenheit'
 "Plug 'CoatiSoftware/vim-coati'
 Plug 'embear/vim-localvimrc'
 Plug 'alessandroyorba/sierra'
+Plug 'cocopon/iceberg.vim'
 
 call plug#end()
 "-------------------------------------------------------
@@ -445,7 +446,8 @@ endif
 let g:solarized_contrast="normal"
 let g:solarized_visibility="high"
 
-colorscheme fahrenheit
+colorscheme iceberg
+"colorscheme fahrenheit
 "colorscheme solarized
 "colorscheme ir_black
 "colorscheme zenburn
