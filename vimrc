@@ -585,7 +585,7 @@ set completeopt=menuone,menu,longest,preview
 if has('mac')
     silent let s:clang_exe = systemlist ('xcrun -f clang++')[0] "use systemlist as it appears to be automatically stripping the unwanted newline
 call SingleCompile#SetCompilerTemplate('cpp', 'clang++_libc++',
-             \'clang++ release with libc++', s:clang_exe, '-g3 -std=c++1y -stdlib=libc++ -Weverything -Wno-padded -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -fno-pie -Wl,-no_pie -I$HOME/LLVM-CURRENT/include -I$HOME/include -I$BOOSTROOT/include -L$HOME/lib -L$HOME/LLVM-CURRENT/lib -lgtest_main -lclang -o %:r', './%:r')
+             \'clang++ release with libc++', s:clang_exe, '-g3 -std=c++1y -stdlib=libc++ -Weverything -Wno-padded -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -fno-pie -Wl,-no_pie -I$HOME/LLVM-CURRENT/include -I$HOME/include -I$BOOSTROOT/include -L$HOME/lib -L$HOME/LLVM-CURRENT/lib -Wl,-rpath -Wl,$HOME/LLVM-CURRENT/lib -lgtest_main -lclang -o %:r', './%:r')
 endif
 
 
@@ -910,7 +910,7 @@ endif
 
 noremap <F1> :pyf ~/scripts/clang-format.py<CR>
 inoremap <F1> <ESC>:pyf ~/scripts/clang-format.py<CR>i
-
+noremap <leader>cr :pyf ~/scripts/clang-rename.py<CR>
 
 "Easy renaming of variables, see http://stackoverflow.com/questions/597687/changing-variable-names-in-vim
 " For local replace
