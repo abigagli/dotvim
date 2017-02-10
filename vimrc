@@ -182,15 +182,18 @@ set autoread
 set mps+=<:>
 set directory=/var/tmp,/tmp
 
-if $TMUX == ""
-    "When running in tmux and reattaching to an old session that is running
-    "a shell that has an outdated value of DISPLAY value, having "unnamed" in
-    "the clipboard options causes an "E353: Nothing in register *" at every 
-    "attempt to paste. (see "http://stackoverflow.com/questions/11404800/fix-vim-tmux-yank-paste-on-unnamed-register).
-    "Simplest workaround is to add "unnamed" to clipboard options only when
-    "_NOT_ running under tmux
-    set clipboard+=unnamed
-endif
+"NOT SURE THIS IS RELEVANT ANYMORE, FOR NOW JUST FORCE clipboard=unnamedplus
+"WHICH SEEMS TO BE WORKING FINE FOR SHARING CLIPBOARD ACROSS OSX/LINUX
+"if $TMUX == ""
+"    "When running in tmux and reattaching to an old session that is running
+"    "a shell that has an outdated value of DISPLAY value, having "unnamed" in
+"    "the clipboard options causes an "E353: Nothing in register *" at every 
+"    "attempt to paste. (see "http://stackoverflow.com/questions/11404800/fix-vim-tmux-yank-paste-on-unnamed-register).
+"    "Simplest workaround is to add "unnamed" to clipboard options only when
+"    "_NOT_ running under tmux
+"    set clipboard+=unnamed
+"endif
+set clipboard+=unnamedplus
 
 set exrc
 
