@@ -123,6 +123,7 @@ Plug 'fcpg/vim-fahrenheit'
 Plug 'embear/vim-localvimrc'
 Plug 'alessandroyorba/sierra'
 Plug 'cocopon/iceberg.vim'
+Plug 'dawikur/algorithm-mnemonics.vim'
 
 call plug#end()
 "-------------------------------------------------------
