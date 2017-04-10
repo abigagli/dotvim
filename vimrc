@@ -931,4 +931,4 @@ function! Refactor()
 endfunction
 
 " Locally (local to block) rename a variable
-nmap <Leader>rf "zyiw:call Refactor()<cr>mx:silent! norm gd<cr>[{V%:s/<C-R>//<c-r>z/gc<cr>`x
+nmap <Leader>rfc "zyiw:call Refactor()<cr>mx:silent! norm gd<cr>[{V%:s/<C-R>//<c-r>z/gc<cr>`x
