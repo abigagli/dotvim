@@ -125,6 +125,7 @@ Plug 'alessandroyorba/sierra'
 Plug 'cocopon/iceberg.vim'
 Plug 'dawikur/algorithm-mnemonics.vim'
 Plug 'lyuts/vim-rtags'
+Plug 'christoomey/vim-system-copy'
 
 call plug#end()
 "-------------------------------------------------------
@@ -195,7 +196,7 @@ set directory=/var/tmp,/tmp
 "    "_NOT_ running under tmux
 "    set clipboard+=unnamed
 "endif
-set clipboard=unnamed,unnamedplus
+"set clipboard=unnamed,unnamedplus
 
 set exrc
 
