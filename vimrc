@@ -954,3 +954,11 @@ function! g:ToggleNuMode()
 endfunc
 
 nnoremap <leader>ln :call g:ToggleNuMode()<CR>
+
+
+" Remove scoping/condition and reindent
+function! g:DeBlock()
+    :normal di}d2k"2Pma=i}'a
+endfunction
+
+nnoremap <leader>db :call DeBlock()<CR>
