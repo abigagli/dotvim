@@ -936,3 +936,21 @@ endfunction
 
 " Locally (local to block) rename a variable
 nmap <Leader>rfc "zyiw:call Refactor()<cr>mx:silent! norm gd<cr>[{V%:s/<C-R>//<c-r>z/gc<cr>`x
+
+
+
+" Automatic relative/absolute line numbers
+autocmd WinEnter,FocusGained *  :setlocal relativenumber
+autocmd WinLeave,FocusLost *    :setlocal norelativenumber
+autocmd InsertEnter *           :setlocal norelativenumber
+autocmd InsertLeave *           :setlocal relativenumber
+
+function! g:ToggleNuMode()
+    if (&relativenumber == 1)
+        set norelativenumber
+    else
+        set relativenumber
+    endif
+endfunc
+
+nnoremap <leader>ln :call g:ToggleNuMode()<CR>
