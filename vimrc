@@ -196,7 +196,10 @@ set directory=/var/tmp,/tmp
 "    "_NOT_ running under tmux
 "    set clipboard+=unnamed
 "endif
-"set clipboard=unnamed,unnamedplus
+set clipboard=unnamed
+if has('unnamedplus')
+    set clipboard+=unnamedplus
+endif
 
 set exrc
 
