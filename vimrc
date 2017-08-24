@@ -351,7 +351,7 @@ inoremap jk <esc>
 cnoremap jk <c-c>
 
 "Quick access to make
-nnoremap <F10> :wa <ESC><BAR> :Make -j4 DEBUG=1<CR>
+nnoremap <F10> :wa <ESC><BAR> :Make -C BUILD_DEBUG -j24<CR>
 
 
 "Recreate cscope db and reload it
