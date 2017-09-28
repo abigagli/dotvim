@@ -555,6 +555,11 @@ if s:uname == "Linux\n"
                 \ 'c': ['g++','clangtidy'],
                 \ 'cpp': ['g++','clangtidy'],
                 \}
+elseif s:uname == "Darwin\n"
+    let g:ale_linters = {
+                \ 'c': ['clang','clangtidy'],
+                \ 'cpp': ['clang','clangtidy'],
+                \}
 endif
 
 let g:ale_fixers = {
