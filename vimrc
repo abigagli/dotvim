@@ -548,6 +548,15 @@ nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "---------------------------- ALE  ---------------------------
 nmap<silent><leader>k <Plug>(ale_previous_wrap)
 nmap<silent><leader>j <Plug>(ale_next_wrap)
+
+"When on linux, don't use clang for linting
+if s:uname == "Linux\n"
+    let g:ale_linters = {
+                \ 'c': ['g++','clangtidy'],
+                \ 'cpp': ['g++','clangtidy'],
+                \}
+endif
+
 let g:ale_fixers = {
             \ 'c': ['clang-format'],
             \ 'cpp': ['clang-format'],
