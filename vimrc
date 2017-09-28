@@ -815,10 +815,10 @@ noremap <Leader>G <Esc>:Rgrep<CR>
 noremap <silent><leader>qq <Esc>:call QFixToggle(0)<CR>
 
 " '[q' previous quickfix entry
-noremap [q :cprev<CR>
+"noremap [q :cprev<CR> DISABLED as this is already provided by unimpaired plugin
 
 " ']q' next quickfix entry
-noremap ]q :cnext<CR>
+"noremap ]q :cnext<CR> DISABLED as this is already provided by unimpaired plugin
 
 " '\q*' : search for occurrences of word under cursor, and write to QuickFix
 noremap <silent><leader>q*  <Esc>:execute 'vimgrep '.expand('<cword>').' '.expand('%') <CR> :copen <CR> :cc
