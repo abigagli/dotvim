@@ -29,6 +29,8 @@ endif
 " VIM-PLUG
 "-------------------------------------------------------
 call plug#begin('~/.vim/bundle')
+Plug 'embear/vim-localvimrc'
+
 Plug 'https://github.com/vim-scripts/TaskList.vim'
 Plug 'https://github.com/vim-scripts/Tagbar'
 Plug 'https://github.com/vim-scripts/errormarker.vim'
@@ -121,7 +123,6 @@ Plug 'rhysd/wandbox-vim'
 Plug 'pelodelfuego/vim-swoop'
 "Plug 'fcpg/vim-fahrenheit'
 "Plug 'CoatiSoftware/vim-sourcetrail'
-Plug 'embear/vim-localvimrc'
 Plug 'alessandroyorba/sierra'
 Plug 'cocopon/iceberg.vim'
 Plug 'dawikur/algorithm-mnemonics.vim'
