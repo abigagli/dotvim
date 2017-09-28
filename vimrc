@@ -555,6 +555,9 @@ let g:ale_fixers = {
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+"let g:ale_cpp_clangtidy_options = '-std=c++14' "Enabling this will disable use of compile_commands.json!!
+
+"Couldn't seem to make these work...
 "let g:airline#extensions#ale#enabled = 1
 "set statusline+=%{ALEGetStatusLine()}
 "let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
