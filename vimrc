@@ -94,7 +94,8 @@ if s:uname != "SunOS\n"
     Plug 'mbadran/headlights'
 endif
 
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 "Plug 'Raimondi/delimitMate'
 Plug 'sjl/gundo.vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -541,8 +542,22 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_always_populate_location_list = 1
+let g:ycm_enable_diagnostic_signs = 0 "Disabled to use ALE
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+"---------------------------- ALE  ---------------------------
+nmap<silent><leader>k <Plug>(ale_previous_wrap)
+nmap<silent><leader>j <Plug>(ale_next_wrap)
+let g:ale_fixers = {
+            \ 'c': ['clang-format'],
+            \ 'cpp': ['clang-format'],
+            \}
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+"let g:airline#extensions#ale#enabled = 1
+"set statusline+=%{ALEGetStatusLine()}
+"let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 "---------------------------- ULTISNIPS ---------------------------
 "Make ultisnips work ok with youcompleteme
 let g:UltiSnipsExpandTrigger="<c-j>"
