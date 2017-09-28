@@ -271,7 +271,7 @@ let b:did_indent = 1
 
 
 "Always put quickfix window at the bottom of the window layout
-autocmd FileType qf wincmd J
+"autocmd FileType qf wincmd J DISABLED as it seems to cause problems with YCM's quickfix and location list handling
 
 "Should let vim realize the file was externally changed
 if ! s:uname == "SunOS"
