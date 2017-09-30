@@ -36,7 +36,6 @@ Plug 'https://github.com/vim-scripts/Tagbar'
 Plug 'https://github.com/vim-scripts/errormarker.vim'
 Plug 'https://github.com/vim-scripts/unimpaired.vim'
 Plug 'https://github.com/vim-scripts/YankRing.vim'
-Plug 'https://github.com/vim-scripts/ack.vim'
 Plug 'https://github.com/vim-scripts/The-NERD-Commenter'
 "Plug 'https://github.com/vim-scripts/Screen-vim---gnu-screentmux'
 Plug 'https://github.com/vim-scripts/surround.vim'
@@ -128,6 +127,7 @@ Plug 'cocopon/iceberg.vim'
 Plug 'dawikur/algorithm-mnemonics.vim'
 Plug 'lyuts/vim-rtags'
 Plug 'christoomey/vim-system-copy'
+Plug 'mileszs/ack.vim'
 
 call plug#end()
 "-------------------------------------------------------
@@ -738,7 +738,10 @@ let g:wandbox#default_extra_options = {
 "------------- vim-localvimrc ------------------
 let g:localvimrc_ask = 0
 
-
+"------------- ack/ag-silver_searcher ------------------
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 "-------------- Functions ----------------
 function! TrimWhiteSpace()
