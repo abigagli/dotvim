@@ -543,7 +543,7 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_always_populate_location_list = 1
-let g:ycm_enable_diagnostic_signs = 0 "Disabled to use ALE
+let g:ycm_enable_diagnostic_signs = 1
 nnoremap <F9> :YcmCompleter FixIt<CR>
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
@@ -571,7 +571,10 @@ let g:ale_fixers = {
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-"let g:ale_cpp_clangtidy_options = '-std=c++14' "Enabling this will disable use of compile_commands.json!!
+let g:ale_cpp_clangtidy_options = '-std=c++14'
+
+"Once you explicitly set g:ale_cpp_clangtidy_options, it seems like we need to also set this to keep using compile_commands.json 
+let g:ale_c_build_dir = '.'
 
 "Couldn't seem to make these work...
 "let g:airline#extensions#ale#enabled = 1
