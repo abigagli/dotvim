@@ -571,10 +571,11 @@ let g:ale_fixers = {
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_cpp_clangtidy_options = '-std=c++14'
 
-"Once you explicitly set g:ale_cpp_clangtidy_options, it seems like we need to also set this to keep using compile_commands.json 
-let g:ale_c_build_dir = '.'
+"NOTE:Once you explicitly set g:ale_cpp_clangtidy_options, you have to set
+"g:ale_c_build_dir or g:ale_c_build_dir_names to re-enable using
+"compile_commands.json
+let g:ale_cpp_clangtidy_options = '-std=c++14'
 
 "Couldn't seem to make these work...
 "let g:airline#extensions#ale#enabled = 1
