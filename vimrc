@@ -127,7 +127,8 @@ Plug 'cocopon/iceberg.vim'
 Plug 'dawikur/algorithm-mnemonics.vim'
 Plug 'lyuts/vim-rtags'
 Plug 'christoomey/vim-system-copy'
-Plug 'mileszs/ack.vim'
+"Plug 'mileszs/ack.vim'
+Plug 'vim-scripts/ag.vim'
 
 call plug#end()
 "-------------------------------------------------------
