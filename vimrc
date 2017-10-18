@@ -294,6 +294,8 @@ let g:cmake_set_makeprg = 0
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
+nnoremap <leader>F :Files<CR>
+nnoremap <leader>B :Buffers<CR>
 
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
