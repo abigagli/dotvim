@@ -26,6 +26,11 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+"Force python version used by vim to be python3
+"see https://robertbasic.com/blog/force-python-version-in-vim/
+if has ('python3')
+endif
+
 " VIM-PLUG
 "-------------------------------------------------------
 call plug#begin('~/.vim/bundle')
@@ -92,7 +97,7 @@ Plug 'derekwyatt/vim-fswitch'
 if s:uname != "SunOS\n"
     Plug 'Valloric/YouCompleteMe'
     Plug 'airblade/vim-gitgutter'
-    Plug 'mbadran/headlights'
+"    Plug 'mbadran/headlights'
 endif
 
 "Plug 'scrooloose/syntastic'
