@@ -26,9 +26,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-"Force python version used by vim to be python3
+"Force python version used by vim to be python
 "see https://robertbasic.com/blog/force-python-version-in-vim/
-if has ('python3')
+if has ('python')
 endif
 
 " VIM-PLUG
@@ -130,7 +130,7 @@ Plug 'pelodelfuego/vim-swoop'
 Plug 'alessandroyorba/sierra'
 Plug 'cocopon/iceberg.vim'
 Plug 'dawikur/algorithm-mnemonics.vim'
-Plug 'lyuts/vim-rtags'
+"Plug 'lyuts/vim-rtags'
 Plug 'christoomey/vim-system-copy'
 "Plug 'mileszs/ack.vim'
 Plug 'vim-scripts/ag.vim'
