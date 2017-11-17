@@ -398,11 +398,12 @@ augroup END
 nnoremap <leader>do :DiffOrig<cr>
 nnoremap <leader>dc :q<cr>:diffoff!<cr>
 
-"Turns off Vim's crazy default regex characters and makes searches use normal
-"regexes
-nnoremap / /\v
-vnoremap / /\v
-cmap s/ s/\v
+if !has('mac') "Disabled on mac since this causes ALL buffer to be highlighted when starting the search
+"Turns off Vim's crazy default regex characters and makes searches use normal regexes
+    nnoremap / /\v
+    vnoremap / /\v
+    cmap s/ s/\v
+endif
 
 "Bubble single lines
 nmap <UP> [e
