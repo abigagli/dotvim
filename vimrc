@@ -992,10 +992,10 @@ nmap <Leader>rfc "zyiw:call Refactor()<cr>mx:silent! norm gd<cr>[{V%:s/<C-R>//<c
 
 
 " Automatic relative/absolute line numbers
-autocmd WinEnter,FocusGained *  :setlocal relativenumber
-autocmd WinLeave,FocusLost *    :setlocal norelativenumber
-autocmd InsertEnter *           :setlocal norelativenumber
-autocmd InsertLeave *           :setlocal relativenumber
+"autocmd WinEnter,FocusGained *  :setlocal relativenumber
+"autocmd WinLeave,FocusLost *    :setlocal norelativenumber
+"autocmd InsertEnter *           :setlocal norelativenumber
+"autocmd InsertLeave *           :setlocal relativenumber
 
 function! g:ToggleNuMode()
     if (&relativenumber == 1)
