@@ -83,7 +83,7 @@ Plug 'proyvind/Cpp11-Syntax-Support'
 Plug 'sjl/clam.vim'
 "Plug 'Lokaltog/vim-powerline'
 Plug 'bling/vim-airline'
-Plug 'godlygeek/tabular'
+"Plug 'godlygeek/tabular'
 Plug 'Lokaltog/vim-easymotion'
 "Plug 'supasorn/vim-easymotion'
 "Plug 'nelstrom/vim-qargs'
@@ -134,6 +134,7 @@ Plug 'dawikur/algorithm-mnemonics.vim'
 Plug 'christoomey/vim-system-copy'
 "Plug 'mileszs/ack.vim'
 Plug 'vim-scripts/ag.vim'
+Plug 'junegunn/vim-easy-align'
 
 call plug#end()
 "-------------------------------------------------------
@@ -718,13 +719,21 @@ let Grep_Xargs_Options = '-0'
 let Grep_Default_Filelist = '*.c *.cpp *.h *.hpp'
 
 
+"------------- EasyAlign  ------------------
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+
 "------------- Tabularize  ------------------
-nnoremap <leader>a= :Tabularize /=<CR>
-vnoremap <leader>a= :Tabularize /=<CR>
-nnoremap <leader>a{ :Tabularize /{<CR>
-vnoremap <leader>a{ :Tabularize /{<CR>
-nnoremap <leader>a: :Tabularize /:\zs<CR>
-vnoremap <leader>a: :Tabularize /:\zs<CR>
+"nnoremap <leader>a= :Tabularize /=<CR>
+"vnoremap <leader>a= :Tabularize /=<CR>
+"nnoremap <leader>a{ :Tabularize /{<CR>
+"vnoremap <leader>a{ :Tabularize /{<CR>
+"nnoremap <leader>a: :Tabularize /:\zs<CR>
+"vnoremap <leader>a: :Tabularize /:\zs<CR>
 
 "------------- Wandbox  ------------------
 " Set default compilers for each filetype
