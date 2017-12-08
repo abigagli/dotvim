@@ -135,6 +135,7 @@ Plug 'christoomey/vim-system-copy'
 "Plug 'mileszs/ack.vim'
 Plug 'vim-scripts/ag.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'lifepillar/vim-cheat40'
 
 call plug#end()
 "-------------------------------------------------------
