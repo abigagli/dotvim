@@ -136,6 +136,7 @@ Plug 'christoomey/vim-system-copy'
 Plug 'vim-scripts/ag.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'lifepillar/vim-cheat40'
+Plug 'thiagoalessio/rainbow_levels.vim'
 
 call plug#end()
 "-------------------------------------------------------
@@ -765,6 +766,9 @@ let g:localvimrc_ask = 0
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+
+"------------- RAINBOW_LEVELS ------------------
+nmap <leader>rl : RainbowLevelsToggle<CR>
 
 "-------------- Functions ----------------
 function! TrimWhiteSpace()
