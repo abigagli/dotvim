@@ -138,6 +138,10 @@ Plug 'junegunn/vim-easy-align'
 Plug 'lifepillar/vim-cheat40'
 Plug 'thiagoalessio/rainbow_levels.vim'
 
+"LanguageServerProtocol client
+"Plug 'prabirshrestha/async.vim'
+"Plug 'prabirshrestha/vim-lsp'
+
 call plug#end()
 "-------------------------------------------------------
 
@@ -769,6 +773,22 @@ endif
 
 "------------- RAINBOW_LEVELS ------------------
 nmap <leader>rl : RainbowLevelsToggle<CR>
+
+"------------- vim-lsp ------------------
+""let g:lsp_log_verbose = 1
+""let g:lsp_log_file = expand('/tmp/vim-lsp.log')
+""let g:asyncomplete_log_file = expand('/tmp/asyncomplete.log')
+
+"au User lsp_setup call lsp#register_server({
+"    \ 'name': 'cquery',
+"    \ 'cmd': {server_info->[&shell, &shellcmdflag, '/Users/abigagli/develop/sources/cquery/build/system/bin/cquery --language-server --log-file /tmp/cquery.log']},
+"    \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+"    \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache' },
+"    \ 'whitelist': ['c', 'cpp'],
+"    \ })
+
+
+
 
 "-------------- Functions ----------------
 function! TrimWhiteSpace()
