@@ -10,6 +10,8 @@
 " :Explore
 " :e scp://host/some/where/to/file.txt
 
+let s:use_ycm = 0 "otherwise use vim-lsp + cquery/clangd
+
 set nocompatible
 let s:uname = system ("uname")
 
@@ -95,7 +97,9 @@ Plug 'derekwyatt/vim-fswitch'
 "Plug 'jalcine/cmake.vim'
 
 if s:uname != "SunOS\n"
-    Plug 'Valloric/YouCompleteMe'
+    if s:use_ycm
+        Plug 'Valloric/YouCompleteMe'
+    endif
     Plug 'airblade/vim-gitgutter'
 "    Plug 'mbadran/headlights'
 endif
@@ -139,9 +143,12 @@ Plug 'lifepillar/vim-cheat40'
 Plug 'thiagoalessio/rainbow_levels.vim'
 
 "LanguageServerProtocol client: see https://jonasdevlieghere.com/vim-lsp-clangd/amp/
-"Plug 'prabirshrestha/async.vim'
-"Plug 'prabirshrestha/vim-lsp'
-"Plug 'ajh17/vimcompletesme'
+if ! s:use_ycm
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'ajh17/vimcompletesme'
+    "Plug 'prabirshrestha/asyncomplete.vim'
+endif
 
 call plug#end()
 "-------------------------------------------------------
@@ -554,15 +561,17 @@ let g:session_autosave_periodic=60
 "let g:EasyClipAutoFormat = 1
 
 "---------------------------- YOUCOMPLETEME ---------------------------
-nnoremap <leader>u :YcmForceCompileAndDiagnostics<CR>
-let g:ycm_global_ycm_extra_conf = $HOME . '/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_always_populate_location_list = 1
-let g:ycm_enable_diagnostic_signs = 1
-nnoremap <F9> :YcmCompleter FixIt<CR>
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+if s:use_ycm
+    nnoremap <leader>u :YcmForceCompileAndDiagnostics<CR>
+    let g:ycm_global_ycm_extra_conf = $HOME . '/.ycm_extra_conf.py'
+    let g:ycm_confirm_extra_conf = 0
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    let g:ycm_autoclose_preview_window_after_insertion = 1
+    let g:ycm_always_populate_location_list = 1
+    let g:ycm_enable_diagnostic_signs = 1
+    nnoremap <F9> :YcmCompleter FixIt<CR>
+    nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+endif
 
 "---------------------------- ALE  ---------------------------
 nmap<silent><leader>k <Plug>(ale_previous_wrap)
@@ -775,45 +784,63 @@ endif
 "------------- RAINBOW_LEVELS ------------------
 nmap <leader>rl : RainbowLevelsToggle<CR>
 
-"------------- vim-lsp ------------------
-
-" -------------- LSP_CLANGD --------------
-"let g:lsp_signs_enabled = 1
-"let g:lsp_diagnostics_echo_cursor = 1
-"let g:lsp_log_verbose = 1
-"let g:lsp_log_file = expand('/tmp/vim-lsp.log')
+"------------- asyncomplete.vim ------------------
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+"imap <c-space> <Plug>(asyncomplete_force_refresh)
+"let g:asyncomplete_auto_popup = 1
+"let g:asyncomplete_remove_duplicates = 1
 "let g:asyncomplete_log_file = expand('/tmp/asyncomplete.log')
 
-"if executable('clangd')
-"    augroup lsp_clangd
-"        autocmd!
-"        autocmd User lsp_setup call lsp#register_server({
-"                    \ 'name': 'clangd',
-"                    \ 'cmd': {server_info->['clangd']},
-"                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-"                    \ })
-"        autocmd FileType c setlocal omnifunc=lsp#complete
-"        autocmd FileType cpp setlocal omnifunc=lsp#complete
-"        autocmd FileType objc setlocal omnifunc=lsp#complete
-"        autocmd FileType objcpp setlocal omnifunc=lsp#complete
-"    augroup end
-"endif
 
-" -------------- LSP_CQUERY --------------
-"if executable('cquery')
-"    augroup lsp_cquery
-"        autocmd!
-"        autocmd User lsp_setup call lsp#register_server({
-"                    \ 'name': 'cquery',
-"                    \ 'cmd': {server_info->['cquery']},
-"                    \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-"                    \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache' },
-"                    \ 'whitelist': ['c', 'cpp'],
-"                    \ })
-""                    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'cquery --language-server --log-file /tmp/cquery.log']},
-"    augroup end
-"endif
+if !s:use_ycm
+    "------------- vim-lsp ------------------
+    " -------------- (LSP_CLANGD setup) --------------
+    "let g:lsp_signs_enabled = 1
+    "let g:lsp_diagnostics_echo_cursor = 1
+    "let g:lsp_log_verbose = 1
+    "let g:lsp_log_file = expand('/tmp/vim-lsp.log')
 
+    "if executable('clangd')
+    "    augroup lsp_clangd
+    "        autocmd!
+    "        autocmd User lsp_setup call lsp#register_server({
+    "                    \ 'name': 'clangd',
+    "                    \ 'cmd': {server_info->['clangd']},
+    "                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+    "                    \ })
+    "        autocmd FileType c setlocal omnifunc=lsp#complete
+    "        autocmd FileType cpp setlocal omnifunc=lsp#complete
+    "        autocmd FileType objc setlocal omnifunc=lsp#complete
+    "        autocmd FileType objcpp setlocal omnifunc=lsp#complete
+    "    augroup end
+    "endif
+
+    " -------------- (LSP_CQUERY setup) --------------
+    if executable('cquery')
+        augroup lsp_cquery
+            autocmd!
+            autocmd User lsp_setup call lsp#register_server({
+                        \ 'name': 'cquery',
+                        \ 'cmd': {server_info->['cquery']},
+                        \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+                        \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache' },
+                        \ 'whitelist': ['c', 'cpp'],
+                        \ })
+            "                    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'cquery --language-server --log-file /tmp/cquery.log']},
+            autocmd FileType c setlocal omnifunc=lsp#complete
+            autocmd FileType cpp setlocal omnifunc=lsp#complete
+            autocmd FileType objc setlocal omnifunc=lsp#complete
+            autocmd FileType objcpp setlocal omnifunc=lsp#complete
+        augroup end
+    endif
+
+    nnoremap <leader>jd :LspDefinition <cr>
+    nnoremap <leader>jr :LspReferences <cr>
+    nnoremap <leader>rn :LspRename <cr>
+
+endif
 
 "-------------- Functions ----------------
 function! TrimWhiteSpace()
