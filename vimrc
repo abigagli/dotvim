@@ -138,9 +138,10 @@ Plug 'junegunn/vim-easy-align'
 Plug 'lifepillar/vim-cheat40'
 Plug 'thiagoalessio/rainbow_levels.vim'
 
-"LanguageServerProtocol client
+"LanguageServerProtocol client: see https://jonasdevlieghere.com/vim-lsp-clangd/amp/
 "Plug 'prabirshrestha/async.vim'
 "Plug 'prabirshrestha/vim-lsp'
+"Plug 'ajh17/vimcompletesme'
 
 call plug#end()
 "-------------------------------------------------------
@@ -775,19 +776,43 @@ endif
 nmap <leader>rl : RainbowLevelsToggle<CR>
 
 "------------- vim-lsp ------------------
-""let g:lsp_log_verbose = 1
-""let g:lsp_log_file = expand('/tmp/vim-lsp.log')
-""let g:asyncomplete_log_file = expand('/tmp/asyncomplete.log')
 
-"au User lsp_setup call lsp#register_server({
-"    \ 'name': 'cquery',
-"    \ 'cmd': {server_info->[&shell, &shellcmdflag, '/Users/abigagli/develop/sources/cquery/build/system/bin/cquery --language-server --log-file /tmp/cquery.log']},
-"    \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-"    \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache' },
-"    \ 'whitelist': ['c', 'cpp'],
-"    \ })
+" -------------- LSP_CLANGD --------------
+"let g:lsp_signs_enabled = 1
+"let g:lsp_diagnostics_echo_cursor = 1
+"let g:lsp_log_verbose = 1
+"let g:lsp_log_file = expand('/tmp/vim-lsp.log')
+"let g:asyncomplete_log_file = expand('/tmp/asyncomplete.log')
 
+"if executable('clangd')
+"    augroup lsp_clangd
+"        autocmd!
+"        autocmd User lsp_setup call lsp#register_server({
+"                    \ 'name': 'clangd',
+"                    \ 'cmd': {server_info->['clangd']},
+"                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+"                    \ })
+"        autocmd FileType c setlocal omnifunc=lsp#complete
+"        autocmd FileType cpp setlocal omnifunc=lsp#complete
+"        autocmd FileType objc setlocal omnifunc=lsp#complete
+"        autocmd FileType objcpp setlocal omnifunc=lsp#complete
+"    augroup end
+"endif
 
+" -------------- LSP_CQUERY --------------
+"if executable('cquery')
+"    augroup lsp_cquery
+"        autocmd!
+"        autocmd User lsp_setup call lsp#register_server({
+"                    \ 'name': 'cquery',
+"                    \ 'cmd': {server_info->['cquery']},
+"                    \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+"                    \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache' },
+"                    \ 'whitelist': ['c', 'cpp'],
+"                    \ })
+""                    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'cquery --language-server --log-file /tmp/cquery.log']},
+"    augroup end
+"endif
 
 
 "-------------- Functions ----------------
