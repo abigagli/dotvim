@@ -796,11 +796,11 @@ nmap <leader>rl : RainbowLevelsToggle<CR>
 
 if !s:use_ycm
     "------------- vim-lsp ------------------
-    " -------------- (LSP_CLANGD setup) --------------
     "let g:lsp_signs_enabled = 1
     "let g:lsp_diagnostics_echo_cursor = 1
     "let g:lsp_log_verbose = 1
     "let g:lsp_log_file = expand('/tmp/vim-lsp.log')
+    " -------------- (LSP_CLANGD setup) --------------
 
     "if executable('clangd')
     "    augroup lsp_clangd
@@ -818,6 +818,7 @@ if !s:use_ycm
     "endif
 
     " -------------- (LSP_CQUERY setup) --------------
+    " see cquery's src/config.h for possible initialization_options
     if executable('cquery')
         augroup lsp_cquery
             autocmd!
@@ -825,7 +826,7 @@ if !s:use_ycm
                         \ 'name': 'cquery',
                         \ 'cmd': {server_info->['cquery']},
                         \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-                        \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache' },
+                        \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache', 'completion': { 'detailedLabel': v:true }},
                         \ 'whitelist': ['c', 'cpp'],
                         \ })
             "                    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'cquery --language-server --log-file /tmp/cquery.log']},
