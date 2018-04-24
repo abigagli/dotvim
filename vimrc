@@ -796,7 +796,7 @@ nmap <leader>rl : RainbowLevelsToggle<CR>
 
 if !s:use_ycm
     "------------- vim-lsp ------------------
-    "let g:lsp_signs_enabled = 1
+    "let g:lsp_signs_enabled = 1 "Keeping disabled since I'm still using ALE for now
     "let g:lsp_diagnostics_echo_cursor = 1
     "let g:lsp_log_verbose = 1
     "let g:lsp_log_file = expand('/tmp/vim-lsp.log')
@@ -819,13 +819,20 @@ if !s:use_ycm
 
     " -------------- (LSP_CQUERY setup) --------------
     " see cquery's src/config.h for possible initialization_options
+
     if executable('cquery')
         augroup lsp_cquery
+
+            let s:found_uri = lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))
+            if (empty(s:found_uri))
+                let s:found_uri = lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.cquery'))
+            endif
+
             autocmd!
             autocmd User lsp_setup call lsp#register_server({
                         \ 'name': 'cquery',
                         \ 'cmd': {server_info->['cquery']},
-                        \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+                        \ 'root_uri': {server_info->s:found_uri},
                         \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache', 'completion': { 'detailedLabel': v:true }},
                         \ 'whitelist': ['c', 'cpp'],
                         \ })
