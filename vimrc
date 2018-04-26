@@ -829,14 +829,16 @@ if !s:use_ycm
             endif
 
             autocmd!
+"                    \ 'cmd': {server_info->['cquery']},
+"                    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'cquery --language-server --log-file /tmp/cquery.log']},
             autocmd User lsp_setup call lsp#register_server({
                         \ 'name': 'cquery',
                         \ 'cmd': {server_info->['cquery']},
                         \ 'root_uri': {server_info->s:found_uri},
-                        \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery_cache', 'completion': { 'detailedLabel': v:true }},
+                        \ 'initialization_options': { 'cacheDirectory': $HOME . '/caches/cquery', 'completion': { 'detailedLabel': v:true }},
                         \ 'whitelist': ['c', 'cpp'],
                         \ })
-            "                    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'cquery --language-server --log-file /tmp/cquery.log']},
+
             autocmd FileType c setlocal omnifunc=lsp#complete
             autocmd FileType cpp setlocal omnifunc=lsp#complete
             autocmd FileType objc setlocal omnifunc=lsp#complete
