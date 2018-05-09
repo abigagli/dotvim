@@ -61,9 +61,6 @@ Plug 'https://github.com/vim-scripts/gtags.vim'
 Plug 'https://github.com/vim-scripts/listmaps.vim'
 "Plug 'https://github.com/vim-scripts/Conque-GDB'
 
-"if s:uname != "SunOS\n"
-"    Plug 'https://github.com/vim-scripts/Intelligent-Tags'
-"endif
 
 if has('mac')
 "   Plug 'Rip-Rip/clang_complete'
@@ -96,13 +93,7 @@ Plug 'mhinz/vim-startify'
 Plug 'derekwyatt/vim-fswitch'
 "Plug 'jalcine/cmake.vim'
 
-if s:uname != "SunOS\n"
-    if s:use_ycm
-        Plug 'Valloric/YouCompleteMe'
-    endif
-    Plug 'airblade/vim-gitgutter'
-"    Plug 'mbadran/headlights'
-endif
+Plug 'airblade/vim-gitgutter'
 
 "Plug 'scrooloose/syntastic'
 Plug 'w0rp/ale'
@@ -142,12 +133,19 @@ Plug 'junegunn/vim-easy-align'
 Plug 'lifepillar/vim-cheat40'
 Plug 'thiagoalessio/rainbow_levels.vim'
 
-"LanguageServerProtocol client: see https://jonasdevlieghere.com/vim-lsp-clangd/amp/
-if ! s:use_ycm
+if s:use_ycm
+    Plug 'Valloric/YouCompleteMe'
+else
+    "LanguageServerProtocol client: see https://jonasdevlieghere.com/vim-lsp-clangd/amp/
+    "------- CORE ------
     Plug 'prabirshrestha/async.vim'
     Plug 'prabirshrestha/vim-lsp'
-    Plug 'ajh17/vimcompletesme'
-    "Plug 'prabirshrestha/asyncomplete.vim'
+
+    "------- COMPLETIONS -----
+    "Plug 'ajh17/vimcompletesme'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 endif
 
 call plug#end()
@@ -295,9 +293,7 @@ let b:did_indent = 1
 "autocmd FileType qf wincmd J DISABLED as it seems to cause problems with YCM's quickfix and location list handling
 
 "Should let vim realize the file was externally changed
-if ! s:uname == "SunOS"
-    autocmd Cursorhold * checktime
-endif
+autocmd Cursorhold * checktime
 
 "Powerline ------------------------
 set encoding=utf-8
@@ -560,18 +556,6 @@ let g:session_autosave_periodic=60
 "---------------------------- EASYCLIP ---------------------------
 "let g:EasyClipAutoFormat = 1
 
-"---------------------------- YOUCOMPLETEME ---------------------------
-if s:use_ycm
-    nnoremap <leader>u :YcmForceCompileAndDiagnostics<CR>
-    let g:ycm_global_ycm_extra_conf = $HOME . '/.ycm_extra_conf.py'
-    let g:ycm_confirm_extra_conf = 0
-    let g:ycm_collect_identifiers_from_tags_files = 1
-    let g:ycm_autoclose_preview_window_after_insertion = 1
-    let g:ycm_always_populate_location_list = 1
-    let g:ycm_enable_diagnostic_signs = 1
-    nnoremap <F9> :YcmCompleter FixIt<CR>
-    nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-endif
 
 "---------------------------- ALE  ---------------------------
 nmap<silent><leader>k <Plug>(ale_previous_wrap)
@@ -607,12 +591,6 @@ let g:ale_cpp_clangtidy_options = '-std=c++14'
 "let g:airline#extensions#ale#enabled = 1
 "set statusline+=%{ALEGetStatusLine()}
 "let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-"---------------------------- ULTISNIPS ---------------------------
-"Make ultisnips work ok with youcompleteme
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-f>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-" let g:UltiSnipsEditSplit="vertical"
 
 
 "---------------------------- SURFER ---------------------------
@@ -667,7 +645,7 @@ endif
 
 if has('mac')
     call SingleCompile#ChooseCompiler ('cpp','clang++_libc++')
-elseif ! s:uname == "SunOS"
+else
     call SingleCompile#ChooseCompiler ('cpp','g++')
 endif
 "-------------------------------------------------------------------
@@ -784,17 +762,44 @@ endif
 "------------- RAINBOW_LEVELS ------------------
 nmap <leader>rl : RainbowLevelsToggle<CR>
 
-"------------- asyncomplete.vim ------------------
-"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
-"imap <c-space> <Plug>(asyncomplete_force_refresh)
-"let g:asyncomplete_auto_popup = 1
-"let g:asyncomplete_remove_duplicates = 1
-"let g:asyncomplete_log_file = expand('/tmp/asyncomplete.log')
+
+if s:use_ycm
+"---------------------------- YouCompleteMe ---------------------------
+    nnoremap <leader>u :YcmForceCompileAndDiagnostics<CR>
+    let g:ycm_global_ycm_extra_conf = $HOME . '/.ycm_extra_conf.py'
+    let g:ycm_confirm_extra_conf = 0
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    let g:ycm_autoclose_preview_window_after_insertion = 1
+    let g:ycm_always_populate_location_list = 1
+    let g:ycm_enable_diagnostic_signs = 1
+    nnoremap <F9> :YcmCompleter FixIt<CR>
+    nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+    "---------------------------- ultisnips ---------------------------
+    "Make ultisnips work ok with youcompleteme
+    let g:UltiSnipsExpandTrigger="<c-j>"
+    let g:UltiSnipsJumpForwardTrigger="<c-f>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+    " let g:UltiSnipsEditSplit="vertical"
+else
+    "------------- asyncomplete.vim ------------------
+    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+    imap <c-space> <Plug>(asyncomplete_force_refresh)
+    let g:asyncomplete_auto_popup = 1
+    let g:asyncomplete_remove_duplicates = 1
+    "let g:asyncomplete_log_file = expand('/tmp/asyncomplete.log')
+
+    let g:UltiSnipsExpandTrigger="<c-e>"
+    call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+                \ 'name': 'ultisnips',
+                \ 'whitelist': ['*'],
+                \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+                \ }))
 
 
-if !s:use_ycm
+
     "------------- vim-lsp ------------------
     "let g:lsp_signs_enabled = 1 "Keeping disabled since I'm still using ALE for now
     "let g:lsp_diagnostics_echo_cursor = 1
