@@ -585,7 +585,8 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 "NOTE:Once you explicitly set g:ale_cpp_clangtidy_options, you have to set
 "g:ale_c_build_dir or g:ale_c_build_dir_names to re-enable using
 "compile_commands.json
-let g:ale_cpp_clangtidy_options = '-std=c++14'
+let g:ale_cpp_clangtidy_options = '-std=c++17'
+let g:ale_cpp_clang_options = '-std=c++17'
 
 "Couldn't seem to make these work...
 "let g:airline#extensions#ale#enabled = 1
