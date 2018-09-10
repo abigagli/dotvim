@@ -560,6 +560,7 @@ let g:session_autosave_periodic=60
 "---------------------------- ALE  ---------------------------
 nmap<silent><leader>k <Plug>(ale_previous_wrap)
 nmap<silent><leader>j <Plug>(ale_next_wrap)
+nmap<silent><leader>i :ALEDetail<CR>
 
 "When on linux, don't use clang for linting
 if s:uname == "Linux\n"
