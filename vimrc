@@ -641,7 +641,7 @@ if has('mac')
     silent let s:clang_exe = '$HOME/LLVM-CURRENT/bin/clang++'
 
 call SingleCompile#SetCompilerTemplate('cpp', 'clang++_libc++',
-             \'clang++ release with libc++', s:clang_exe, '-g3 -std=c++1z -stdlib=libc++ -Weverything -Wno-padded -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -fno-pie -Wl,-no_pie -I$HOME/LLVM-CURRENT/include/c++/v1 -I$HOME/include -I$BOOSTROOT/include -L$HOME/lib -L$HOME/LLVM-CURRENT/lib -L$BOOSTROOT/lib -Wl,-rpath,$HOME/lib -Wl,-rpath,$HOME/LLVM-CURRENT/lib -Wl,-rpath,$BOOSTROOT/lib -o %:r', './%:r')
+             \'clang++ release with libc++', s:clang_exe, '-g3 -std=c++17 -stdlib=libc++ -Weverything -Wno-padded -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -fno-pie -Wl,-no_pie -I$HOME/LLVM-CURRENT/include/c++/v1 -I$HOME/include -I$BOOSTROOT/include -L$HOME/lib -L$HOME/LLVM-CURRENT/lib -L$BOOSTROOT/lib -Wl,-rpath,$HOME/lib -Wl,-rpath,$HOME/LLVM-CURRENT/lib -Wl,-rpath,$BOOSTROOT/lib -o %:r', './%:r')
 endif
 
 
