@@ -569,9 +569,11 @@ if s:uname == "Linux\n"
                 \ 'cpp': ['g++','clangtidy'],
                 \}
 elseif s:uname == "Darwin\n"
+    "Set this if you use 'clang' as a linter to ensure which version of clang to use
+    "let g:ale_cpp_clang_executable=$HOME . '/LLVM-RELEASE/bin/clang++'
     let g:ale_linters = {
-                \ 'c': ['clang','clangtidy'],
-                \ 'cpp': ['clang','clangtidy'],
+                \ 'c': ['cquery', 'clangtidy'],
+                \ 'cpp': ['cquery', 'clangtidy'],
                 \}
 endif
 
