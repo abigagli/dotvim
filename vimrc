@@ -854,11 +854,13 @@ else
                             \ 'cmd': {server_info->['cquery']},
                             \ 'root_uri': {server_info->s:found_uri},
                             \ 'initialization_options': { 'cacheDirectory': $HOME . '/caches/cquery', 'completion': { 'detailedLabel': v:true }},
-                            \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+                            \ 'whitelist': ['c', 'cpp', 'cc', 'cxx', 'objc', 'objcpp'],
                             \ })
 
                 autocmd FileType c setlocal omnifunc=lsp#complete
                 autocmd FileType cpp setlocal omnifunc=lsp#complete
+                autocmd FileType cc setlocal omnifunc=lsp#complete
+                autocmd FileType cxx setlocal omnifunc=lsp#complete
                 autocmd FileType objc setlocal omnifunc=lsp#complete
                 autocmd FileType objcpp setlocal omnifunc=lsp#complete
             augroup end
@@ -876,12 +878,14 @@ else
                             \ 'name': 'ccls',
                             \ 'cmd': {server_info->['ccls']},
                             \ 'root_uri': {server_info->s:found_uri},
-                            \ 'initialization_options': { 'cacheDirectory': $HOME . '/caches/ccls' },
-                            \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+                            \ 'initialization_options': { 'cacheDirectory': $HOME . '/caches/ccls' , 'cacheFormat': "json"},
+                            \ 'whitelist': ['c', 'cpp', 'cc', 'cxx', 'objc', 'objcpp'],
                             \ })
 
                 autocmd FileType c setlocal omnifunc=lsp#complete
                 autocmd FileType cpp setlocal omnifunc=lsp#complete
+                autocmd FileType cc setlocal omnifunc=lsp#complete
+                autocmd FileType cxx setlocal omnifunc=lsp#complete
                 autocmd FileType objc setlocal omnifunc=lsp#complete
                 autocmd FileType objcpp setlocal omnifunc=lsp#complete
             augroup end
