@@ -15,6 +15,10 @@ let s:use_ycm = 0 "otherwise use vim-lsp + cquery/clangd
 set nocompatible
 let s:uname = system ("uname")
 
+"Choose the LSP backend between 'cquery' and 'ccls'
+"let s:lsp_server = "cquery"
+let s:lsp_server = "ccls"
+
 " cgrep config =======================
 if s:uname == "Linux\n"
     set grepprg=cgrep
@@ -584,6 +588,7 @@ let g:ale_fixers = {
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_c_parse_compile_commands = 1
 
 "NOTE:Once you explicitly set g:ale_cpp_clangtidy_options, you have to set
 "g:ale_c_build_dir or g:ale_c_build_dir_names to re-enable using
@@ -829,30 +834,57 @@ else
     " -------------- (LSP_CQUERY setup) --------------
     " see cquery's src/config.h for possible initialization_options
 
-    if executable('cquery')
-        augroup lsp_cquery
+    let s:found_uri = lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))
 
-            let s:found_uri = lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))
-            if (empty(s:found_uri))
-                let s:found_uri = lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.cquery'))
-            endif
 
-            autocmd!
-"                    \ 'cmd': {server_info->['cquery']},
-"                    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'cquery --language-server --log-file /tmp/cquery.log']},
-            autocmd User lsp_setup call lsp#register_server({
-                        \ 'name': 'cquery',
-                        \ 'cmd': {server_info->['cquery']},
-                        \ 'root_uri': {server_info->s:found_uri},
-                        \ 'initialization_options': { 'cacheDirectory': $HOME . '/caches/cquery', 'completion': { 'detailedLabel': v:true }},
-                        \ 'whitelist': ['c', 'cpp'],
-                        \ })
+    if s:lsp_server == "cquery"
+        if executable('cquery')
+            augroup lsp_cquery
 
-            autocmd FileType c setlocal omnifunc=lsp#complete
-            autocmd FileType cpp setlocal omnifunc=lsp#complete
-            autocmd FileType objc setlocal omnifunc=lsp#complete
-            autocmd FileType objcpp setlocal omnifunc=lsp#complete
-        augroup end
+                if (empty(s:found_uri))
+                    let s:found_uri = lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.cquery'))
+                endif
+
+                autocmd!
+    "                    \ 'cmd': {server_info->['cquery']},
+    "                    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'cquery --language-server --log-file /tmp/cquery.log']},
+                autocmd User lsp_setup call lsp#register_server({
+                            \ 'name': 'cquery',
+                            \ 'cmd': {server_info->['cquery']},
+                            \ 'root_uri': {server_info->s:found_uri},
+                            \ 'initialization_options': { 'cacheDirectory': $HOME . '/caches/cquery', 'completion': { 'detailedLabel': v:true }},
+                            \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+                            \ })
+
+                autocmd FileType c setlocal omnifunc=lsp#complete
+                autocmd FileType cpp setlocal omnifunc=lsp#complete
+                autocmd FileType objc setlocal omnifunc=lsp#complete
+                autocmd FileType objcpp setlocal omnifunc=lsp#complete
+            augroup end
+        endif
+    elseif s:lsp_server == "ccls"
+        if executable('ccls')
+            augroup lsp_ccls
+
+                if (empty(s:found_uri))
+                    let s:found_uri = lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.ccls'))
+                endif
+
+                autocmd!
+                autocmd User lsp_setup call lsp#register_server({
+                            \ 'name': 'ccls',
+                            \ 'cmd': {server_info->['ccls']},
+                            \ 'root_uri': {server_info->s:found_uri},
+                            \ 'initialization_options': { 'cacheDirectory': $HOME . '/caches/ccls' },
+                            \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+                            \ })
+
+                autocmd FileType c setlocal omnifunc=lsp#complete
+                autocmd FileType cpp setlocal omnifunc=lsp#complete
+                autocmd FileType objc setlocal omnifunc=lsp#complete
+                autocmd FileType objcpp setlocal omnifunc=lsp#complete
+            augroup end
+        endif
     endif
 
     nnoremap <leader>jd :LspDefinition <cr>
