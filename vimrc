@@ -153,6 +153,8 @@ else
     Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 endif
 
+Plug 'jaxbot/semantic-highlight.vim'
+
 call plug#end()
 "-------------------------------------------------------
 
