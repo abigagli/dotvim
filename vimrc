@@ -579,8 +579,8 @@ elseif s:uname == "Darwin\n"
     "Set this if you use 'clang' as a linter to ensure which version of clang to use
     "let g:ale_cpp_clang_executable=$HOME . '/LLVM-RELEASE/bin/clang++'
     let g:ale_linters = {
-                \ 'c': ['cquery', 'clangtidy'],
-                \ 'cpp': ['cquery', 'clangtidy'],
+                \ 'c': ['ccls', 'clangtidy'],
+                \ 'cpp': ['ccls', 'clangtidy'],
                 \}
 endif
 
@@ -596,6 +596,7 @@ let g:ale_c_parse_compile_commands = 1
 "NOTE:Once you explicitly set g:ale_cpp_clangtidy_options, you have to set
 "g:ale_c_build_dir or g:ale_c_build_dir_names to re-enable using
 "compile_commands.json
+let g:ale_cpp_clangtidy_checks = ['*', '-fuchsia*', '-*array*decay', '-*braces-around-statements', '-llvm*', '-readability-implicit-bool-conversion']
 let g:ale_cpp_clangtidy_options = '-std=c++17'
 let g:ale_cpp_clang_options = '-std=c++17'
 
