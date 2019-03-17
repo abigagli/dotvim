@@ -881,7 +881,7 @@ else
                             \ 'name': 'ccls',
                             \ 'cmd': {server_info->['ccls']},
                             \ 'root_uri': {server_info->s:found_uri},
-                            \ 'initialization_options': { 'cacheDirectory': $HOME . '/caches/ccls' , 'cacheFormat': "json", 'completion': {'detailedLabel': v:false}, 'client': {'snippetSupport': v:true}},
+                            \ 'initialization_options': {'cache': {'directory': $HOME . '/caches/ccls' }, 'completion': {'detailedLabel': v:false}, 'client': {'snippetSupport': v:true}},
                             \ 'whitelist': ['c', 'cpp', 'cc', 'cxx', 'objc', 'objcpp'],
                             \ })
 
