@@ -577,10 +577,10 @@ if s:uname == "Linux\n"
                 \}
 elseif s:uname == "Darwin\n"
     "Set this if you use 'clang' as a linter to ensure which version of clang to use
-    "let g:ale_cpp_clang_executable=$HOME . '/LLVM-RELEASE/bin/clang++'
+    let g:ale_cpp_clang_executable=$HOME . '/LLVM-RELEASE/bin/clang++'
     let g:ale_linters = {
-                \ 'c': ['ccls', 'clangtidy'],
-                \ 'cpp': ['ccls', 'clangtidy'],
+                \ 'c': ['clang', 'clangtidy'],
+                \ 'cpp': ['clang', 'clangtidy'],
                 \}
 endif
 
@@ -879,10 +879,15 @@ else
                 autocmd!
                 autocmd User lsp_setup call lsp#register_server({
                             \ 'name': 'ccls',
-                            \ 'cmd': {server_info->['ccls']},
+                            \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ccls --log-file=/tmp/ccls_vim.log']},
                             \ 'root_uri': {server_info->s:found_uri},
-                            \ 'initialization_options': {'cache': {'directory': $HOME . '/caches/ccls' }, 'completion': {'detailedLabel': v:false}, 'client': {'snippetSupport': v:true}},
-                            \ 'whitelist': ['c', 'cpp', 'cc', 'cxx', 'objc', 'objcpp'],
+                            \ 'initialization_options': {'cache': {'directory': $HOME . '/caches/ccls' }, 
+                            \                            'completion': {'detailedLabel': v:false,
+                            \                                           'include': {'suffixWhitelist': ['.hxx']}
+                            \                                          },
+                            \                            'client': {'snippetSupport': v:true},
+                            \                            'index': {'whitelist': ['c', 'cpp', 'cc', 'cxx']}},
+                            \ 'whitelist': ['c', 'cpp', 'cc', 'cxx'],
                             \ })
 
                 autocmd FileType c setlocal omnifunc=lsp#complete
