@@ -22,7 +22,6 @@ let s:lsp_server = "ccls"
 " cgrep config =======================
 if s:uname == "Linux\n"
     set grepprg=cgrep
-    let s:lsp_server = "cquery" "force cquery on linux as ccls require a newer libstdc++ that's not available on jessie
 endif
 
 
