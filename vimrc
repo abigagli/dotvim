@@ -568,20 +568,15 @@ nmap<silent><leader>k <Plug>(ale_previous_wrap)
 nmap<silent><leader>j <Plug>(ale_next_wrap)
 nmap<silent><leader>i :ALEDetail<CR>
 
-"When on linux, don't use clang for linting
-if s:uname == "Linux\n"
-    let g:ale_linters = {
-                \ 'c': ['g++','clangtidy'],
-                \ 'cpp': ['g++','clangtidy'],
-                \}
-elseif s:uname == "Darwin\n"
+if s:uname == "Darwin\n"
     "Set this if you use 'clang' as a linter to ensure which version of clang to use
     let g:ale_cpp_clang_executable=$HOME . '/LLVM-RELEASE/bin/clang++'
-    let g:ale_linters = {
-                \ 'c': ['clang', 'clangtidy'],
-                \ 'cpp': ['clang', 'clangtidy'],
-                \}
 endif
+
+let g:ale_linters = {
+            \ 'c': ['clang', 'clangtidy'],
+            \ 'cpp': ['clang', 'clangtidy'],
+            \}
 
 let g:ale_fixers = {
             \ 'c': ['clang-format'],
@@ -644,7 +639,7 @@ set completeopt=menuone,menu,longest,preview
 
 "------------------------ SINGLE COMPILE ---------------------------
  call SingleCompile#SetCompilerTemplate('cpp', 'g++',
-             \'g++', 'g++', '-g3 -std=c++1y -Wall -I$HOME/include -o %:r', './%:r')
+             \'g++', 'g++', '-g3 -std=c++17 -Wall -I$HOME/include -o %:r', './%:r')
 
 if has('mac')
     "silent let s:clang_exe = systemlist ('xcrun -f clang++')[0] "use systemlist as it appears to be automatically stripping the unwanted newline
