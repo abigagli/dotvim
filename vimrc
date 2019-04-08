@@ -871,9 +871,11 @@ else
                 endif
 
                 autocmd!
+"                            \ 'cmd': {server_info->['ccls']},
+"                            \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ccls --log-file=/tmp/ccls_vim.log']},
                 autocmd User lsp_setup call lsp#register_server({
                             \ 'name': 'ccls',
-                            \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ccls --log-file=/tmp/ccls_vim.log']},
+                            \ 'cmd': {server_info->['ccls']},
                             \ 'root_uri': {server_info->s:found_uri},
                             \ 'initialization_options': {'cache': {'directory': $HOME . '/caches/ccls' }, 
                             \                            'completion': {'detailedLabel': v:false,
