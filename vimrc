@@ -10,14 +10,20 @@
 " :Explore
 " :e scp://host/some/where/to/file.txt
 
-let s:use_ycm = 0 "otherwise use vim-lsp + cquery/clangd
+let s:use_ycm = 0 "otherwise use vim-lsp
 
 set nocompatible
 let s:uname = system ("uname")
 
-"Choose the LSP backend between 'cquery' and 'ccls'
+"Choose the LSP server between 'cquery' and 'ccls'
 "let s:lsp_server = "cquery"
 let s:lsp_server = "ccls"
+
+"Choose the LSP client between 'vim-lsp' and 'ale'
+"let s:lsp_client = "vim-lsp"
+let s:lsp_client = "ale"
+
+let g:ale_completion_enabled = 1 "This must be done before ALE gets loaded
 
 " cgrep config =======================
 if s:uname == "Linux\n"
@@ -139,7 +145,7 @@ Plug 'thiagoalessio/rainbow_levels.vim'
 
 if s:use_ycm
     Plug 'Valloric/YouCompleteMe'
-else
+elseif s:lsp_client == "vim-lsp"
     "LanguageServerProtocol client: see https://jonasdevlieghere.com/vim-lsp-clangd/amp/
     "------- CORE ------
     Plug 'prabirshrestha/async.vim'
@@ -574,8 +580,8 @@ if s:uname == "Darwin\n"
 endif
 
 let g:ale_linters = {
-            \ 'c': ['clang', 'clangtidy'],
-            \ 'cpp': ['clang', 'clangtidy'],
+            \ 'c': ['ccls', 'clang', 'clangtidy'],
+            \ 'cpp': ['ccls', 'clang', 'clangtidy'],
             \}
 
 let g:ale_fixers = {
@@ -598,7 +604,6 @@ let g:ale_cpp_clang_options = '-std=c++17'
 "let g:airline#extensions#ale#enabled = 1
 "set statusline+=%{ALEGetStatusLine()}
 "let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-
 
 "---------------------------- SURFER ---------------------------
 let g:surfer_root_markers = [ 'Version.make' ]
@@ -788,7 +793,7 @@ if s:use_ycm
     let g:UltiSnipsJumpForwardTrigger="<c-f>"
     let g:UltiSnipsJumpBackwardTrigger="<c-b>"
     " let g:UltiSnipsEditSplit="vertical"
-else
+elseif s:lsp_client == "vim-lsp"
     "------------- asyncomplete.vim ------------------
     inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
     inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -899,7 +904,18 @@ else
     nnoremap <leader>jd :LspDefinition <cr>
     nnoremap <leader>jr :LspReferences <cr>
     nnoremap <leader>rn :LspRename <cr>
+elseif s:lsp_client == "ale"
+    let g:ale_cpp_ccls_init_options = {'cache': {'directory': $HOME . '/caches/ccls' }, 
+                \                            'completion': {'detailedLabel': v:false,
+                \                                           'include': {'suffixWhitelist': ['.hxx']}
+                \                                          },
+                \                            'client': {'snippetSupport': v:true},
+                \                            'index': {'whitelist': ['c', 'cpp', 'cc', 'cxx']}}
 
+    let g:ale_c_ccls_init_options = g:ale_cpp_ccls_init_options
+    nnoremap <leader>jd :ALEGoToDefinition <cr>
+    nnoremap <leader>jr :ALEFindReferences <cr>
+    noremap <Leader>lf :ALEFix<CR>
 endif
 
 "-------------- Functions ----------------
