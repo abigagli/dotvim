@@ -909,13 +909,18 @@ elseif s:lsp_client == "ale"
                 \                            'completion': {'detailedLabel': v:false,
                 \                                           'include': {'suffixWhitelist': ['.hxx']}
                 \                                          },
-                \                            'client': {'snippetSupport': v:true},
+                \                            'client': {'snippetSupport': v:false},
                 \                            'index': {'whitelist': ['c', 'cpp', 'cc', 'cxx']}}
 
     let g:ale_c_ccls_init_options = g:ale_cpp_ccls_init_options
+    let g:ale_completion_delay = 700 "Setting this too small causes completion not to work correctly
     nnoremap <leader>jd :ALEGoToDefinition <cr>
     nnoremap <leader>jr :ALEFindReferences <cr>
     noremap <Leader>lf :ALEFix<CR>
+
+    let g:UltiSnipsExpandTrigger="<c-e>"
+    let g:UltiSnipsJumpForwardTrigger="<c-f>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 endif
 
 "-------------- Functions ----------------
