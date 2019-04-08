@@ -40,7 +40,7 @@ endif
 
 "Force python version used by vim to be python
 "see https://robertbasic.com/blog/force-python-version-in-vim/
-if has ('python')
+if has ('python3')
 endif
 
 " VIM-PLUG
@@ -77,7 +77,7 @@ if has('mac')
 "   Plug 'lillq/peepopenvim'
 endif
 
-if has ('python')
+if has ('python3')
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
 endif
