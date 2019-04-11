@@ -1137,9 +1137,9 @@ if has('mac')
     map <leader>d :call SearchDash()<CR>
 endif
 
-noremap <F1> :pyf ~/scripts/clang-format.py<CR>
-inoremap <F1> <ESC>:pyf ~/scripts/clang-format.py<CR>i
-noremap <leader>cr :pyf ~/scripts/clang-rename.py<CR>
+noremap <F1> :py3file ~/scripts/clang-format.py<CR>
+inoremap <F1> <ESC>:py3file ~/scripts/clang-format.py<CR>i
+noremap <leader>cr :py3file ~/scripts/clang-rename.py<CR>
 
 "Easy renaming of variables, see http://stackoverflow.com/questions/597687/changing-variable-names-in-vim
 " For local replace
