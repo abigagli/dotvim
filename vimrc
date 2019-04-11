@@ -159,6 +159,7 @@ elseif s:lsp_client == "vim-lsp"
 endif
 
 Plug 'jaxbot/semantic-highlight.vim'
+Plug 'rhysd/vim-clang-format'
 
 call plug#end()
 "-------------------------------------------------------
@@ -439,10 +440,6 @@ nmap <DOWN> ]e
 "Quick open of .vimrc in a right vertical split
 nnoremap <leader>erc <C-w>v<C-w>l:e $MYVIMRC<cr>
 
-"Who cares using F1 to call for help??
-inoremap <F1> <ESC>
-vnoremap <F1> <ESC>
-nnoremap <F1> <ESC>
 
 "Providing :Hexmode ex command to toggle xxd hex mode on or off
 "(http://vim.wikia.com/wiki/Improved_Hex_editing)
@@ -1137,8 +1134,9 @@ if has('mac')
     map <leader>d :call SearchDash()<CR>
 endif
 
-noremap <F1> :py3file ~/scripts/clang-format.py<CR>
-inoremap <F1> <ESC>:py3file ~/scripts/clang-format.py<CR>i
+noremap <F1> :<C-u>ClangFormat<CR>
+inoremap <F1> <ESC>:<C-u>ClangFormat<CR>i
+vnoremap <F1> :ClangFormat<CR>
 noremap <leader>cr :py3file ~/scripts/clang-rename.py<CR>
 
 "Easy renaming of variables, see http://stackoverflow.com/questions/597687/changing-variable-names-in-vim
