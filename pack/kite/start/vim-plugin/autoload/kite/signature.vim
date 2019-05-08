@@ -106,7 +106,7 @@ function! kite#signature#handler(counter, startcol, response) abort
   endif
 
   " The completion popup does not wrap long lines so we wrap manually.
-  for line in kite#utils#wrap('⟠ '.function_name.'('.join(parameters, ', ').')'.return_type, wrap_width, 4)
+  for line in kite#utils#wrap(kite#symbol().' '.function_name.'('.join(parameters, ', ').')'.return_type, wrap_width, 4)
     let completion = {
           \   'word':  '',
           \   'abbr':  line,
@@ -142,7 +142,7 @@ function! kite#signature#handler(counter, startcol, response) abort
 
 
   " 4. Popular patterns
-  if kite#plan#is_pro()
+  if kite#signature#should_show_popular_patterns()
     let signatures = call.dig('signatures', [])
     if len(signatures) > 0
       call add(completions, spacer)
@@ -182,6 +182,22 @@ function! kite#signature#handler(counter, startcol, response) abort
   endif
 
   call complete(a:startcol+1, completions)
+endfunction
+
+
+function! kite#signature#should_show_popular_patterns()
+  return kite#utils#get_setting('show_popular_patterns', 0)
+endfunction
+
+
+
+function! kite#signature#show_popular_patterns()
+  call kite#utils#set_setting('show_popular_patterns', 1)
+endfunction
+
+
+function! kite#signature#hide_popular_patterns()
+  call kite#utils#set_setting('show_popular_patterns', 0)
 endfunction
 
 

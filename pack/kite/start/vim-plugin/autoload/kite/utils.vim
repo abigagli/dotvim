@@ -3,8 +3,7 @@
 if has('win64') || has('win32') || has('win32unix')
   let s:os = 'windows'
 else
-  let uname = substitute(system('uname'), '\n', '', '')  " Darwin or Linux
-  let s:os = uname ==? 'Darwin' ? 'macos' : 'linux'
+    let s:os = empty(findfile('/sbin/launchd')) ? 'linux' : 'macos'
 endif
 
 function! kite#utils#windows()
@@ -143,7 +142,15 @@ function! s:kite_install_path()
   elseif kite#utils#macos()
     return kite#async#sync('mdfind ''kMDItemCFBundleIdentifier = "com.kite.Kite" || kMDItemCFBundleIdentifier = "enterprise.kite.Kite"''')
   else
-    return exepath('/opt/kite/kited')
+    let path = exepath('/opt/kite/kited')
+    if !empty(path)
+      return path
+    endif
+    let path = exepath($HOME.'/.local/share/kite/kited')
+    if !empty(path)
+      return path
+    endif
+    return ''
   endif
 endfunction
 
