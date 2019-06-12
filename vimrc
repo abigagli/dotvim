@@ -646,9 +646,11 @@ set completeopt=menuone,menu,longest,preview
 if has('mac')
     "silent let s:clang_exe = systemlist ('xcrun -f clang++')[0] "use systemlist as it appears to be automatically stripping the unwanted newline
     silent let s:clang_exe = '$HOME/LLVM-CURRENT/bin/clang++'
+    silent let s:sdk_path = systemlist("xcrun --show-sdk-path")[0]
+    silent let s:args = '-ggdb3 -O0 -std=c++17 -stdlib=libc++ -isysroot ' . s:sdk_path . ' -Weverything -Wno-padded -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -fno-pie -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -L$HOME/lib -L$HOME/LLVM-CURRENT/lib -L$BOOSTROOT/lib -Wl,-rpath,$HOME/lib -Wl,-rpath,$HOME/LLVM-CURRENT/lib -Wl,-rpath,$BOOSTROOT/lib -o %:r'
 
 call SingleCompile#SetCompilerTemplate('cpp', 'clang++_libc++',
-             \'clang++ release with libc++', s:clang_exe, '-g3 -std=c++17 -stdlib=libc++ -Weverything -Wno-padded -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -fno-pie -Wl,-no_pie -I$HOME/LLVM-CURRENT/include/c++/v1 -I$HOME/include -I$BOOSTROOT/include -L$HOME/lib -L$HOME/LLVM-CURRENT/lib -L$BOOSTROOT/lib -Wl,-rpath,$HOME/lib -Wl,-rpath,$HOME/LLVM-CURRENT/lib -Wl,-rpath,$BOOSTROOT/lib -o %:r', './%:r')
+             \'clang++ release with libc++', s:clang_exe, s:args, './%:r')
 endif
 
 
