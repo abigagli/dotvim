@@ -1,6 +1,12 @@
 let s:status_poll_interval = 5 * 1000  " 5sec in milliseconds
 let s:timer = -1
-let s:kite_symbol = nr2char(printf('%d', '0x27E0'))
+
+if !kite#utils#windows()
+  let s:kite_symbol = nr2char(printf('%d', '0x27E0'))
+else
+  let s:kite_symbol = '[k]'
+endif
+
 let s:inited = 0
 let s:kite_auto_launched = 0
 
@@ -31,7 +37,18 @@ endfunction
 
 
 function! kite#max_file_size()
-  return 1048576  " 1MB
+  return 76800  " 75KB
+endfunction
+
+
+function! kite#configure_completeopt()
+  " If the user has configured completeopt, leave it alone.
+  redir => output
+    silent verbose set completeopt
+  redir END
+  if len(split(output, '\n')) > 1 | return | endif
+
+  set completeopt=menuone,noinsert
 endfunction
 
 
@@ -49,10 +66,6 @@ function! s:setup_options()
   let s:shortmess = &shortmess
   set shortmess+=c
 
-  let s:completeopt = &completeopt
-  set completeopt+=menuone,noinsert
-  set completeopt-=longest
-
   if kite#utils#windows()
     " Avoid taskbar flashing on Windows when executing system() calls.
     let s:shelltemp = &shelltemp
@@ -67,7 +80,6 @@ function! s:restore_options()
   let &pumheight   = s:pumheight
   let &updatetime  = s:updatetime
   let &shortmess   = s:shortmess
-  let &completeopt = s:completeopt
   if kite#utils#windows()
     let &shelltemp = s:shelltemp
   endif
@@ -106,6 +118,8 @@ function s:setup_events()
     autocmd InsertCharPre            <buffer> call kite#completion#insertcharpre()
     autocmd TextChangedI             <buffer> call kite#completion#autocomplete()
 
+    autocmd CompleteDone             <buffer> call kite#snippet#complete_done()
+
     if exists('g:kite_documentation_continual') && g:kite_documentation_continual
       autocmd CursorHold,CursorHoldI <buffer> call kite#docs#docs()
     endif
@@ -120,40 +134,20 @@ function! s:setup_mappings()
   " keys is pressed.
   "
   " Note the <CR> mapping can conflict with vim-endwise because vim-endwise
-  " also maps <CR>.  There are two ways around the conflict:
-  "
-  " - Either:
+  " also maps <CR>.  To work around the conflict:
   "
   "     let g:kite_deconflict_cr = 1
   "
-  "   This works but you will see the mapping echoed in the status line
-  "   because vim-endwise ignores the <silent> when it re-maps the map.
-  "
-  " - Or use vim-endwise's experimental abbreviations instead:
-  "
-  "     let g:endwise_abbreviations = 1
-  "     let g:endwise_no_mappings = 1
-  "
-  inoremap <buffer> <expr> <C-e> kite#completion#popup_exit("\<C-e>")
-  inoremap <buffer> <expr> <C-y> kite#completion#popup_exit("\<C-y>")
+  imap <buffer> <expr> <C-e> kite#completion#popup_exit("\<C-e>")
+  imap <buffer> <expr> <C-y> kite#completion#popup_exit("\<C-y>")
   if exists('g:kite_deconflict_cr') && g:kite_deconflict_cr
-    inoremap <silent> <buffer> <CR> <C-R>=kite#completion#popup_exit('')<CR><CR>
+    imap <silent> <buffer> <CR> <C-R>=kite#completion#popup_exit('')<CR><CR>
   else
-    inoremap <buffer> <expr> <CR> kite#completion#popup_exit("\<CR>")
-  endif
-
-  " InsertCharPre is not fired for non-printable characters such as backspace.
-  " TextChangedI is not fired when the pop-up menu is open.  Therefore use
-  " an insert-mode mapping to force completion to re-occur when backspace is
-  " pressed while the pop-up menu is open.
-  "
-  " This can cause problems in gVim <= 8.0.1806. #123.
-  if !(kite#utils#windows() && has('gui_running') && (v:version < 800 || (v:version == 800 && !has('patch1806'))))
-    inoremap <buffer> <expr> <BS> pumvisible() ? kite#completion#backspace() : "\<BS>"
+    imap <buffer> <expr> <CR> kite#completion#popup_exit("\<CR>")
   endif
 
   if exists('g:kite_tab_complete')
-    inoremap <buffer> <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
+    imap <buffer> <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
   endif
 
   if empty(maparg('K', 'n')) && !hasmapto('(kite-docs)', 'n')
@@ -188,6 +182,6 @@ endfunction
 
 
 function! s:supported_language()
-  return expand('%:e') == 'py'
+  return &filetype == 'python' && expand('%:e') != 'pyi'
 endfunction
 

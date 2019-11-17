@@ -2,6 +2,7 @@ let s:port               = empty($KITED_TEST_PORT) ? 46624 : $KITED_TEST_PORT
 let s:channel_base       = 'localhost:'.s:port
 let s:base_url           = 'http://127.0.0.1:'.s:port
 let s:editor_path        = '/clientapi/editor'
+let s:onboarding_path    = '/clientapi/plugins/onboarding_file?editor=vim'
 let s:hover_path         = '/api/buffer/vim'
 let s:docs_path          = 'kite://docs/'
 let s:status_path        = '/clientapi/status?filename='
@@ -14,22 +15,22 @@ let s:permissions_path   = 'kite://settings/permissions'
 
 function! kite#client#docs(word)
   let url = s:docs_path.a:word
-  call s:open_kite_url(url)
+  call kite#utils#browse(url)
 endfunction
 
 
 function! kite#client#settings()
-  call s:open_kite_url(s:settings_path)
+  call kite#utils#browse(s:settings_path)
 endfunction
 
 
 function! kite#client#permissions()
-  call s:open_kite_url(s:permissions_path)
+  call kite#utils#browse(s:permissions_path)
 endfunction
 
 
 function! kite#client#copilot()
-  call s:open_kite_url(s:copilot_path)
+  call kite#utils#browse(s:copilot_path)
 endfunction
 
 
@@ -38,13 +39,24 @@ function! kite#client#counter(json, handler)
   if has('channel')
     call s:async(function('s:timer_post', [path, g:kite_long_timeout, a:json, a:handler]))
   else
-    call kite#async#execute(s:external_http(s:base_url.path, g:kite_long_timeout, a:json), a:handler)
+    call kite#async#execute(s:external_http_cmd(s:base_url.path, g:kite_long_timeout, 1), a:handler, a:json)
   endif
 endfunction
 
 
 function! kite#client#logged_in(handler)
   let path = s:user_path
+  if has('channel')
+    let response = s:internal_http(path, g:kite_short_timeout)
+  else
+    let response = s:external_http(s:base_url.path, g:kite_short_timeout)
+  endif
+  return a:handler(s:parse_response(response))
+endfunction
+
+
+function! kite#client#onboarding_file(handler)
+  let path = s:onboarding_path
   if has('channel')
     let response = s:internal_http(path, g:kite_short_timeout)
   else
@@ -72,7 +84,7 @@ function! kite#client#hover(filename, hash, cursor, handler)
   if has('channel')
     call s:async(function('s:timer_get', [path, g:kite_long_timeout, a:handler]))
   else
-    call kite#async#execute(s:external_http_cmd(s:base_url.path, g:kite_long_timeout),
+    call kite#async#execute(s:external_http_cmd(s:base_url.path, g:kite_long_timeout, 0),
           \ function('s:parse_and_handle', [a:handler]))
   endif
 endfunction
@@ -83,19 +95,19 @@ function! kite#client#signatures(json, handler)
   if has('channel')
     call s:async(function('s:timer_post', [path, g:kite_long_timeout, a:json, a:handler]))
   else
-    call kite#async#execute(s:external_http_cmd(s:base_url.path, g:kite_long_timeout, a:json),
-          \ function('s:parse_and_handle', [a:handler]))
+    call kite#async#execute(s:external_http_cmd(s:base_url.path, g:kite_long_timeout, 1),
+          \ function('s:parse_and_handle', [a:handler]), a:json)
   endif
 endfunction
 
 
 function! kite#client#completions(json, handler)
-  let path = s:editor_path.'/completions'
+  let path = s:editor_path.'/complete'
   if has('channel')
     call s:async(function('s:timer_post', [path, g:kite_long_timeout, a:json, a:handler]))
   else
-    call kite#async#execute(s:external_http_cmd(s:base_url.path, g:kite_long_timeout, a:json),
-          \ function('s:parse_and_handle', [a:handler]))
+    call kite#async#execute(s:external_http_cmd(s:base_url.path, g:kite_long_timeout, 1),
+          \ function('s:parse_and_handle', [a:handler]), a:json)
   endif
 endfunction
 
@@ -105,8 +117,8 @@ function! kite#client#post_event(json, handler)
   if has('channel')
     call s:async(function('s:timer_post', [path, g:kite_short_timeout, a:json, a:handler]))
   else
-    call kite#async#execute(s:external_http_cmd(s:base_url.path, g:kite_short_timeout, a:json),
-          \ function('s:parse_and_handle', [a:handler]))
+    call kite#async#execute(s:external_http_cmd(s:base_url.path, g:kite_short_timeout, 1),
+          \ function('s:parse_and_handle', [a:handler]), a:json)
   endif
 endfunction
 
@@ -182,31 +194,23 @@ endfunction
 
 " Optional argument is json to be posted
 function! s:external_http(url, timeout, ...)
+  let cmd = s:external_http_cmd(a:url, a:timeout, a:0)
   if a:0
-    let cmd = call(function('s:external_http_cmd'), [a:url, a:timeout] + a:000)
+    return system(cmd, a:1)
   else
-    let cmd = s:external_http_cmd(a:url, a:timeout)
+    return system(cmd)
   endif
-  return system(cmd)
 endif
 endfunction
 
 
-" Optional arguments:
-" - json to be posted
-function! s:external_http_cmd(endpoint, timeout, ...)
+" data argument is a boolean
+function! s:external_http_cmd(endpoint, timeout, data)
   let cmd = s:http_binary
   let cmd .= ' --timeout '.a:timeout.'ms'
-
-  if a:0 > 0
-    let cmd .= ' --post --data '
-    if kite#utils#windows()
-      let cmd .= s:win_escape_json(a:1)
-    else
-      let cmd .= s:shellescape(a:1)
-    endif
+  if a:data
+    let cmd .= ' -'
   endif
-
   let cmd .= ' '.s:shellescape(a:endpoint)
   call kite#utils#log('')
   call kite#utils#log('> '.cmd)
@@ -270,36 +274,22 @@ function! s:shellescape(str)
 endfunction
 
 
-" Only used with NeoVim on Windows.
-function! s:win_escape_json(str)
-  " Literal " -> \"
-  let a = escape(a:str, '"')
-  " Literal \\" -> \\\"  (for double quotes escaped inside json property values)
-  let b = substitute(a, '\\\\"', '\\\\\\"', 'g')
-  return '"'.b.'"'
-endfunction
-
-
 let s:http_binary = kite#utils#lib('kite-http')
-
-
-function! s:open_kite_url(url)
-  if kite#utils#windows()
-    let cmd = 'cmd /c start "" "'.a:url.'"'
-  else
-    let cmd = 'open "'.a:url.'"'
-  endif
-  silent call system(cmd)
-endfunction
 
 
 if !empty($KITED_TEST_PORT)
   function! kite#client#request_history()
-    return json_decode(
+    let ret = json_decode(
           \   s:parse_response(
           \     s:internal_http('/testapi/request-history', 500)
           \   ).body
           \ )
+
+    if type(ret) != type([])
+      throw '/testapi/request-history did not return a list (type '.type(ret).')'
+    endif
+
+    return ret
   endfunction
 
   function! kite#client#reset_request_history()

@@ -1,5 +1,7 @@
 let s:should_trigger_completion = 0
 let s:completion_counter = 0
+let s:begin = 0
+let s:end = 0
 
 
 function! kite#completion#insertcharpre()
@@ -35,14 +37,13 @@ function! kite#completion#autocomplete()
 endfunction
 
 
-function! kite#completion#backspace()
-  let s:should_trigger_completion = 1
-  return "\<BS>"
-endfunction
-
-
 " Manual invocation calls this method.
 function! kite#completion#complete(findstart, base)
+  if !s:completeopt_suitable()
+    let g:kite_auto_complete = 0
+    return -3
+  endif
+
   if a:findstart
     " Store the buffer contents and cursor position here because when Vim
     " calls this function the second time (with a:findstart == 0) Vim has
@@ -61,11 +62,19 @@ function! kite#completion#complete(findstart, base)
 endfunction
 
 
+function! kite#completion#snippet(begin, end)
+  let s:begin = a:begin
+  let s:end = a:end
+  " call kite#completion#autocomplete()
+  call feedkeys("\<C-X>\<C-U>")
+endfunction
+
+
 function! s:findstart()
   let line = getline('.')
   let start = col('.') - 1
 
-  let s:signature = s:before_function_call_argument(line[:start-1])
+  let s:signature = s:before_function_call_argument(line[:start-1]) && s:begin == 0
 
   if !s:signature
     while start > 0 && line[start - 1] =~ '\w'
@@ -86,12 +95,28 @@ function! s:get_completions()
 
   let filename = kite#utils#filepath(0)
 
-  let params = {
-        \   'filename':     filename,
-        \   'editor':       'vim',
-        \   'text':         s:text,
-        \   'cursor_runes': s:cursor
-        \ }
+  if s:signature
+    let params = {
+          \   'filename':     filename,
+          \   'editor':       'vim',
+          \   'text':         s:text,
+          \   'cursor_runes': s:cursor
+          \ }
+  else
+    let params = {
+          \   'no_snippets':  (g:kite_snippets ? v:false : v:true),
+          \   'filename':     filename,
+          \   'editor':       'vim',
+          \   'text':         s:text,
+          \   'position': {
+          \     'begin': (s:begin > 0 ? s:begin : s:cursor),
+          \     'end':   (s:end   > 0 ? s:end   : s:cursor),
+          \   },
+          \   'placeholders': []
+          \ }
+    let s:begin = 0
+    let s:end   = 0
+  endif
 
   let json = json_encode(params)
 
@@ -105,6 +130,11 @@ endfunction
 
 function! kite#completion#handler(counter, startcol, response) abort
   call kite#utils#log('completion: '.a:response.status)
+
+  " Ignore old completion results.
+  if a:counter != s:completion_counter
+    return
+  endif
 
   " Ignore old completion results.
   if a:counter != s:completion_counter
@@ -128,29 +158,125 @@ function! kite#completion#handler(counter, startcol, response) abort
     return
   endif
 
-  let hint_len = 0
-  for c in json.completions
-    let hint = ' '.(strlen(c.hint) > 0 ? c.hint.' '.kite#symbol(): kite#symbol())
-    if strlen(hint) > hint_len
-      let hint_len = strlen(hint)
-    endif
-  endfor
+  " 'display' is the LHS of each option in the completion menu
+  let max_display_length = s:max_display_length(json.completions, 0)
+  " 'hint' is the RHS of each option in the completion menu
+  " Add 1 for leading space we add
+  let max_hint_length = s:max_hint_length(json.completions) + 1
+
+  let available_win_width = s:winwidth() - a:startcol
+  let max_width = available_win_width > g:kite_completion_max_width
+        \ ? g:kite_completion_max_width : available_win_width
+
+  "               pad      LHS text        gap    RHS text       gap          kite branding           pad scrollbar
+  "                |          |             |        |            |                |                   |   |
+  let menu_width = 1 + max_display_length + 1 + max_hint_length + 1 + strdisplaywidth(kite#symbol()) + 2 + 1
+
+  if menu_width < max_width  " no truncation
+    let lhs_width = max_display_length
+    let rhs_width = max_hint_length
+
+  elseif menu_width - 1 - max_hint_length < max_width  " truncate rhs
+    let lhs_width = max_display_length
+    let rhs_width = max_width - (1 + max_display_length + 1 + strdisplaywidth(kite#symbol()) + 2 + 1)
+
+  else  " drop rhs and truncate lhs
+    let lhs_width = max_width - (1 + 1 + strdisplaywidth(kite#symbol()) + 2 + 1)
+    let rhs_width = 0
+  endif
 
   let matches = []
   for c in json.completions
-    let hint = ' '.(strlen(c.hint) > 0 ? c.hint.' '.kite#symbol(): kite#symbol())
-    if strlen(hint) < hint_len
-      let hint = repeat(' ', hint_len - strlen(hint)).hint
+    call add(matches, s:adapt(c, lhs_width, rhs_width, 0))
+
+    if has_key(c, 'children')
+      for child in c.children
+        call add(matches, s:adapt(child, lhs_width, rhs_width, 1))
+      endfor
     endif
-    call add(matches, {
-          \     'word': c.insert,
-          \     'abbr': c.display,
-          \     'info': c.documentation_text,
-          \     'menu': hint
-          \   })
   endfor
 
-  call complete(a:startcol+1, matches)
+  if !has('patch-8.0.1493')
+    let b:kite_completions = {}
+    for item in filter(copy(matches), 'has_key(v:val, "user_data")')
+      let b:kite_completions[item.word] = item.user_data
+    endfor
+  endif
+
+  if mode(1) ==# 'i'
+    call complete(a:startcol+1, matches)
+  endif
+endfunction
+
+
+function! s:adapt(completion_option, lhs_width, rhs_width, nesting)
+  let display = s:indent(a:nesting) . a:completion_option.display
+  let display = kite#utils#truncate(display, a:lhs_width)
+
+  " Ensure a minimum separation between abbr and menu of two spaces.
+  " (Vim lines up the menus so that they are left-aligned 1 space after the longest abbr).
+  let hint = ' ' . a:completion_option.hint
+
+  let hint = kite#utils#ralign(hint, a:rhs_width)
+
+  " Add the branding
+  let hint .= ' '.kite#symbol()
+
+  return {
+        \   'word': a:completion_option.snippet.text,
+        \   'abbr': display,
+        \   'info': a:completion_option.documentation.text,
+        \   'menu': hint,
+        \   'equal': 1,
+        \   'user_data': json_encode(a:completion_option.snippet.placeholders)
+        \ }
+endfunction
+
+
+function! s:max_hint_length(completions)
+  let max = 0
+
+  for e in a:completions
+    let len = strdisplaywidth(e.hint)
+    if len > max
+      let max = len
+    endif
+
+    if has_key(e, 'children')
+      let len = s:max_hint_length(e.children)
+      if len > max
+        let max = len
+      endif
+    endif
+  endfor
+
+  return max
+endfunction
+
+
+function! s:max_display_length(completions, nesting)
+  let max = 0
+
+  for e in a:completions
+    let len = strdisplaywidth(s:indent(a:nesting) . e.display)
+    if len > max
+      let max = len
+    endif
+
+    if has_key(e, 'children')
+      let len = s:max_display_length(e.children, a:nesting+1)
+      if len > max
+        let max = len
+      endif
+    endif
+  endfor
+
+  return max
+endfunction
+
+
+function! s:indent(nesting)
+  return repeat('  ', a:nesting)
 endfunction
 
 
@@ -174,3 +300,40 @@ function! s:before_function_call_argument(line)
   return a:line =~ '\v[(]([^)]+[=,])?\s*$'
 endfunction
 
+
+" Returns the width of the part of the current window which holds the buffer contents.
+function! s:winwidth()
+  let w = winwidth(0)
+
+  if &number
+    let w -= &numberwidth
+  endif
+
+  let w -= &foldcolumn
+
+  if &signcolumn == 'yes' || (&signcolumn == 'auto' && s:signs_in_buffer())
+    " TODO: neovim multiple sign columns
+    let w -= 2
+  endif
+
+  return w
+endfunction
+
+
+" Returns 1 if the current buffer has any signs, 0 otherwise.
+function! s:signs_in_buffer()
+  let bufinfo = getbufinfo(bufnr(''))[0]
+  let signs = has_key(bufinfo, 'signs') ? bufinfo.signs : []
+  return !empty(signs)
+endfunction
+
+
+function! s:completeopt_suitable()
+  let copts = split(&completeopt, ',')
+
+  if index(copts, 'longest')  != -1 | call kite#utils#warn("completeopt must not contain 'longest'") | return 0 | endif
+  if index(copts, 'menuone')  == -1 | call kite#utils#warn("completeopt must contain 'menuone'")     | return 0 | endif
+  if index(copts, 'noinsert') == -1 | call kite#utils#warn("completeopt must contain 'noinsert'")    | return 0 | endif
+
+  return 1
+endfunction
