@@ -6,6 +6,7 @@ let s:onboarding_path    = '/clientapi/plugins/onboarding_file?editor=vim'
 let s:hover_path         = '/api/buffer/vim'
 let s:docs_path          = 'kite://docs/'
 let s:status_path        = '/clientapi/status?filename='
+let s:languages_path     = '/clientapi/languages'
 let s:user_path          = '/clientapi/user'
 let s:copilot_path       = 'kite://home'
 let s:counter_path       = '/clientapi/metrics/counters'
@@ -68,6 +69,17 @@ endfunction
 
 function! kite#client#status(filename, handler)
   let path = s:status_path.kite#utils#url_encode(a:filename)
+  if has('channel')
+    let response = s:internal_http(path, g:kite_short_timeout)
+  else
+    let response = s:external_http(s:base_url.path, g:kite_short_timeout)
+  endif
+  return a:handler(s:parse_response(response))
+endfunction
+
+
+function! kite#client#languages(handler)
+  let path = s:languages_path
   if has('channel')
     let response = s:internal_http(path, g:kite_short_timeout)
   else
@@ -159,14 +171,14 @@ function! s:internal_http(path, timeout, ...)
           \   'callback': function('s:on_std_out', options)
           \ })
   catch /E898\|E901\|E902/
-    call kite#utils#log('Cannot open channel: '.str)
+    call kite#utils#log('| Cannot open channel: '.str)
     return ''
   endtry
 
   try
     call ch_sendraw(channel, str)
   catch /E630\|E631\|E906/
-    call kite#utils#log('Cannot send over channel: '.str)
+    call kite#utils#log('| Cannot send over channel: '.str)
     return ''
   endtry
 
@@ -227,16 +239,16 @@ endfunction
 "
 " lines - either a list (from async commands) or a string (from sync)
 function! s:parse_response(lines)
+  if empty(a:lines)
+    return {'status': 0, 'body': ''}
+  endif
+
   if type(a:lines) == v:t_string
     let lines = split(a:lines, '\r\?\n', 1)
   else
     let lines = a:lines
   endif
   call kite#utils#log(map(copy(lines), '"< ".v:val'))
-
-  if empty(a:lines)
-    return {'status': 0, 'body': ''}
-  endif
 
   if type(a:lines) == v:t_string
     let lines = split(a:lines, '\r\?\n')
