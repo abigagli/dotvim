@@ -42,7 +42,7 @@ Plug 'https://github.com/vim-scripts/TaskList.vim'
 Plug 'https://github.com/vim-scripts/Tagbar'
 Plug 'https://github.com/vim-scripts/errormarker.vim'
 Plug 'https://github.com/vim-scripts/unimpaired.vim'
-Plug 'https://github.com/vim-scripts/YankRing.vim'
+"Plug 'https://github.com/vim-scripts/YankRing.vim'
 Plug 'https://github.com/vim-scripts/The-NERD-Commenter'
 "Plug 'https://github.com/vim-scripts/Screen-vim---gnu-screentmux'
 Plug 'https://github.com/vim-scripts/surround.vim'
@@ -286,6 +286,8 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+" Coc-extensions settings
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 "-----------------------------------------------------------
 
 set mouse=a
@@ -423,7 +425,7 @@ set encoding=utf-8
 let g:Powerline_symbols = 'fancy'
 
 "yankring ------------------------
-let g:yankring_manual_clipboard_check=1
+"let g:yankring_manual_clipboard_check=1
 
 
 "cmake.vim -----------------------
@@ -506,7 +508,6 @@ nnoremap <F8> :TagbarToggle<CR>
 
 "Quick access to buffer list
 "nnoremap <F5> :buffers<CR>:buffer<Space>
-nnoremap <F11> :YRShow<CR>
 
 "Quick jump to alternate file
 "nnoremap <leader>a :A<CR>
@@ -602,6 +603,8 @@ colorscheme iceberg
 "colorscheme ir_black
 "colorscheme zenburn
 set background=dark
+
+hi HighlightedyankRegion term=bold ctermbg=0 guibg=#13354A
 
 " Highlight trailing whitespace as per http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 highlight WhitespaceEOL ctermbg=DarkYellow guibg=DarkYellow
