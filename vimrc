@@ -304,10 +304,21 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Coc-extensions settings
+" ------------------ coc-yank
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 "nnoremap <silent> <space>yr  :<C-u>CocCommand yank.clean<cr>
 hi HighlightedyankRegion term=bold ctermbg=LightYellow guibg=#13354A
 hi CocHighlightText term=bold ctermbg=LightGrey guibg=#13354A
+
+" ------------------ coc-snippets
+" Use <C-l> for trigger snippet expand.
+"imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+"vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+"imap <C-j> <Plug>(coc-snippets-expand-jump)
 "-----------------------------------------------------------
 
 set mouse=a
