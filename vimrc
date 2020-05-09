@@ -144,6 +144,23 @@ set path+=$LLVMROOT/include/**
 "let mapleader="\<space>"
 let mapleader=","
 
+"--------------------Setup up colorscheme stuff--------------------
+if ! has ('gui_running')
+    set t_Co=256
+else
+    set guifont=Inconsolata:h13
+endif
+
+let g:solarized_contrast="normal"
+let g:solarized_visibility="high"
+
+colorscheme iceberg
+"colorscheme fahrenheit
+"colorscheme solarized
+"colorscheme ir_black
+"colorscheme zenburn
+set background=dark
+
 " ------------------------------------ Suggested settings for coc.nvim
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -288,6 +305,9 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Coc-extensions settings
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+"nnoremap <silent> <space>yr  :<C-u>CocCommand yank.clean<cr>
+hi HighlightedyankRegion term=bold ctermbg=LightYellow guibg=#13354A
+hi CocHighlightText term=bold ctermbg=LightGrey guibg=#13354A
 "-----------------------------------------------------------
 
 set mouse=a
@@ -587,24 +607,6 @@ nnoremap <leader>cd :cd %:p:h<CR>
 "Configure CSApprox
 let g:CSApprox_attr_map = {'bold' : 'bold', 'italic' : '', 'sp' : '' }
 
-"--------------------Setup up colorscheme stuff--------------------
-if ! has ('gui_running')
-    set t_Co=256
-else
-    set guifont=Inconsolata:h13
-endif
-
-let g:solarized_contrast="normal"
-let g:solarized_visibility="high"
-
-colorscheme iceberg
-"colorscheme fahrenheit
-"colorscheme solarized
-"colorscheme ir_black
-"colorscheme zenburn
-set background=dark
-
-hi HighlightedyankRegion term=bold ctermbg=0 guibg=#13354A
 
 " Highlight trailing whitespace as per http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 highlight WhitespaceEOL ctermbg=DarkYellow guibg=DarkYellow
