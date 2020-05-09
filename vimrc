@@ -10,20 +10,10 @@
 " :Explore
 " :e scp://host/some/where/to/file.txt
 
-let s:use_ycm = 0 "otherwise use vim-lsp
-
 set nocompatible
 let s:uname = system ("uname")
 
-"Choose the LSP server between 'cquery' and 'ccls'
-"let s:lsp_server = "cquery"
-let s:lsp_server = "ccls"
-
-"Choose the LSP client between 'vim-lsp' and 'ale'
-"let s:lsp_client = "vim-lsp"
-let s:lsp_client = "ale"
-
-let g:ale_completion_enabled = 1 "This must be done before ALE gets loaded
+let g:ale_completion_enabled = 0 "This must be done before ALE gets loaded
 
 " cgrep config =======================
 if s:uname == "Linux\n"
@@ -72,14 +62,9 @@ Plug 'https://github.com/vim-scripts/listmaps.vim'
 "Plug 'https://github.com/vim-scripts/Conque-GDB'
 
 
-if has('mac')
-"   Plug 'Rip-Rip/clang_complete'
-"   Plug 'lillq/peepopenvim'
-endif
-
 if has ('python3')
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
+    "Plug 'SirVer/ultisnips'
+    "Plug 'honza/vim-snippets'
 endif
 
 Plug 'gregsexton/gitv'
@@ -126,8 +111,6 @@ Plug 'tommcdo/vim-exchange'
 if has('mac')
     Plug 'rizzatti/dash.vim'
 endif
-"Plug 'garious/vim-llvm'
-Plug 'rhysd/wandbox-vim'
 "Plug 'tpope/vim-sensible'
 Plug 'pelodelfuego/vim-swoop'
 "Plug 'fcpg/vim-fahrenheit'
@@ -143,24 +126,10 @@ Plug 'junegunn/vim-easy-align'
 Plug 'lifepillar/vim-cheat40'
 Plug 'thiagoalessio/rainbow_levels.vim'
 
-if s:use_ycm
-    Plug 'Valloric/YouCompleteMe'
-elseif s:lsp_client == "vim-lsp"
-    "LanguageServerProtocol client: see https://jonasdevlieghere.com/vim-lsp-clangd/amp/
-    "------- CORE ------
-    Plug 'prabirshrestha/async.vim'
-    Plug 'prabirshrestha/vim-lsp'
-
-    "------- COMPLETIONS -----
-    "Plug 'ajh17/vimcompletesme'
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
-endif
-
 Plug 'jaxbot/semantic-highlight.vim'
 Plug 'rhysd/vim-clang-format'
-
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 call plug#end()
 "-------------------------------------------------------
 
@@ -172,6 +141,152 @@ set path+=$GCCROOT/include/c++/**
 set path+=$BOOSTROOT/include/**
 set path+=$LLVMROOT/include/**
 
+"let mapleader="\<space>"
+let mapleader=","
+
+" ------------------------------------ Suggested settings for coc.nvim
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Introduce function text object
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <TAB> for selections ranges.
+" NOTE: Requires 'textDocument/selectionRange' support from the language server.
+" coc-tsserver, coc-python are the examples of servers that support it.
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings using CoCList:
+" Show all diagnostics.
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+"-----------------------------------------------------------
 
 set mouse=a
 set number
@@ -181,14 +296,11 @@ set softtabstop=4
 set expandtab
 set autoindent
 set cursorline
-set nobackup
-set writebackup
 set wildchar=<Tab>
 set wildmenu
 set wildmode=list:longest
 set wildignore+=*.a,*.o,*.so,*.dylib,*.gz,*.tar,.DS_Store,*/.hg/*,*/.svn/*
 set scrolloff=3
-set hidden
 set makeprg=make
 "set makeprg=osascript\ -e\ 'tell\ app\ \"Xcode\"\ to\ build'\ -e\ 'tell\ app\ \"MacVim\"\ to\ activate'
 set incsearch
@@ -257,8 +369,6 @@ if has ('conceal')
     set conceallevel=2
 endif
 
-"let mapleader="\<space>"
-let mapleader=","
 
 au BufNewFile,BufRead *.cpp set syntax=cpp11
 
@@ -577,8 +687,8 @@ if s:uname == "Darwin\n"
 endif
 
 let g:ale_linters = {
-            \ 'c': ['ccls', 'clang', 'clangtidy'],
-            \ 'cpp': ['ccls', 'clang', 'clangtidy'],
+            \ 'c': ['clang', 'clangtidy'],
+            \ 'cpp': ['clang', 'clangtidy'],
             \}
 
 let g:ale_fixers = {
@@ -703,11 +813,6 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabLongestEnhanced = 1
 "let g:SuperTabContextDefaultCompletionType = "<c-x><c-n>"
 
-"-------------- Gtags --------------
-":map <C-]> :Gtags<CR><CR>
-:map <C-\> :Gtags -r<CR><CR>
-
-
 "-------------- Alternate --------------
 let g:alternateExtensions_m = "h"
 let g:alternateExtensions_mm = "h"
@@ -740,28 +845,6 @@ nmap ga <Plug>(EasyAlign)
 "nnoremap <leader>a: :Tabularize /:\zs<CR>
 "vnoremap <leader>a: :Tabularize /:\zs<CR>
 
-"------------- Wandbox  ------------------
-" Set default compilers for each filetype
-if ! exists('g:wandbox#default_compiler')
-    let g:wandbox#default_compiler = {}
-endif
-let g:wandbox#default_compiler = {
-\   'cpp' : 'clang-head',
-\ }
-
-" Set default options for each filetype.  Type of value is string or list of string
-if ! exists('g:wandbox#default_options')
-    let g:wandbox#default_options = {}
-endif
-let g:wandbox#default_options = {
-\   'cpp' : 'warning,optimize,boost-1.59,sprout,verbose',
-\ }
-
-" Set extra options for compilers if you need
-let g:wandbox#default_extra_options = {
-\   'clang-head' : '-std=c++14',
-\ }
-
 "------------- vim-localvimrc ------------------
 let g:localvimrc_ask = 0
 
@@ -774,153 +857,6 @@ endif
 nmap <leader>rl : RainbowLevelsToggle<CR>
 
 
-if s:use_ycm
-"---------------------------- YouCompleteMe ---------------------------
-    nnoremap <leader>u :YcmForceCompileAndDiagnostics<CR>
-    let g:ycm_global_ycm_extra_conf = $HOME . '/.ycm_extra_conf.py'
-    let g:ycm_confirm_extra_conf = 0
-    let g:ycm_collect_identifiers_from_tags_files = 1
-    let g:ycm_autoclose_preview_window_after_insertion = 1
-    let g:ycm_always_populate_location_list = 1
-    let g:ycm_enable_diagnostic_signs = 1
-    nnoremap <F9> :YcmCompleter FixIt<CR>
-    nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-    "---------------------------- ultisnips ---------------------------
-    "Make ultisnips work ok with youcompleteme
-    let g:UltiSnipsExpandTrigger="<c-j>"
-    let g:UltiSnipsJumpForwardTrigger="<c-f>"
-    let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-    " let g:UltiSnipsEditSplit="vertical"
-elseif s:lsp_client == "vim-lsp"
-    "------------- asyncomplete.vim ------------------
-    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
-    imap <c-space> <Plug>(asyncomplete_force_refresh)
-    let g:asyncomplete_auto_popup = 1
-    let g:asyncomplete_remove_duplicates = 1
-    "let g:asyncomplete_log_file = expand('/tmp/asyncomplete.log')
-
-    let g:UltiSnipsExpandTrigger="<c-e>"
-    call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-                \ 'name': 'ultisnips',
-                \ 'whitelist': ['*'],
-                \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-                \ }))
-
-
-
-    "------------- vim-lsp ------------------
-    "let g:lsp_signs_enabled = 1 "Keeping disabled since I'm still using ALE for now
-    "let g:lsp_diagnostics_echo_cursor = 1
-    "let g:lsp_log_verbose = 1
-    "let g:lsp_log_file = expand('/tmp/vim-lsp.log')
-    " -------------- (LSP_CLANGD setup) --------------
-
-    "if executable('clangd')
-    "    augroup lsp_clangd
-    "        autocmd!
-    "        autocmd User lsp_setup call lsp#register_server({
-    "                    \ 'name': 'clangd',
-    "                    \ 'cmd': {server_info->['clangd']},
-    "                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-    "                    \ })
-    "        autocmd FileType c setlocal omnifunc=lsp#complete
-    "        autocmd FileType cpp setlocal omnifunc=lsp#complete
-    "        autocmd FileType objc setlocal omnifunc=lsp#complete
-    "        autocmd FileType objcpp setlocal omnifunc=lsp#complete
-    "    augroup end
-    "endif
-
-    " -------------- (LSP_CQUERY setup) --------------
-    " see cquery's src/config.h for possible initialization_options
-
-    let s:found_uri = lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))
-
-
-    if s:lsp_server == "cquery"
-        if executable('cquery')
-            augroup lsp_cquery
-
-                if (empty(s:found_uri))
-                    let s:found_uri = lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.cquery'))
-                endif
-
-                autocmd!
-    "                    \ 'cmd': {server_info->['cquery']},
-    "                    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'cquery --language-server --log-file /tmp/cquery.log']},
-                autocmd User lsp_setup call lsp#register_server({
-                            \ 'name': 'cquery',
-                            \ 'cmd': {server_info->['cquery']},
-                            \ 'root_uri': {server_info->s:found_uri},
-                            \ 'initialization_options': { 'cacheDirectory': $HOME . '/caches/cquery', 'completion': { 'detailedLabel': v:true }},
-                            \ 'whitelist': ['c', 'cpp', 'cc', 'cxx', 'objc', 'objcpp'],
-                            \ })
-
-                autocmd FileType c setlocal omnifunc=lsp#complete
-                autocmd FileType cpp setlocal omnifunc=lsp#complete
-                autocmd FileType cc setlocal omnifunc=lsp#complete
-                autocmd FileType cxx setlocal omnifunc=lsp#complete
-                autocmd FileType objc setlocal omnifunc=lsp#complete
-                autocmd FileType objcpp setlocal omnifunc=lsp#complete
-            augroup end
-        endif
-    elseif s:lsp_server == "ccls"
-        if executable('ccls')
-            augroup lsp_ccls
-
-                if (empty(s:found_uri))
-                    let s:found_uri = lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.ccls'))
-                endif
-
-                autocmd!
-"                            \ 'cmd': {server_info->['ccls']},
-"                            \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ccls --log-file=/tmp/ccls_vim.log']},
-                autocmd User lsp_setup call lsp#register_server({
-                            \ 'name': 'ccls',
-                            \ 'cmd': {server_info->['ccls']},
-                            \ 'root_uri': {server_info->s:found_uri},
-                            \ 'initialization_options': {'cache': {'directory': $HOME . '/caches/ccls' }, 
-                            \                            'completion': {'detailedLabel': v:false,
-                            \                                           'include': {'suffixWhitelist': ['.hxx']}
-                            \                                          },
-                            \                            'client': {'snippetSupport': v:true},
-                            \                            'index': {'whitelist': ['c', 'cpp', 'cc', 'cxx']}},
-                            \ 'whitelist': ['c', 'cpp', 'cc', 'cxx'],
-                            \ })
-
-                autocmd FileType c setlocal omnifunc=lsp#complete
-                autocmd FileType cpp setlocal omnifunc=lsp#complete
-                autocmd FileType cc setlocal omnifunc=lsp#complete
-                autocmd FileType cxx setlocal omnifunc=lsp#complete
-                autocmd FileType objc setlocal omnifunc=lsp#complete
-                autocmd FileType objcpp setlocal omnifunc=lsp#complete
-            augroup end
-        endif
-    endif
-
-    nnoremap <leader>jd :LspDefinition <cr>
-    nnoremap <leader>jr :LspReferences <cr>
-    nnoremap <leader>rn :LspRename <cr>
-elseif s:lsp_client == "ale"
-    let g:ale_cpp_ccls_init_options = {'cache': {'directory': $HOME . '/caches/ccls' }, 
-                \                            'completion': {'detailedLabel': v:false,
-                \                                           'include': {'suffixWhitelist': ['.hxx']}
-                \                                          },
-                \                            'client': {'snippetSupport': v:false},
-                \                            'index': {'whitelist': ['c', 'cpp', 'cc', 'cxx']}}
-
-    let g:ale_c_ccls_init_options = g:ale_cpp_ccls_init_options
-    let g:ale_completion_delay = 700 "Setting this too small causes completion not to work correctly
-    nnoremap <leader>jd :ALEGoToDefinition <cr>
-    nnoremap <leader>jr :ALEFindReferences <cr>
-    noremap <Leader>lf :ALEFix<CR>
-
-    let g:UltiSnipsExpandTrigger="<c-e>"
-    let g:UltiSnipsJumpForwardTrigger="<c-f>"
-    let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-endif
 
 "-------------- Functions ----------------
 function! TrimWhiteSpace()

@@ -2,3 +2,4 @@ bundle
 sessions
 autoload/plug.vim*
 .netrwhist
+coc-settings.json
