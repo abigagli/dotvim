@@ -151,15 +151,16 @@ else
     set guifont=Inconsolata:h13
 endif
 
-let g:solarized_contrast="normal"
-let g:solarized_visibility="high"
-
 colorscheme iceberg
 "colorscheme fahrenheit
 "colorscheme solarized
 "colorscheme ir_black
 "colorscheme zenburn
 set background=dark
+
+if has ('gui_running')
+    let g:coc_node_path = '/opt/local/bin/node'
+endif
 
 " ------------------------------------ Suggested settings for coc.nvim
 " TextEdit might fail if hidden is not set.
@@ -320,9 +321,11 @@ hi CocHighlightText term=bold ctermbg=LightGrey guibg=#13354A
 " Use <C-j> for both expand and jump (make expand higher priority.)
 "imap <C-j> <Plug>(coc-snippets-expand-jump)
 "-----------------------------------------------------------
+
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
 set mouse=a
 set number
 set tabstop=4
