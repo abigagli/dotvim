@@ -148,7 +148,7 @@ let mapleader=","
 if ! has ('gui_running')
     set t_Co=256
 else
-    set guifont=Inconsolata:h13
+    set guifont=JetBrainsMono-Regular:h11
 endif
 
 colorscheme iceberg
