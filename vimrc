@@ -158,9 +158,21 @@ colorscheme iceberg
 "colorscheme zenburn
 set background=dark
 
+
+"-------------------- Prepare for COC --------------------
 if has ('gui_running')
     let g:coc_node_path = '/opt/local/bin/node'
 endif
+
+let g:coc_global_extensions = [
+    \ 'coc-yank',
+    \ 'coc-snippets',
+    \ 'coc-lists',
+    \ 'coc-highlight',
+    \ 'coc-json',
+    \ 'coc-cmake',
+    \ 'coc-clangd',
+    \ ]
 
 " ------------------------------------ Suggested settings for coc.nvim
 " TextEdit might fail if hidden is not set.
