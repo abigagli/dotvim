@@ -1,5 +1,6 @@
 let s:status_poll_interval = 5 * 1000  " 5sec in milliseconds
 let s:timer = -1
+let s:watch_timer = -1
 
 if !kite#utils#windows()
   let s:kite_symbol = nr2char(printf('%d', '0x27E0'))
@@ -78,6 +79,7 @@ function! s:restore_options()
   if !exists('s:pumheight') | return | endif
 
   let &pumheight   = s:pumheight
+  unlet s:pumheight
   let &updatetime  = s:updatetime
   let &shortmess   = s:shortmess
   if kite#utils#windows()
@@ -89,6 +91,16 @@ endfunction
 function! kite#bufenter()
   if kite#languages#supported_by_plugin()
     call s:launch_kited()
+
+    if !kite#utils#kite_running()
+      call kite#status#status()
+      call s:start_status_timer()
+
+      call s:start_watching_for_kited()
+      return
+    endif
+
+    call s:stop_watching_for_kited()
 
     if kite#languages#supported_by_kited()
       call s:disable_completion_plugins()
@@ -165,6 +177,10 @@ function! s:setup_mappings()
   if empty(maparg('K', 'n')) && !hasmapto('(kite-docs)', 'n')
     nmap <silent> <buffer> K <Plug>(kite-docs)
   endif
+
+  if empty(maparg('<C-]>', 'n'))
+    nmap <silent> <buffer> <C-]> :KiteGotoDefinition<CR>
+  endif
 endfunction
 
 
@@ -193,6 +209,28 @@ function! s:launch_kited()
 endfunction
 
 
+function! s:start_watching_for_kited()
+  if s:watch_timer == -1
+    let s:watch_timer = timer_start(s:status_poll_interval,
+          \   function('kite#activate_when_ready'),
+          \   {'repeat': -1}
+          \ )
+  else
+    call timer_pause(s:watch_timer, 0)  " unpause
+  endif
+endfunction
+
+function! kite#activate_when_ready(...)
+  if kite#utils#kite_running()
+    call kite#bufenter()
+  endif
+endfunction
+
+function! s:stop_watching_for_kited()
+  call timer_pause(s:watch_timer, 1)
+endfunction
+
+
 function! s:disable_completion_plugins()
   " coc.nvim
   if exists('g:did_coc_loaded')
@@ -214,7 +252,7 @@ function! s:disable_completion_plugins()
   endif
 
   " YouCompleteMe
-  if exists('g:loaded_youcompleteme')
+  if exists('g:loaded_youcompleteme') && !exists('g:ycm_filetype_blacklist.python')
     let g:ycm_filetype_blacklist.python = 1
     call kite#utils#warn("disabling YouCompleteMe's completions for python files")
   endif
