@@ -739,6 +739,7 @@ let g:ale_c_parse_compile_commands = 1
 let g:ale_cpp_clangtidy_checks = ['*', '-fuchsia*', '-*array*decay', '-*braces-around-statements', '-llvm*', '-readability-implicit-bool-conversion', '-*avoid-c-arrays']
 "let g:ale_cpp_clangtidy_options = '-std=c++17'
 let g:ale_cpp_clang_options = '-std=c++17 -isysroot ' . system("xcrun --show-sdk-path")
+let g:ale_cpp_cc_options = '-std=c++17 -isysroot ' . system("xcrun --show-sdk-path")
 
 "Couldn't seem to make these work...
 "let g:airline#extensions#ale#enabled = 1
