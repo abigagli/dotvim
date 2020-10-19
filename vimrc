@@ -297,6 +297,8 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'dark'
 
 " Mappings using CoCList:
 " Show all diagnostics.
@@ -480,6 +482,7 @@ let g:Powerline_symbols = 'fancy'
 let g:cmake_set_makeprg = 0
 
 "fzf ----------------------------
+let g:fzf_layout = { 'down': '~40%' }
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
