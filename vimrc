@@ -53,7 +53,7 @@ Plug 'https://github.com/vim-scripts/bufexplorer.zip'
 Plug 'https://github.com/vim-scripts/SingleCompile'
 Plug 'https://github.com/vim-scripts/The-NERD-tree', {'on': 'NERDTreeToggle'}
 "Plug 'https://github.com/vim-scripts/cscope_macros.vim'
-Plug 'https://github.com/vim-scripts/fugitive.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'https://github.com/vim-scripts/Lucius'
 Plug 'https://github.com/vim-scripts/bash-support.vim'
 Plug 'https://github.com/vim-scripts/git-file.vim'
@@ -483,6 +483,8 @@ let g:cmake_set_makeprg = 0
 
 "fzf ----------------------------
 let g:fzf_layout = { 'down': '~40%' }
+"let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
