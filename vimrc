@@ -130,6 +130,7 @@ Plug 'jaxbot/semantic-highlight.vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'chrisbra/unicode.vim'
 call plug#end()
 "-------------------------------------------------------
 
