@@ -197,6 +197,10 @@ set shortmess+=c
 " diagnostics appear/become resolved.
 set signcolumn=yes
 
+" Remap CTRL-+ to CTRL-] to allow easy tag navigation
+" with italian keyboard
+nnoremap <c-+> <c-]>
+
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
