@@ -175,6 +175,12 @@ let g:coc_global_extensions = [
     \ 'coc-clangd',
     \ ]
 
+" ************ NOTE (https://github.com/clangd/clangd/issues/487) **********
+" If using /usr/bin/clang++ and coc seems not to be working, try adding
+" "clangd.arguments": ["--query-driver=/usr/bin/clang++"]
+" to ~/.vim/coc-settings.json
+" **************************************************************************
+
 " ------------------------------------ Suggested settings for coc.nvim
 " TextEdit might fail if hidden is not set.
 set hidden
