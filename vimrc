@@ -176,6 +176,8 @@ let g:coc_global_extensions = [
     \ ]
 
 " ************ NOTE (https://github.com/clangd/clangd/issues/487) **********
+" Workaround for 'System headers not found on macOS if compiler invoked as /usr/bin/clang++'
+" (https://github.com/clangd/clangd/issues/487)
 " If using /usr/bin/clang++ and coc seems not to be working, try adding
 " "clangd.arguments": ["--query-driver=/usr/bin/clang++"]
 " to ~/.vim/coc-settings.json
