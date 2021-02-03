@@ -574,6 +574,7 @@ nnoremap <F8> :TagbarToggle<CR>
 "FSHere configuration
 nnoremap <silent> <leader>a :FSHere<CR>
 nnoremap <silent> <leader>av :FSSplitLeft<CR>
+"nnoremap <silent> <leader>a  :<C-u>CocCommand clangd.switchSourceHeader<cr>
 
 augroup mycppfiles
    au!
