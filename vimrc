@@ -160,6 +160,9 @@ colorscheme iceberg
 set background=dark
 
 
+" clang_format: format-on-save
+let g:clang_format#auto_format=1
+
 "-------------------- Prepare for COC --------------------
 if has ('gui_running')
     let g:coc_node_path = '/opt/local/bin/node'
