@@ -736,11 +736,14 @@ nmap<silent><leader>k <Plug>(ale_previous_wrap)
 nmap<silent><leader>j <Plug>(ale_next_wrap)
 nmap<silent><leader>i :ALEDetail<CR>
 
-if s:uname == "Darwin\n"
+let g:ale_cpp_cc_options = '-std=c++20 -Wall'
+if has('mac')
     "Set this if you use 'clang' as a linter to ensure which version of clang to use
-    let g:ale_cpp_clang_executable=$HOME . '/LLVM-RELEASE/bin/clang++'
+    let g:ale_cpp_cc_executable = $HOME . '/LLVM-CURRENT/bin/clang++'
+    let g:ale_cpp_clangtidy_executable = $HOME . '/LLVM-CURRENT/bin/clang-tidy'
+    "let g:ale_cpp_cc_options .= ' -isysroot ' . system("xcrun --show-sdk-path")
+    let g:ale_cpp_clangtidy_extra_options = '--extra-arg-before="-I' . $BOOSTROOT . '/include"'
 endif
-
 let g:ale_linters = {
             \ 'c': ['clang', 'clangtidy'],
             \ 'cpp': ['clang', 'clangtidy'],
@@ -760,9 +763,6 @@ let g:ale_c_parse_compile_commands = 1
 "compile_commands.json
 let g:ale_cpp_clangtidy_checks = ['*', '-fuchsia*', '-*array*decay', '-*braces-around-statements', '-llvm*', '-readability-implicit-bool-conversion', '-*avoid-c-arrays']
 "let g:ale_cpp_clangtidy_options = '-std=c++17'
-let g:ale_cpp_clangtidy_extra_options = '-I' . $BOOSTROOT . '/include'
-let g:ale_cpp_clang_options = '-std=c++17 -isysroot ' . system("xcrun --show-sdk-path")
-let g:ale_cpp_cc_options = '-std=c++17 -isysroot ' . system("xcrun --show-sdk-path")
 
 "Couldn't seem to make these work...
 "let g:airline#extensions#ale#enabled = 1
@@ -814,7 +814,7 @@ if has('mac')
     "silent let s:clang_exe = systemlist ('xcrun -f clang++')[0] "use systemlist as it appears to be automatically stripping the unwanted newline
     silent let s:clang_exe = '$HOME/LLVM-CURRENT/bin/clang++'
     silent let s:sdk_path = systemlist("xcrun --show-sdk-path")[0]
-    silent let s:args = '-ggdb3 -O0 -std=c++2a -fsanitize=address,undefined -stdlib=libc++ -isysroot ' . s:sdk_path . ' -Weverything -Wno-padded -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -fno-pie -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -L$HOME/lib -L$HOME/LLVM-CURRENT/lib -L$BOOSTROOT/lib -Wl,-rpath,$HOME/lib -Wl,-rpath,$HOME/LLVM-CURRENT/lib -Wl,-rpath,$BOOSTROOT/lib -o %:r'
+    silent let s:args = '-ggdb3 -O0 -std=c++20 -fsanitize=address,undefined -stdlib=libc++ -isysroot ' . s:sdk_path . ' -Weverything -Wno-padded -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-undef -fno-pie -Wl,-no_pie -I$HOME/include -I$BOOSTROOT/include -L$HOME/lib -L$HOME/LLVM-CURRENT/lib -L$BOOSTROOT/lib -Wl,-rpath,$HOME/lib -Wl,-rpath,$HOME/LLVM-CURRENT/lib -Wl,-rpath,$BOOSTROOT/lib -o %:r'
 
 call SingleCompile#SetCompilerTemplate('cpp', 'clang++_libc++',
              \'clang++ release with libc++', s:clang_exe, s:args, './%:r')
