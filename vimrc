@@ -85,7 +85,6 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'dahu/LearnVim'
 "Plug 'ervandew/supertab'
 Plug 'mhinz/vim-startify'
-Plug 'derekwyatt/vim-fswitch'
 "Plug 'jalcine/cmake.vim'
 
 Plug 'airblade/vim-gitgutter'
@@ -336,6 +335,8 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Coc-extensions settings
 " ------------------ coc-yank
+nnoremap <silent> <leader>a  :<C-u>CocCommand clangd.switchSourceHeader<cr>
+
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 "nnoremap <silent> <space>yr  :<C-u>CocCommand yank.clean<cr>
 hi HighlightedyankRegion term=bold ctermbg=LightYellow guibg=#13354A
@@ -581,23 +582,6 @@ nnoremap <F8> :TagbarToggle<CR>
 "Quick jump to alternate file
 "nnoremap <leader>a :A<CR>
 "nnoremap <leader>av :AV<CR>
-
-"FSHere configuration
-nnoremap <silent> <leader>a :FSHere<CR>
-nnoremap <silent> <leader>av :FSSplitLeft<CR>
-"nnoremap <silent> <leader>a  :<C-u>CocCommand clangd.switchSourceHeader<cr>
-
-augroup mycppfiles
-   au!
-   au BufEnter *.cpp let b:fswitchdst  = 'h,hpp'
-   au BufEnter *.cpp let b:fswitchlocs = './,reg:|Source|Include|,reg:|Source|Include/**|,reg:|source|include|,reg:|source|include/**|'
-
-   au BufEnter *.c let b:fswitchdst  = 'h'
-   au BufEnter *.c let b:fswitchlocs = './,reg:|Source|Include|,reg:|Source|Include/**|,reg:|source|include|,reg:|source|include/**|'
-
-   au BufEnter *.h let b:fswitchdst  = 'cpp,cc,C'
-   au BufEnter *.h let b:fswitchlocs = './,reg:|Include|Source|,reg:|Include.*|Source|,reg:|include|source|,reg:|include.*|source|'
-augroup END
 
 "Quick difference from when file was opened
 nnoremap <leader>do :DiffOrig<cr>
