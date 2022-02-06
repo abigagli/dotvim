@@ -125,12 +125,13 @@ Plug 'junegunn/vim-easy-align'
 Plug 'lifepillar/vim-cheat40'
 Plug 'thiagoalessio/rainbow_levels.vim'
 
-Plug 'jaxbot/semantic-highlight.vim'
+"Plug 'jaxbot/semantic-highlight.vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'chrisbra/unicode.vim'
 Plug 'unblevable/quick-scope'
+
 call plug#end()
 "-------------------------------------------------------
 
