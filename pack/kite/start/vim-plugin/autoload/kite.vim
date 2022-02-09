@@ -38,7 +38,8 @@ endfunction
 
 
 function! kite#max_file_size()
-  return 76800  " 75KB
+  " Fallback to 1MB
+  return get(b:, 'kite_max_file_size', 1048576)
 endfunction
 
 
@@ -107,6 +108,7 @@ function! kite#bufenter()
       call s:setup_options()
       call s:setup_events()
       call s:setup_mappings()
+      call s:set_max_file_size()
 
       setlocal completefunc=kite#completion#complete
 
@@ -152,24 +154,6 @@ endfunction
 
 
 function! s:setup_mappings()
-  " When the pop-up menu is closed with <C-e>, <C-y>, or <CR>,
-  " the TextChangedI event is fired again, which re-opens the
-  " pop-up menu.  To avoid this, we set a flag when one of those
-  " keys is pressed.
-  "
-  " Note the <CR> mapping can conflict with vim-endwise because vim-endwise
-  " also maps <CR>.  To work around the conflict:
-  "
-  "     let g:kite_deconflict_cr = 1
-  "
-  imap <buffer> <expr> <C-e> kite#completion#popup_exit("\<C-e>")
-  imap <buffer> <expr> <C-y> kite#completion#popup_exit("\<C-y>")
-  if exists('g:kite_deconflict_cr') && g:kite_deconflict_cr
-    imap <silent> <buffer> <CR> <C-R>=kite#completion#popup_exit('')<CR><CR>
-  else
-    imap <buffer> <expr> <CR> kite#completion#popup_exit("\<CR>")
-  endif
-
   if exists('g:kite_tab_complete')
     imap <buffer> <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
   endif
@@ -180,6 +164,14 @@ function! s:setup_mappings()
 
   if empty(maparg('<C-]>', 'n'))
     nmap <silent> <buffer> <C-]> :KiteGotoDefinition<CR>
+  endif
+endfunction
+
+
+function! s:set_max_file_size()
+  let max_file_size = kite#client#max_file_size()
+  if max_file_size != -1
+    let b:kite_max_file_size = max_file_size
   endif
 endfunction
 
