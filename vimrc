@@ -11,6 +11,10 @@
 " :e scp://host/some/where/to/file.txt
 
 set nocompatible
+
+" Workaround for garbage characters when using iterm2
+" see https://stackoverflow.com/questions/21618614/vim-shows-garbage-characters
+set t_RV=
 let s:uname = system ("uname")
 
 "These must be done before ALE gets loaded
