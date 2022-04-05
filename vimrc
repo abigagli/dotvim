@@ -13,7 +13,10 @@
 set nocompatible
 let s:uname = system ("uname")
 
-let g:ale_completion_enabled = 0 "This must be done before ALE gets loaded
+"These must be done before ALE gets loaded
+let g:ale_completion_enabled = 0
+let g:ale_disable_lsp = 1
+"""""""""""""""""""""
 
 " cgrep config =======================
 if s:uname == "Linux\n"
@@ -736,11 +739,20 @@ if has('mac')
     let g:ale_cpp_clangtidy_executable = $HOME . '/LLVM-CURRENT/bin/clang-tidy'
     "let g:ale_cpp_cc_options .= ' -isysroot ' . system("xcrun --show-sdk-path")
     let g:ale_cpp_clangtidy_extra_options = '--extra-arg-before="-I' . $BOOSTROOT . '/include"'
+    let g:ale_linters = {
+                \ 'c': ['clang', 'clangtidy'],
+                \ 'cpp': ['clang', 'clangtidy'],
+                \}
 endif
-let g:ale_linters = {
-            \ 'c': ['clang', 'clangtidy'],
-            \ 'cpp': ['clang', 'clangtidy'],
-            \}
+
+if has('linux')
+    let g:ale_cpp_cc_executable='/usr/local/bin/latest-g++'
+"Disable clangtidy linting since I don't usually have a 'modern' clang-tidy on linux
+    let g:ale_linters = {
+                \ 'c': ['gcc'],
+                \ 'cpp': ['g++'],
+                \}
+endif
 
 let g:ale_fixers = {
             \ 'c': ['clang-format'],
