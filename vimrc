@@ -738,7 +738,7 @@ if has('mac')
     let g:ale_cpp_cc_executable = $HOME . '/LLVM-CURRENT/bin/clang++'
     let g:ale_cpp_clangtidy_executable = $HOME . '/LLVM-CURRENT/bin/clang-tidy'
     "let g:ale_cpp_cc_options .= ' -isysroot ' . system("xcrun --show-sdk-path")
-    let g:ale_cpp_clangtidy_extra_options = '--extra-arg-before="-I' . $BOOSTROOT . '/include"'
+    let g:ale_cpp_clangtidy_options = '-std=c++20 -isystem ' . $BOOSTROOT . '/include'
     let g:ale_linters = {
                 \ 'c': ['clang', 'clangtidy'],
                 \ 'cpp': ['clang', 'clangtidy'],
