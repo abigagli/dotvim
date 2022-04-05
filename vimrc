@@ -733,12 +733,13 @@ nmap<silent><leader>j <Plug>(ale_next_wrap)
 nmap<silent><leader>i :ALEDetail<CR>
 
 let g:ale_cpp_cc_options = '-std=c++20 -Wall'
+let g:ale_cpp_clangtidy_options = '-std=c++20 -isystem ' . $BOOSTROOT . '/include'
+
 if has('mac')
     "Set this if you use 'clang' as a linter to ensure which version of clang to use
     let g:ale_cpp_cc_executable = $HOME . '/LLVM-CURRENT/bin/clang++'
     let g:ale_cpp_clangtidy_executable = $HOME . '/LLVM-CURRENT/bin/clang-tidy'
     "let g:ale_cpp_cc_options .= ' -isysroot ' . system("xcrun --show-sdk-path")
-    let g:ale_cpp_clangtidy_options = '-std=c++20 -isystem ' . $BOOSTROOT . '/include'
     let g:ale_linters = {
                 \ 'c': ['clang', 'clangtidy'],
                 \ 'cpp': ['clang', 'clangtidy'],
@@ -747,10 +748,9 @@ endif
 
 if has('linux')
     let g:ale_cpp_cc_executable='/usr/local/bin/latest-g++'
-"Disable clangtidy linting since I don't usually have a 'modern' clang-tidy on linux
     let g:ale_linters = {
-                \ 'c': ['gcc'],
-                \ 'cpp': ['g++'],
+                \ 'c': ['gcc', 'clangtidy'],
+                \ 'cpp': ['g++', 'clangtidy'],
                 \}
 endif
 
